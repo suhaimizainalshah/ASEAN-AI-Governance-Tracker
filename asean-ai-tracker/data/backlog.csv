@@ -1,0 +1,23 @@
+item,country,why,priority
+"National Strategy on AI R&D and Application to 2030 (Decision 127/QD-TTg, 2021)",VN,Add as a strategy instrument once the decision text is checked.,high
+National AI Roadmap 2021-2025,MY,Add as a strategy instrument with a verified date.,high
+Personal Data Protection Law: enactment and in-force dates,ID,Row currently has year precision only.,high
+"POFMA (2019), Online Criminal Harms Act (2023), Code of Practice for Online Safety for Social Media Services",SG,Existing powers relevant to deepfakes and platforms; add with dates.,high
+IMDA spokesperson statement on Grok: date,SG,"May shorten the recorded first-response lag, currently 40 days.",high
+"Did Vietnam respond to Grok, and was there local harm?",VN,The Grok comparison currently has four countries; Vietnam is unchecked.,medium
+Any ASEAN-level statement or action on Grok,ASEAN,None found so far; confirm before stating there was none.,high
+"Outcome of the ASEAN AI Summit (Cebu, September 2026) and the ASEAN Responsible AI Roadmap",ASEAN,Both mentioned in sources; dates and outcomes unverified.,medium
+Decree 13/2023/ND-CP status after the 2025 Personal Data Protection Law,VN,Possible supersession; check before adding.,medium
+NAIS Roadmap 2.0: exact date; NAIS-PH approval details,PH,Currently year or month precision.,medium
+NAIO AI security guidelines (expected July 2026) and Online Safety Act codes (reported 22 May 2026),MY,Possible new instruments; verify publication.,medium
+"Incidents, hazards and milestones from the existing ASEAN atlas (2022-2025)",all,Map each to a primary source before importing; none are included unverified.,high
+"Philippine officials sharing an AI-generated deepfake video on the Vice President's impeachment (OECD AIM, 16 Jun 2025)",PH,"AIM reports public concern and official condemnation. Find who condemned it, and when, before adding.",medium
+"DOJ, PCO and DICT memorandum of agreement: signing date and primary release",PH,The current entry has month precision from a secondary report.,high
+CICC advisory on deepfake cloning of small-business owners (21 Jan 2026),PH,A warning without a dated incident. Decide whether to record it as a series.,low
+Purported AI-generated audio of Hun Sen on the Cambodia-Thailand conflict (AI Incident Database 1127),KH,Cambodia is not yet in scope. Check for any official response by either government.,medium
+"Deepfake of Thai PBS World anchors promoting a 'Crystallum AI' investment (AI Incident Database 1254 and 1255, 2025)",TH,No official response found yet. Check for warnings by Thai authorities.,medium
+"Thailand: did the government respond to Grok, and what existing law covers deepfakes and data protection (PDPA 2019, Computer Crime Act)?",TH,The Thai policy stack currently has no data-protection or cybercrime entries.,high
+"Singapore: other deepfake cases in the OECD monitor, for example the 2025 finance-director video-call scam and school deepfake images",SG,Verify against Singapore Police Force and Ministry of Education statements.,high
+Indonesia: 2024 election deepfakes and any Bawaslu or Komdigi responses,ID,Not yet searched.,medium
+Malaysia and Vietnam: sweep the OECD monitor for 2025 and 2026 incidents beyond the current cases,MY;VN,The sweep so far was by keyword search; the monitor has no downloadable feed in this build.,high
+"Cambodia, Laos, Myanmar, Brunei and Timor-Leste",ASEAN,Not in scope yet. Add a country once it has at least two verified cases.,low
