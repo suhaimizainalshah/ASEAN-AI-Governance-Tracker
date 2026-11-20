@@ -13,12 +13,22 @@
   --t-engagement:#52606f; --t-lifted:#15803d; --t-legislation:#9a5b00;
   --ok:#14663a; --warn:#8a4b00; --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --sel:#0a1f36; --sel-ink:#fff;
+  --sh-btn:0 1px 2px rgba(10,25,45,.18),0 2px 6px rgba(10,25,45,.10);
+  --sh-btn-hov:0 2px 5px rgba(10,25,45,.22),0 6px 16px rgba(10,25,45,.14);
+  --sh-card:0 1px 3px rgba(10,25,45,.16),0 8px 24px rgba(10,25,45,.10);
+  --sh-sel:0 2px 6px rgba(10,31,54,.35),0 6px 16px rgba(10,31,54,.22);
 }
 [data-theme=dark]{
   --paper:#0c1521; --surface:#122033; --ink:#e9eef5; --muted:#a3b3c4; --line:#27384d; --soft:#192a40;
   --navy:#071423; --gold:#d6ae5a; --gold-text:#e6c779; --link:#8ab8ff; --focus:#8ab8ff;
   --t-statement:#8fb0ff; --t-advisory:#4fd1c5; --t-enforcement:#bba2ff; --t-block:#ff8f85;
   --t-engagement:#aab9c9; --t-lifted:#6ee79a; --t-legislation:#f2c14e; --ok:#6ee79a; --warn:#f2c14e;
+  --sel:#3d8bdb; --sel-ink:#fff;
+  --sh-btn:0 1px 3px rgba(0,0,0,.55),0 3px 10px rgba(0,0,0,.35);
+  --sh-btn-hov:0 2px 6px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.45);
+  --sh-card:0 1px 3px rgba(0,0,0,.5),0 10px 28px rgba(0,0,0,.4);
+  --sh-sel:0 2px 8px rgba(61,139,219,.5),0 6px 18px rgba(61,139,219,.32);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -40,7 +50,10 @@ h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
 .mast-title{display:flex;gap:.9rem;align-items:flex-start}
 .emblem{flex:none;width:58px;height:58px;background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
 .emblem svg{width:100%;height:100%;display:block}
-.seabtns{display:flex;gap:.4rem;flex-wrap:wrap}
+.seabtns{display:flex;gap:3px;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:3px;box-shadow:inset 0 1px 3px rgba(10,25,45,.10)}
+.seabtns .btn{flex:1;border:0;background:transparent;box-shadow:none;padding:.5rem .6rem;border-radius:4px;color:var(--muted)}
+.seabtns .btn:hover{transform:none;box-shadow:none;border-color:transparent;color:var(--ink)}
+.seabtns .btn.on{background:var(--sel);color:var(--sel-ink);box-shadow:var(--sh-sel)}
 .mast-tools{text-align:right;font-size:.88rem;color:#cfd9e6}
 .mast-tools p{margin:0 0 .4rem}
 button.ghost{background:transparent;color:inherit;border:1px solid currentColor;border-radius:4px;padding:.35rem .7rem;font:inherit;font-size:.85rem;cursor:pointer}
@@ -58,21 +71,33 @@ main{padding-top:1.1rem;padding-bottom:3rem}
 .layout.no-rail{grid-template-columns:minmax(0,1fr)}
 .layout.no-rail #rail{display:none}
 #rail{position:sticky;top:.8rem}
-#rail details{border:1px solid var(--line);background:var(--surface);border-radius:4px}
-#rail summary{padding:.7rem .9rem;font-weight:700;cursor:pointer;list-style:none;display:none}
+#rail details{border:1px solid var(--line);background:var(--surface);border-radius:4px;box-shadow:var(--sh-card)}
+#rail summary{padding:.7rem .9rem;font-weight:700;cursor:pointer;list-style:none;display:none;align-items:center;gap:.5rem;border-radius:4px;box-shadow:var(--sh-btn)}
+#rail summary::-webkit-details-marker{display:none}
+#rail summary::after{content:"";flex:none;width:.55rem;height:.55rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-left:.4rem;transition:transform .2s}
+#rail details[open] summary::after{transform:rotate(225deg)}
+#rail summary.has-filters{border:1px solid var(--sel);box-shadow:0 0 0 1px var(--sel),var(--sh-btn)}
+#rail summary .fcount{margin-left:auto;background:var(--sel);color:var(--sel-ink);border-radius:99px;min-width:1.4rem;height:1.4rem;line-height:1.4rem;text-align:center;font-size:.78rem;font-weight:700;padding:0 .35rem}
 #rail .rail-body{padding:.9rem;display:grid;gap:.95rem}
 .field label,.field legend{display:block;font-size:.85rem;font-weight:700;margin-bottom:.3rem;padding:0}
-.field input[type=search],.field select{width:100%;font:inherit;padding:.5rem .6rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px}
+.field input[type=search],.field select{width:100%;font:inherit;padding:.5rem .6rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;box-shadow:var(--sh-btn)}
+.rail-done{display:none;width:100%}
 fieldset{border:0;margin:0;padding:0;min-width:0}
 .where{display:grid;grid-template-columns:1fr 1fr;gap:.35rem}
-.where button{font:inherit;font-size:.86rem;text-align:left;padding:.4rem .5rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;cursor:pointer;display:flex;justify-content:space-between;gap:.4rem;align-items:center}
-.where button[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
-.where .n{font-variant-numeric:tabular-nums;opacity:.8;font-size:.8rem}
+.where button{font:inherit;font-size:.86rem;text-align:left;padding:.45rem .55rem;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;cursor:pointer;display:flex;gap:.4rem;align-items:center;box-shadow:var(--sh-btn);transition:background .15s,border-color .15s,box-shadow .15s,transform .15s}
+.where button:hover{border-color:var(--link);transform:translateY(-1px);box-shadow:var(--sh-btn-hov)}
+.where button:active{transform:translateY(0);box-shadow:var(--sh-btn)}
+.where button[aria-pressed=true]{background:var(--sel);color:var(--sel-ink);border-color:transparent;box-shadow:var(--sh-sel)}
+.where button[aria-pressed=true]::before{content:"✓";font-weight:700}
+.where .n{font-variant-numeric:tabular-nums;font-size:.8rem;background:rgba(127,166,204,.18);border-radius:99px;padding:.05rem .5rem;min-width:1.7rem;text-align:center;margin-left:auto}
+.where button[aria-pressed=true] .n{background:rgba(255,255,255,.25);color:var(--sel-ink)}
 .checks label{display:flex;gap:.5rem;align-items:flex-start;font-weight:400;font-size:.9rem;margin:.2rem 0}
 .rail-actions{display:grid;gap:.4rem}
-.btn{font:inherit;font-size:.88rem;font-weight:600;padding:.5rem .7rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;cursor:pointer;text-align:center}
-.btn:hover{border-color:var(--ink)}
-.btn.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn{font:inherit;font-size:.88rem;font-weight:600;padding:.5rem .7rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;cursor:pointer;text-align:center;box-shadow:var(--sh-btn);transition:background .15s,border-color .15s,box-shadow .15s,transform .15s}
+.btn:hover{border-color:var(--link);transform:translateY(-1px);box-shadow:var(--sh-btn-hov)}
+.btn:active{transform:translateY(0);box-shadow:var(--sh-btn)}
+.btn.primary{background:var(--sel);color:var(--sel-ink);border-color:transparent}
+.btn.primary:hover{border-color:transparent}
 .hidden{display:none!important}
 .sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
@@ -195,7 +220,8 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
 @media (max-width:980px){
   .layout{grid-template-columns:minmax(0,1fr);gap:1rem}
   #rail{position:static}
-  #rail summary{display:block}
+  #rail summary{display:flex}
+  .rail-done{display:block}
   .glance{grid-template-columns:repeat(2,1fr)}
   .glance div:nth-child(2){border-right:0}
   .glance div:nth-child(-n+2){border-bottom:1px solid var(--line)}
@@ -246,7 +272,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
   <div class="layout" id="layout">
     <aside id="rail" aria-label="Filters">
       <details id="filters" open>
-        <summary>Filters and sort</summary>
+        <summary>Filters and sort<span class="fcount" id="fcount" hidden>0</span></summary>
         <div class="rail-body">
           <div class="field"><label for="q">Search</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
           <fieldset class="field"><legend>Where</legend><div class="where" id="where"></div></fieldset>
@@ -264,6 +290,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
             <button class="btn" id="copy" type="button">Copy link to this view</button>
             <button class="btn" id="csv" type="button">Download these rows (CSV)</button>
           </div>
+          <button class="btn primary rail-done" id="railDone" type="button">Show results</button>
         </div>
       </details>
     </aside>
@@ -876,6 +903,11 @@ function syncControls() {
   $('#f-rt').classList.toggle('hidden', state.tab !== 'cases');
   $('#f-ps').classList.toggle('hidden', state.tab !== 'policies');
   $('#b-lbl').textContent = state.tab === 'cases' ? 'Only cases with a binding action' : 'Only binding policies';
+  const nActive = state.c.size + (state.t ? 1 : 0) + (state.rt ? 1 : 0) + (state.ps ? 1 : 0) + (state.b ? 1 : 0) + (state.f ? 1 : 0) + (state.q.trim() ? 1 : 0);
+  const fc = $('#fcount'); if (fc) { fc.textContent = nActive; fc.hidden = nActive === 0; }
+  const sum = document.querySelector('#rail summary'); if (sum) sum.classList.toggle('has-filters', nActive > 0);
+  $('#sea-all').classList.toggle('on', state.c.size === 0);
+  $('#sea-6').classList.toggle('on', state.c.size === 6 && SEA6.every(c => state.c.has(c)));
   const base = state.tab === 'cases' ? INC.filter(i => matchCase(i, true)) : POL.filter(p => matchPolicy(p, true));
   $('#where').innerHTML = ORDER.filter(c => state.tab === 'cases' ? c !== 'ASEAN' : true).map(c => {
     const n = base.filter(o => (o.country || o.jurisdiction) === c).length;
@@ -943,6 +975,7 @@ $('#f-chk').addEventListener('change', e => { state.f = e.target.checked; refres
 $('#reset').addEventListener('click', () => { Object.assign(state, { c: new Set(), t: '', rt: '', ps: '', b: false, f: false, q: '', sort: 'new' }); refresh(); });
 $('#sea-all').addEventListener('click', () => { state.c = new Set(); refresh(); });
 $('#sea-6').addEventListener('click', () => { state.c = new Set(SEA6); refresh(); });
+$('#railDone').addEventListener('click', () => { $('#filters').open = false; });
 document.addEventListener('change', e => {
   const box = e.target.closest('[data-review]'); if (!box) return;
   const latest = DATA.meta.verified;
