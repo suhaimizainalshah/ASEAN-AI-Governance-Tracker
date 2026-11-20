@@ -2,7 +2,7 @@
 
 A living record of **what went wrong, who officially responded and when, and which policies were already in place**, for Singapore, Indonesia, Malaysia, Vietnam, the Philippines, Thailand and ASEAN.
 
-**Status: proof of concept.** Version 0.3 · 19 cases · 42 official responses · 43 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
+**Status: proof of concept.** Version 0.3 · 40 cases · 62 official responses · 60 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
 ## What is in this folder
 
@@ -119,19 +119,21 @@ It never shows individuals. Countries and sites with fewer than 3 visits are mer
 
 **Preview the layout first.** `python3 build.py --demo-stats` makes a page with invented numbers, clearly labelled as sample data. It is for looking only; never publish it, and rebuild normally afterwards.
 
-## Monthly routine (about 90 minutes)
+## Weekly routine (about 90 minutes, every Wednesday midday)
 
 1. **Watch list.** On the Updates tab, open every item marked "Check due". Update its status, `next_milestone` and `next_check`.
 2. **Scan** for new incidents and official actions (news alerts, the OECD AI Incidents Monitor, ministry press pages).
 3. **Verify** each candidate against a primary source, add the rows, and run `python3 build.py`.
 4. **Work the queue.** Take two or three items from `data/backlog.csv`, verify them, and move them into the data.
-5. **Log it** in `data/changelog.csv`, then publish the new `index.html`.
+5. **Log it** in `data/changelog.csv`, then propose the changes as a pull request for review (see below). Nothing goes live until the pull request is reviewed and merged.
 
-## Using an AI assistant safely
+## Using an AI assistant (Muse) — human in the loop
 
-You do not need an autonomous agent. Use an assistant as a **drafter**, and keep yourself as the editor who verifies and signs off. Never let it write to the data files or publish by itself.
+Weekly updates are drafted by **Muse**, an AI assistant, and reviewed by a human before anything goes live. Muse works on a branch and opens a pull request; it never pushes to `main` or publishes by itself. The human reviews the pull request, checks anything that looks unsure, and merges it — or asks for changes first.
 
-Paste a source (an article or a ministry page) with this prompt:
+Anything Muse cannot verify against a source stays in `data/backlog.csv` as a draft: it appears on the Updates tab as "queued", asserting nothing, until a human checks it.
+
+For a one-off row, paste a source (an article or a ministry page) with this prompt:
 
 > Using only the text I pasted, draft one row each for `incidents.csv` and `responses.csv` following the field list below. Use only facts stated in the text. If a date or detail is missing, leave the cell empty and say so; do not guess. Quote the sentence that supports each date and each actor. Classify the response type and whether it is binding, and explain why. Do not add anything that is not in the text.
 
@@ -145,4 +147,4 @@ Then **you** open the source, confirm each field, and only then add the row. Tre
 - Day counts depend on the earliest public record found, so a response on "day 0" may simply be the first record.
 - Themes and the "pre-emptive" label are researcher judgements and can be challenged.
 
-*Prepared by Suhaimi Zainal Shah with assistance from Claude AI (Anthropic). Version 0.3, data verified 15 November 2026.*
+*Prepared by Suhaimi Zainal Shah with assistance from Claude AI (Anthropic). Version 0.3, data verified 20 November 2026.*
