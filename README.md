@@ -133,6 +133,8 @@ Weekly updates are drafted by **Muse**, an AI assistant, and reviewed by a human
 
 Anything Muse cannot verify against a source stays in `data/backlog.csv` as a draft: it appears on the Updates tab as "queued", asserting nothing, until a human checks it.
 
+Each weekly update is comprehensive: it covers all six countries plus ASEAN, all themes, every watch-list item due for checking, and the backlog queue — and the pull request says explicitly what was checked and what could not be verified.
+
 For a one-off row, paste a source (an article or a ministry page) with this prompt:
 
 > Using only the text I pasted, draft one row each for `incidents.csv` and `responses.csv` following the field list below. Use only facts stated in the text. If a date or detail is missing, leave the cell empty and say so; do not guess. Quote the sentence that supports each date and each actor. Classify the response type and whether it is binding, and explain why. Do not add anything that is not in the text.
@@ -147,4 +149,4 @@ Then **you** open the source, confirm each field, and only then add the row. Tre
 - Day counts depend on the earliest public record found, so a response on "day 0" may simply be the first record.
 - Themes and the "pre-emptive" label are researcher judgements and can be challenged.
 
-*Prepared by Suhaimi Zainal Shah with assistance from Claude AI (Anthropic). Version 0.3, data verified 20 November 2026.*
+*Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic). Version 0.3, data verified 20 November 2026.*
