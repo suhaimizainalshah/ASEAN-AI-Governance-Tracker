@@ -1,8 +1,10 @@
 # ASEAN AI Governance Tracker
 
-A living record of **what went wrong, who officially responded and when, and which policies were already in place**, for Singapore, Indonesia, Malaysia, Vietnam, the Philippines, Thailand and ASEAN.
+A living record of **what went wrong, who officially responded and when, and which policies were already in place**, for all eleven ASEAN member states — Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — plus ASEAN regional action.
 
-**Status: proof of concept.** Version 0.3 · 40 cases · 62 official responses · 60 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
+**Status: proof of concept.** Version 0.3 · 50 cases · 74 official responses · 88 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
+
+The emblem in the page header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025.
 
 ## What is in this folder
 
@@ -58,7 +60,7 @@ Allowed themes: `deepfake-fraud`, `sexual-deepfakes`, `political-deepfakes`, `el
 
 ## Countries covered, and adding one
 
-Covered now: `SG`, `ID`, `MY`, `VN`, `PH`, `TH`, plus `ASEAN` for regional policies. To add another (for example `KH`, `LA`, `MM`, `BN`, `TL`), do three things: add its code to `COUNTRIES` in `build.py`; add its name to `CT`, `ORDER` and `NATIONAL` near the top of the script in `template.html`; then add rows. A suggested rule is to add a country only once it has at least two verified cases.
+Covered now: all eleven member states — `SG`, `ID`, `MY`, `VN`, `PH`, `TH`, `KH`, `LA`, `MM`, `BN`, `TL` — plus `ASEAN` for regional policies. The six **SEA-6** countries (`SG`, `ID`, `MY`, `VN`, `PH`, `TH`) have the deepest verified coverage so far; the other five joined the scope on 20 November 2026 and their coverage is still being built. (An earlier rule — add a country only once it has two verified cases — was retired on 20 November 2026: all eleven are in scope from that date, and the gaps are shown rather than hidden.) The page has an **All 11 countries** / **SEA-6 only** switch in the filter rail: SEA-6 is the mature dataset, the 11-country view is the full scope. To add rows for a country, its code goes in `COUNTRIES` in `build.py` and its name in `CT`, `ORDER` and `NATIONAL` in `template.html` — all eleven are already there.
 
 ## Where cases come from
 
@@ -133,13 +135,17 @@ Weekly updates are drafted by **Muse**, an AI assistant, and reviewed by a human
 
 Anything Muse cannot verify against a source stays in `data/backlog.csv` as a draft: it appears on the Updates tab as "queued", asserting nothing, until a human checks it.
 
-Each weekly update is comprehensive: it covers all six countries plus ASEAN, all themes, every watch-list item due for checking, and the backlog queue — and the pull request says explicitly what was checked and what could not be verified.
+Each weekly update is comprehensive: it covers all eleven member states plus ASEAN regional action, all themes, every watch-list item due for checking, and the backlog queue — and the pull request says explicitly what was checked and what could not be verified.
 
 For a one-off row, paste a source (an article or a ministry page) with this prompt:
 
 > Using only the text I pasted, draft one row each for `incidents.csv` and `responses.csv` following the field list below. Use only facts stated in the text. If a date or detail is missing, leave the cell empty and say so; do not guess. Quote the sentence that supports each date and each actor. Classify the response type and whether it is binding, and explain why. Do not add anything that is not in the text.
 
 Then **you** open the source, confirm each field, and only then add the row. Treat any detail you cannot find on the source page as wrong until proven otherwise.
+
+## Checking a weekly update (the Review tab)
+
+There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the **Review tab** on the page — or add `#review` to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row (ticks are saved in your browser only). The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in `data/backlog.csv` instead.
 
 ## Known limits (also on the Method tab)
 

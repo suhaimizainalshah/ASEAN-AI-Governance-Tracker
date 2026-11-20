@@ -37,6 +37,10 @@ h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
 .mast-row{display:flex;gap:1.5rem;justify-content:space-between;align-items:flex-end;padding-top:1.6rem;padding-bottom:1.1rem;flex-wrap:wrap}
 .masthead h1{font-size:clamp(1.55rem,3.4vw,2.25rem);font-weight:700;letter-spacing:.2px}
 .lede{margin:.4rem 0 0;max-width:62ch;color:#cfd9e6;font-size:1rem}
+.mast-title{display:flex;gap:.9rem;align-items:flex-start}
+.emblem{flex:none;width:58px;height:58px;background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.emblem svg{width:100%;height:100%;display:block}
+.seabtns{display:flex;gap:.4rem;flex-wrap:wrap}
 .mast-tools{text-align:right;font-size:.88rem;color:#cfd9e6}
 .mast-tools p{margin:0 0 .4rem}
 button.ghost{background:transparent;color:inherit;border:1px solid currentColor;border-radius:4px;padding:.35rem .7rem;font:inherit;font-size:.85rem;cursor:pointer}
@@ -214,9 +218,18 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
 <a class="skip" href="#main">Skip to content</a>
 <header class="masthead">
   <div class="wrap mast-row">
-    <div>
+    <div class="mast-title">
+      <span class="emblem" role="img" aria-label="ASEAN emblem: eleven stalks of rice, one per member state"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 307 307" aria-hidden="true">
+  <circle cx="153.5" cy="153.5" r="153.5" fill="#0032a1"/>
+  <path fill="#fff" d="M153.04 6.68C71.78 6.68 5.85 72.63 5.85 153.88s65.93 147.2 147.19 147.2 147.22-65.95 147.22-147.2S234.3 6.68 153.04 6.68"/>
+  <path fill="#ef3240" d="M153.04 12.16c-78.3 0-141.71 63.44-141.71 141.73s63.42 141.73 141.71 141.73 141.74-63.44 141.74-141.73S231.34 12.16 153.04 12.16"/>
+  <text fill="#0032a1" font-family="Helvetica-Bold,Helvetica" font-size="58.65" font-weight="700" style="isolation:isolate" transform="matrix(1.04 0 0 1 67.28 257.32)"><tspan x="0" y="0">asean</tspan></text>
+  <path fill="#f8e702" d="M70.98 58.01h10.88s-1.88 61.14 34.52 81.49c-36.39 20.35-34.52 81.51-34.52 81.51H70.98s-1.05-61.25 41.58-81.51c-42.63-20.26-41.58-81.49-41.58-81.49m49.4 81.5C86.5 159.47 86.42 221 86.42 221H97.3s-1.65-60.81 27.26-81.49C95.8 119.25 97.3 58 97.3 58H86.42s.5 61.26 33.96 81.51m7.82 0C102.88 161.79 101.73 221 101.73 221h10.88s-1.3-59.41 19.66-81.49C111.9 117.93 112.61 58 112.61 58h-10.88s.13 58.95 26.47 81.51m7.84 0C117.03 162.38 117.33 221 117.33 221h10.88s-1.62-59.69 11.85-81.49C126.25 117.9 128.21 58 128.21 58h-10.88s-.86 58.81 18.71 81.51m7.9 0C132.33 162.57 132.55 221 132.55 221h10.88s-1.51-59.4 4.1-81.49c-5.93-21.27-4.1-81.51-4.1-81.51h-10.88s-.22 59.26 11.39 81.51m7.08 0c-1.8 21.06-3.15 81.49-3.15 81.49h10.94s-1.94-62.81-3.61-81.49c2.42-25.38 3.24-81.51 3.24-81.51h-10.88s1.89 60.2 3.46 81.51m84.37-81.5h-10.88s1.88 61.14-34.52 81.49c36.39 20.35 34.52 81.51 34.52 81.51h10.88s1.05-61.25-41.58-81.51c42.63-20.26 41.58-81.49 41.58-81.49m-15.44 0h-10.88s1.49 61.23-27.26 81.49c28.92 20.69 27.26 81.51 27.26 81.51h10.88s-.08-61.55-33.96-81.51c33.46-20.25 33.96-81.49 33.96-81.49m-15.31 0h-10.88s.71 59.92-19.66 81.49c20.96 22.08 19.66 81.51 19.66 81.51h10.88s-1.15-59.23-26.47-81.51c26.34-22.55 26.47-81.49 26.47-81.49m-15.6 0h-10.88s1.96 59.89-11.85 81.49c13.47 21.8 11.85 81.51 11.85 81.51h10.88s.3-58.63-18.71-81.51c19.57-22.7 18.71-81.49 18.71-81.49m-15.22 0h-10.88s1.83 60.22-4.1 81.49c5.61 22.09 4.1 81.51 4.1 81.51h10.88s.22-58.44-11.39-81.51c11.61-22.24 11.39-81.49 11.39-81.49" style="isolation:isolate"/>
+</svg></span>
+      <div>
       <h1>ASEAN AI Governance Tracker</h1>
-      <p class="lede">What went wrong, who officially responded and when, and which policies were already in place. Singapore, Indonesia, Malaysia, Vietnam, the Philippines, Thailand and ASEAN.</p>
+      <p class="lede">What went wrong, who officially responded and when, and which policies were already in place. Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — all eleven ASEAN member states — plus ASEAN regional action.</p>
+      </div>
     </div>
     <div class="mast-tools">
       <p>Version <span id="ver"></span>, last verified <time id="verified"></time></p>
@@ -237,6 +250,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
         <div class="rail-body">
           <div class="field"><label for="q">Search</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
           <fieldset class="field"><legend>Where</legend><div class="where" id="where"></div></fieldset>
+          <div class="field"><div class="seabtns"><button type="button" class="btn" id="sea-all">All 11 countries</button><button type="button" class="btn" id="sea-6">SEA-6 only</button></div><p class="small muted" style="margin:.4rem 0 0">SEA-6 is the six countries with verified cases so far. <a href="#method">Why it matters</a>.</p></div>
           <div class="field"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div>
           <div class="field" id="f-rt"><label for="rt-sel">Type of official response</label><select id="rt-sel"></select></div>
           <div class="field hidden" id="f-ps"><label for="ps-sel">Policy status</label><select id="ps-sel"></select></div>
@@ -259,6 +273,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
       <section id="panel-policies" role="tabpanel" aria-labelledby="tab-policies" tabindex="0" hidden></section>
       <section id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" tabindex="0" hidden></section>
       <section id="panel-updates" role="tabpanel" aria-labelledby="tab-updates" tabindex="0" hidden></section>
+      <section id="panel-review" role="tabpanel" aria-labelledby="tab-review" tabindex="0" hidden></section>
       <section id="panel-method" role="tabpanel" aria-labelledby="tab-method" tabindex="0" hidden></section>
       <section id="panel-visitors" role="tabpanel" aria-labelledby="tab-visitors" tabindex="0" hidden></section>
     </div>
@@ -283,8 +298,8 @@ const fmt = (s, p) => { const [y, m, d] = s.split('-'); return p === 'year' ? y 
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 const median = a => { if (!a.length) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
-const CT = { SG:'Singapore', ID:'Indonesia', MY:'Malaysia', VN:'Vietnam', PH:'Philippines', TH:'Thailand', ASEAN:'ASEAN (regional)' };
-const ORDER = ['ASEAN','SG','ID','MY','VN','PH','TH'];
+const CT = { SG:'Singapore', ID:'Indonesia', MY:'Malaysia', VN:'Vietnam', PH:'Philippines', TH:'Thailand', KH:'Cambodia', LA:'Laos', MM:'Myanmar', BN:'Brunei', TL:'Timor-Leste', ASEAN:'ASEAN (regional)' };
+const ORDER = ['ASEAN','SG','ID','MY','VN','PH','TH','KH','LA','MM','BN','TL'];
 const THEME = { 'deepfake-fraud':'Deepfake scams', 'sexual-deepfakes':'Sexual deepfakes and child safety', 'political-deepfakes':'Political deepfakes',
   'election-integrity':'Election integrity', 'online-safety':'Online safety and platforms', 'general-ai':'General AI governance', 'data-protection':'Data protection' };
 const RT = {
@@ -299,7 +314,8 @@ const ICON = (t, cls = '') => `<svg viewBox="0 0 16 16" aria-hidden="true" class
 const STAT = { in_force:'In effect', adopted:'Passed, not yet in effect', draft:'Draft or consultation', proposed:'Proposed', superseded:'Superseded' };
 const LAYERS = ['Strategy or declaration','Voluntary AI guidance','Binding AI law','Online safety and platform rules','Deepfake-specific rules','Data protection','Institution'];
 const SPECIFIC = t => !['general-ai', 'data-protection'].includes(t);
-const NATIONAL = ['SG','ID','MY','VN','PH','TH'];
+const NATIONAL = ['SG','ID','MY','VN','PH','TH','KH','LA','MM','BN','TL'];
+const SEA6 = ['SG','ID','MY','VN','PH','TH'];
 const TODAY = Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
 /* ------------------------------------------------------------------ derive */
@@ -337,7 +353,7 @@ function timing(p) {
   const incThemes = new Set(INC.flatMap(i => i.themes));
   const evalT = p.themes.filter(SPECIFIC).filter(t => incThemes.has(t));
   const scope = p.jurisdiction === 'ASEAN' ? NATIONAL : [p.jurisdiction];
-  const where = p.jurisdiction === 'ASEAN' ? 'the six countries' : CT[p.jurisdiction];
+  const where = p.jurisdiction === 'ASEAN' ? 'the member states' : CT[p.jurisdiction];
   if (!evalT.length) {
     const specific = p.themes.filter(SPECIFIC);
     if (specific.length && p.names_risk === 'yes')
@@ -370,7 +386,7 @@ function context(i) {
 /* ------------------------------------------------------------------ state */
 const AN = (DATA.meta && DATA.meta.analytics) || {};
 const GC_CODE = /^[a-z0-9][a-z0-9-]{1,40}$/.test(AN.goatcounter || '') ? AN.goatcounter : '';
-const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
+const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],['review','Review'],['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
 const state = { tab:'cases', c:new Set(), t:'', rt:'', ps:'', b:false, f:false, q:'', sort:'new' };
 const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 let following = new Set(store.get('aat_follow_v1', []));
@@ -557,7 +573,7 @@ function policyHTML(p) {
 function renderGlance(nCases, nResp, nPol) {
   return `<div class="glance" role="group" aria-label="Summary of what is shown">
     <div><b>${nCases}</b><span>cases</span></div><div><b>${nResp}</b><span>official responses</span></div>
-    <div><b>${nPol}</b><span>policies tracked</span></div><div><b>${state.c.size || 6}</b><span>${state.c.size ? 'places selected' : 'places covered'}</span></div></div>`;
+    <div><b>${nPol}</b><span>policies tracked</span></div><div><b>${state.c.size || NATIONAL.length}</b><span>${state.c.size ? 'places selected' : 'places covered'}</span></div></div>`;
 }
 function activeChips() {
   const chips = [];
@@ -682,6 +698,39 @@ function renderUpdates() {
       ${DATA.backlog.map(b => `<tr><th scope="row">${esc(b.item)}</th><td>${esc(b.country === 'all' ? 'All' : CT[b.country] || b.country)}</td><td>${esc(b.why)}</td><td>${esc(b.priority)}</td></tr>`).join('')}</tbody></table></div></div>`;
 }
 
+/* ------------------------------------------------------------------ review */
+function renderReview() {
+  const latest = DATA.meta.verified;
+  const newInc = INC.filter(i => i.verified_on === latest);
+  const newResp = RESP.filter(r => r.verified_on === latest);
+  const newPol = POL.filter(p => p.verified_on === latest);
+  let rv = store.get('aat_review_v1', { date: '', ids: [] });
+  if (!rv || typeof rv !== 'object' || rv.date !== latest || !Array.isArray(rv.ids)) rv = { date: latest, ids: [] };
+  const checked = new Set(rv.ids);
+  const allIds = [...newInc.map(i => i.id), ...newResp.map(r => r.id), ...newPol.map(p => p.id)];
+  const nChecked = allIds.filter(id => checked.has(id)).length;
+  const rowCheck = id => `<input type="checkbox" data-review="${esc(id)}" ${checked.has(id) ? 'checked' : ''} aria-label="Checked ${esc(id)}">`;
+  const table = (cap, rows) => rows ? `<div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">${esc(cap)}</caption><thead><tr><th scope="col">Checked</th><th scope="col">ID</th><th scope="col">What</th><th scope="col">Source</th><th scope="col">Confidence</th></tr></thead><tbody>${rows}</tbody></table></div>` : '<p class="muted">None in this update.</p>';
+  const incRows = newInc.map(i => `<tr><td>${rowCheck(i.id)}</td><th scope="row">${esc(i.id)}</th><td>${esc(i.title)} <span class="muted">(${esc(CT[i.country])}, ${esc(fmt(i.date, i.date_precision))})</span></td><td>${srcLink(i)}${i.more_sources ? '. ' + moreLinks(i) : ''}</td><td>${i.confidence === 'high' ? 'High' : 'Medium'}</td></tr>`).join('');
+  const respRows = newResp.map(r => { const inc = incById[r.incident_id]; return `<tr><td>${rowCheck(r.id)}</td><th scope="row">${esc(r.id)}</th><td>${esc(r.actor)} — ${esc(RT[r.type].l)} on <a href="#cases?q=${esc(r.incident_id)}">${esc(r.incident_id)}</a> <span class="muted">(${inc ? esc(CT[inc.country]) : ''}, ${esc(fmt(r.date, r.date_precision))})</span></td><td>${srcLink(r)}${r.more_sources ? '. ' + moreLinks(r) : ''}</td><td>${r.confidence === 'high' ? 'High' : 'Medium'}</td></tr>`; }).join('');
+  const polRows = newPol.map(p => `<tr><td>${rowCheck(p.id)}</td><th scope="row">${esc(p.id)}</th><td>${esc(p.short_title || p.title)} <span class="muted">(${esc(CT[p.jurisdiction])}, ${esc(fmt(p.date, p.date_precision))}, ${STAT[p.status]})</span></td><td>${srcLink(p)}${p.more_sources ? '. ' + moreLinks(p) : ''}</td><td>${p.confidence === 'high' ? 'High' : 'Medium'}</td></tr>`).join('');
+  $('#panel-review').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Review</h2>
+    <div class="sect"><h2>Check this update before it goes live</h2>
+    <p>Everything below was added or changed in the latest update (verified ${esc(fmt(latest, 'day'))}). Nothing here is published until the pull request is merged. Work through it row by row:</p>
+    <ol><li>Open the source link and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says.</li>
+    <li>Tick the row when it checks out. Anything you cannot confirm stays unticked — leave a comment on the pull request instead of merging.</li>
+    <li>When every new row is ticked, merge the pull request. Rows that could not be verified belong in the backlog queue, not in the data.</li></ol>
+    <p><span id="rv-count"><b>Checked ${nChecked} of ${allIds.length} new rows.</b>${allIds.length && nChecked === allIds.length ? ' All new rows checked — ready to merge.' : ''}</span> <button type="button" class="btn" id="rv-all">Tick all</button> <button type="button" class="btn" id="rv-clear">Clear ticks</button></p>
+    <p class="small muted">Ticks are saved in this browser only. The pull request itself carries a review file quoting the exact source sentence behind each date and actor — check the row against that sentence.</p></div>
+    <div class="sect"><h2>New cases</h2>${table('New cases to check', incRows)}</div>
+    <div class="sect"><h2>New official responses</h2>${table('New responses to check', respRows)}</div>
+    <div class="sect"><h2>New policies</h2>${table('New policies to check', polRows)}</div>
+    <div class="sect"><h2>Still queued for verification</h2><p>Items not in the tracker because a source has not been checked. Nothing here is asserted.</p>
+      <div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">Queue of items to verify</caption><thead><tr><th scope="col">Item</th><th scope="col">Place</th><th scope="col">Why it matters</th><th scope="col">Priority</th></tr></thead><tbody>
+      ${DATA.backlog.map(b => `<tr><th scope="row">${esc(b.item)}</th><td>${esc(b.country === 'all' ? 'All' : CT[b.country] || b.country)}</td><td>${esc(b.why)}</td><td>${esc(b.priority)}</td></tr>`).join('')}</tbody></table></div></div>
+    <div class="sect"><h2>Coverage in this version</h2>${coverageHTML()}</div>`;
+}
+
 /* ------------------------------------------------------------------ visitors */
 const ASEAN_CODES = new Set('BN KH ID LA MY MM PH SG TH TL VN'.split(' '));
 const CONT = {};
@@ -781,7 +830,7 @@ function renderMethod() {
     <h2>How days are counted</h2>
     <p>The clock starts at the earliest public record of the incident that we found, and stops at each official action. A response on the same day as the first record can mean the official statement is itself the earliest record. If the start is unknown, or a date is only known to the month or year, no day count is shown. Where a start is approximate this is marked.</p>
     <h2>Policies: before, after, and pre-emptive</h2>
-    <p>For each policy we compare its date with the first incident on the same theme recorded <i>in this tracker</i> for that place (for ASEAN, any of the six countries). A policy is called <b>pre-emptive</b> only if it came earlier and also names the risk it covers, or if it names a risk for which no incident has been recorded. A general law that merely predates an incident is labelled <b>predates incidents</b>, because a 2012 cybercrime law was not written for a 2026 incident. A policy that came after is labelled <b>followed incidents</b>, and no causal link is claimed unless a source says so.</p>
+    <p>For each policy we compare its date with the first incident on the same theme recorded <i>in this tracker</i> for that place (for ASEAN, any of the member states). A policy is called <b>pre-emptive</b> only if it came earlier and also names the risk it covers, or if it names a risk for which no incident has been recorded. A general law that merely predates an incident is labelled <b>predates incidents</b>, because a 2012 cybercrime law was not written for a 2026 incident. A policy that came after is labelled <b>followed incidents</b>, and no causal link is claimed unless a source says so.</p>
     <p>These labels depend on what the tracker contains. Missing incidents can make a policy look more pre-emptive than it is. Treat them as prompts to look closer.</p>
     <h2>Sources and confidence</h2>
     <p>Every row has at least one source link and the date it was checked. Rows with no confidence tag are <b>high</b>: an official or primary source, or several independent sources that agree. A <b>medium</b> tag means a single or secondary source, or sources that disagree (the disagreement is noted on the row). Where news pages were only seen as search listings, the row says so.</p>
@@ -789,8 +838,14 @@ function renderMethod() {
     <p>Cases come from public reporting, the OECD AI Incidents and Hazards Monitor (AIM) and the AI Incident Database. AIM collects and classifies incidents automatically from news; the tracker keeps the subset where an official response or a relevant policy can be checked by a person. A case links to its AIM record where one was found. <b>The tracker does not claim to hold every AIM incident for these countries.</b> Sweeping AIM is done by hand, so each version states what was searched (see the Updates tab).</p>
     <h2>Coverage in this version</h2>
     ${coverageHTML()}
+    <h2>What SEA-6 means</h2>
+    <p><b>SEA-6</b> is Singapore, Indonesia, Malaysia, Vietnam, the Philippines and Thailand — the six countries the tracker started with. The other five member states (Brunei, Cambodia, Laos, Myanmar and Timor-Leste) joined the tracker's scope on 20 November 2026, and their verified data is still being gathered. The filter rail has a <b>SEA-6 only</b> button: use it when you want the mature dataset without the gaps, and <b>All 11 countries</b> when you want the full scope, gaps included. The gap is the point of the wider view — it shows where verification still has to happen, rather than pretending the record is complete.</p>
+    <h2>How the human in the loop checks a weekly update</h2>
+    <p>There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the <a href="#review">Review tab</a> — or add <code>#review</code> to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row. The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in the backlog queue instead.</p>
+    <h2>The emblem</h2>
+    <p>The emblem in the header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025.</p>
     <h2>Limits</h2>
-    <ul><li>Version ${esc(DATA.meta.version)} is a seed, not a complete census. Six countries and ASEAN are covered. Cambodia, Laos, Myanmar, Brunei and Timor-Leste are not yet included, and many incidents and policies are still queued (see the Updates tab).</li>
+    <ul><li>Version ${esc(DATA.meta.version)} is a seed, not a complete census. All eleven ASEAN member states are now in scope, plus ASEAN regional action, but coverage is uneven: the SEA-6 countries have the deepest verified coverage, and the other five are still being checked. Many incidents and policies are still queued (see the Updates tab).</li>
     <li>"No official response recorded" means none was found in the sources checked. It is not proof that none occurred.</li>
     <li>Incidents come from public reporting and incident monitors, so better-reported events are over-represented.</li>
     <li>Themes are tags added by the researchers and are open to challenge.</li></ul>
@@ -835,6 +890,7 @@ function show() {
   else if (state.tab === 'policies') { syncControls(); renderPolicies(); }
   else if (state.tab === 'compare') renderCompare();
   else if (state.tab === 'updates') renderUpdates();
+  else if (state.tab === 'review') renderReview();
   else if (state.tab === 'visitors') renderVisitors();
   else renderMethod();
   makeScrollersFocusable();
@@ -885,6 +941,24 @@ $('#sort-sel').addEventListener('change', e => { state.sort = e.target.value; re
 $('#b-chk').addEventListener('change', e => { state.b = e.target.checked; refresh(); });
 $('#f-chk').addEventListener('change', e => { state.f = e.target.checked; refresh(); });
 $('#reset').addEventListener('click', () => { Object.assign(state, { c: new Set(), t: '', rt: '', ps: '', b: false, f: false, q: '', sort: 'new' }); refresh(); });
+$('#sea-all').addEventListener('click', () => { state.c = new Set(); refresh(); });
+$('#sea-6').addEventListener('click', () => { state.c = new Set(SEA6); refresh(); });
+document.addEventListener('change', e => {
+  const box = e.target.closest('[data-review]'); if (!box) return;
+  const latest = DATA.meta.verified;
+  let rv = store.get('aat_review_v1', { date: '', ids: [] });
+  if (!rv || typeof rv !== 'object' || rv.date !== latest || !Array.isArray(rv.ids)) rv = { date: latest, ids: [] };
+  const ids = new Set(rv.ids);
+  box.checked ? ids.add(box.dataset.review) : ids.delete(box.dataset.review);
+  store.set('aat_review_v1', { date: latest, ids: [...ids] });
+  const allIds = [...INC.filter(i => i.verified_on === latest).map(i => i.id), ...RESP.filter(r => r.verified_on === latest).map(r => r.id), ...POL.filter(p => p.verified_on === latest).map(p => p.id)];
+  const n = allIds.filter(id => ids.has(id)).length, el = $('#rv-count');
+  if (el) el.innerHTML = `<b>Checked ${n} of ${allIds.length} new rows.</b>${allIds.length && n === allIds.length ? ' All new rows checked — ready to merge.' : ''}`;
+});
+document.addEventListener('click', e => {
+  if (e.target.closest('#rv-all')) { const latest = DATA.meta.verified; const ids = [...INC.filter(i => i.verified_on === latest).map(i => i.id), ...RESP.filter(r => r.verified_on === latest).map(r => r.id), ...POL.filter(p => p.verified_on === latest).map(p => p.id)]; store.set('aat_review_v1', { date: latest, ids }); renderReview(); return; }
+  if (e.target.closest('#rv-clear')) { store.set('aat_review_v1', { date: DATA.meta.verified, ids: [] }); renderReview(); return; }
+});
 $('#copy').addEventListener('click', async e => { track('copy-link', 'Copied a link to a view', true); try { await navigator.clipboard.writeText(location.href); e.target.textContent = 'Link copied'; } catch { e.target.textContent = 'Copy the address bar to share'; } setTimeout(() => e.target.textContent = 'Copy link to this view', 2200); });
 $('#csv').addEventListener('click', exportCSV);
 window.addEventListener('hashchange', () => { readHash(); show(); });
