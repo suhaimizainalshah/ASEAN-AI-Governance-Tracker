@@ -84,7 +84,7 @@ Both depend on honest dates. A case whose start is unknown (`onset_certainty` = 
 
 **itch.io (as a showcase).** Use `asean-ai-tracker-v0.2-itch.zip`, which has `index.html` at the top of the zip. On the project page set Kind of project to HTML, tick "This file will be played in the browser", and choose a viewport of at least 1280 by 900 or the fullscreen option. Say in the description that it is a proof of concept and link to the GitHub page for the data. itch.io shows the page inside a frame and archives poorly, so use the GitHub address when citing.
 
-**Before going public.** Choose a licence (suggestion: CC BY 4.0 for the data and MIT for the code; none is chosen yet). Check that nothing implies endorsement by LSE or LSE IDEAS. Fill in `CORRECTIONS_URL` in `build.py` so readers can report errors.
+**Before going public.** The licences are chosen: CC BY 4.0 for the data (`DATA-LICENSE.md`) and MIT for the code (`LICENSE`). Corrections go to suhaimizainalshah@gmail.com (set as `CORRECTIONS_URL` in `build.py`, so the link appears on the page). The privacy page is `PRIVACY.md`. Check that nothing implies endorsement by LSE or LSE IDEAS.
 
 ## Visitor counts and the Visitors tab (optional, no cookies)
 
