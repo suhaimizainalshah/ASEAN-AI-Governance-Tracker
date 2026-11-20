@@ -1,23 +1,16 @@
 item,country,why,priority
-"National Strategy on AI R&D and Application to 2030 (Decision 127/QD-TTg, 2021)",VN,Add as a strategy instrument once the decision text is checked.,high
-National AI Roadmap 2021-2025,MY,Add as a strategy instrument with a verified date.,high
-Personal Data Protection Law: enactment and in-force dates,ID,Row currently has year precision only.,high
-"POFMA (2019), Online Criminal Harms Act (2023), Code of Practice for Online Safety for Social Media Services",SG,Existing powers relevant to deepfakes and platforms; add with dates.,high
-IMDA spokesperson statement on Grok: date,SG,"May shorten the recorded first-response lag, currently 40 days.",high
-"Did Vietnam respond to Grok, and was there local harm?",VN,The Grok comparison currently has four countries; Vietnam is unchecked.,medium
-Any ASEAN-level statement or action on Grok,ASEAN,None found so far; confirm before stating there was none.,high
-"Outcome of the ASEAN AI Summit (Cebu, September 2026) and the ASEAN Responsible AI Roadmap",ASEAN,Both mentioned in sources; dates and outcomes unverified.,medium
-Decree 13/2023/ND-CP status after the 2025 Personal Data Protection Law,VN,Possible supersession; check before adding.,medium
-NAIS Roadmap 2.0: exact date; NAIS-PH approval details,PH,Currently year or month precision.,medium
-NAIO AI security guidelines (expected July 2026) and Online Safety Act codes (reported 22 May 2026),MY,Possible new instruments; verify publication.,medium
+"Did Vietnam respond to Grok, and was there local harm?",VN,No Vietnamese official response and no evidence of local harm found as of 20 Nov 2026; Grok opens in Vietnam (Viettel/FPT). Keep as a watch item.,medium
+Any ASEAN-level statement or action on Grok,ASEAN,No ASEAN-level statement or action found as of 20 Nov 2026; all documented actions were national (ID/MY/PH). Keep as a watch item.,high
 "Incidents, hazards and milestones from the existing ASEAN atlas (2022-2025)",all,Map each to a primary source before importing; none are included unverified.,high
-"Philippine officials sharing an AI-generated deepfake video on the Vice President's impeachment (OECD AIM, 16 Jun 2025)",PH,"AIM reports public concern and official condemnation. Find who condemned it, and when, before adding.",medium
-"DOJ, PCO and DICT memorandum of agreement: signing date and primary release",PH,The current entry has month precision from a secondary report.,high
-CICC advisory on deepfake cloning of small-business owners (21 Jan 2026),PH,A warning without a dated incident. Decide whether to record it as a series.,low
-Purported AI-generated audio of Hun Sen on the Cambodia-Thailand conflict (AI Incident Database 1127),KH,Cambodia is not yet in scope. Check for any official response by either government.,medium
-"Deepfake of Thai PBS World anchors promoting a 'Crystallum AI' investment (AI Incident Database 1254 and 1255, 2025)",TH,No official response found yet. Check for warnings by Thai authorities.,medium
-"Thailand: did the government respond to Grok, and what existing law covers deepfakes and data protection (PDPA 2019, Computer Crime Act)?",TH,The Thai policy stack currently has no data-protection or cybercrime entries.,high
-"Singapore: other deepfake cases in the OECD monitor, for example the 2025 finance-director video-call scam and school deepfake images",SG,Verify against Singapore Police Force and Ministry of Education statements.,high
-Indonesia: 2024 election deepfakes and any Bawaslu or Komdigi responses,ID,Not yet searched.,medium
-Malaysia and Vietnam: sweep the OECD monitor for 2025 and 2026 incidents beyond the current cases,MY;VN,The sweep so far was by keyword search; the monitor has no downloadable feed in this build.,high
+Purported AI-generated audio of Hun Sen on the Cambodia-Thailand conflict (AI Incident Database 1127),KH,"MPTC condemned it as malicious disinformation; MPTC statement date unverified. Possible second KH case: PM Hun Manet warned of an AI fake video imitating his voice (Khmer Times, 14 Nov 2025) — verify before adding KH.",medium
+"Thailand: did the government respond to Grok, and what existing law covers deepfakes and data protection (PDPA 2019, Computer Crime Act)?",TH,No Thai Grok response found as of 20 Nov 2026; Grok opens in Thailand. Applicable law now covered: PDPA 2019 (TH-P-07) and Computer Crime Act (TH-P-08).,high
+"Singapore: other deepfake cases in the OECD monitor, for example the 2025 finance-director video-call scam and school deepfake images",SG,"Finance-director video-call scam (SG-I-06), Sports School (SG-I-07) and public-servant sextortion emails (SG-I-08) added 20 Nov 2026. Remaining follow-up: OECD AIM 2026-07-07-5a78 (AI fake content targeting the Indian community; 'authorities blocked 14 posts' — verify against a primary source for a possible takedown response).",high
+Indonesia: 2024 election deepfakes and any Bawaslu or Komdigi responses,ID,"Jokowi Mandarin video added (ID-I-04). Soeharto AI video, Anies Arabic-speech deepfake, Prabowo Arabic-speech deepfake and Surya Paloh audio deepfake verified as circulated but with no verified official response to the specific incident.",medium
 "Cambodia, Laos, Myanmar, Brunei and Timor-Leste",ASEAN,Not in scope yet. Add a country once it has at least two verified cases.,low
+OECD AIM 2026-07-07-5a78 — AI-generated fake content targeting the Indian community in Singapore,SG,'Authorities blocked 14 posts and are closely monitoring the situation' — verify against a primary/official source for a possible block_takedown response.,medium
+"OECD AIM 2025-12-07-ca89 — second AKPS director-general deepfake (TikTok, false aid-program claims, Dec 2025)",MY,Confirm whether it is distinct from the Aug 2025 video (MY-I-06) before adding as a separate incident.,medium
+OECD AIM 2026-05-01-a290 — AI-generated deepfake videos used for celebrity impersonation and scams in Vietnam,VN,'Authorities have intervened in some cases' (unspecified) — verify from the underlying article.,medium
+OECD AIM 2026-11-03 — AI-generated deepfakes used to bypass biometric security and commit bank fraud in Vietnam,VN,"Recover the AIM URL and verify from the underlying article (underlying case: Thanh Hóa police bust of a ring selling ~1,000 bank accounts, Jun 2025).",medium
+Johor exco deepfake (MY-I-07) — identify the responding authority,MY,"Identify the responding authority that shut down 12 accounts from the underlying article, to add a response row.",medium
+NPC notice of 11 Aug 2026 — face/likeness is personal information,PH,Verify against the NPC primary notice: a person's face/likeness is personal information and generating/sharing AI media of an identifiable person is processing under the Data Privacy Act.,medium
+Kominfo Election Monitoring Desk launch (28 Nov 2023),ID,Verify the primary Kominfo press release to add a response row to ID-I-04.,medium
