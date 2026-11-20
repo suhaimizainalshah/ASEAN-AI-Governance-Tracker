@@ -18,7 +18,7 @@ DATA = ROOT / "data"
 
 # ---- settings you may edit -------------------------------------------------
 VERSION = "0.3"
-CREDIT = "Prepared by Suhaimi Zainal Shah with assistance from Claude AI (Anthropic)."
+CREDIT = "Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic)."
 CORRECTIONS_URL = "mailto:suhaimizainalshah@gmail.com"     # readers can report errors by email; or use a GitHub issues link
 # Optional visitor counting with GoatCounter (no cookies). Empty means OFF: no tracking code is added.
 # You can also set it without editing this file:  python3 build.py --goatcounter your-code   (or "off")
