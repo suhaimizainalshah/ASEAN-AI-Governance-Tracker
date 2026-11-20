@@ -42,7 +42,7 @@ if GOATCOUNTER_CODE and not re.match(r"^[a-z0-9][a-z0-9-]{1,40}$", GOATCOUNTER_C
     sys.exit(f"GOATCOUNTER_CODE {GOATCOUNTER_CODE!r} is not valid: use lower-case letters, digits and hyphens (the part before .goatcounter.com).")
 if STATS_URL and not re.match(r"^https://\S+$", STATS_URL): sys.exit("STATS_URL must be an https:// address.")
 
-COUNTRIES = {"ASEAN", "SG", "ID", "MY", "VN", "PH", "TH"}
+COUNTRIES = {"ASEAN", "SG", "ID", "MY", "VN", "PH", "TH", "KH", "LA", "MM", "BN", "TL"}
 THEMES = {"deepfake-fraud", "sexual-deepfakes", "political-deepfakes", "election-integrity",
           "online-safety", "general-ai", "data-protection"}
 RTYPES = {"statement", "advisory", "enforcement", "block_takedown", "engagement", "restriction_lifted", "legislation"}
