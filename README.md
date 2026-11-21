@@ -156,3 +156,4 @@ There is no admin backend: the tracker is a static page, and checking happens on
 - Themes and the "pre-emptive" label are researcher judgements and can be challenged.
 
 *Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic). Version 0.3, data verified 20 November 2026.*
+*Built and maintained by Suhaimi Zainal Shah · [AI Benar Advisory](https://suhaimizainalshah.github.io/AI-Benar-Advisory/) — independent AI compliance and governance.*
