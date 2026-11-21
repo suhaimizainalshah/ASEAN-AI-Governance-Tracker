@@ -1,8 +1,8 @@
 {
  "meta": {
   "version": "0.3",
-  "verified": "2026-11-20",
-  "built": "2026-11-20",
+  "verified": "2026-11-21",
+  "built": "2026-11-21",
   "credit": "Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic).",
   "corrections_url": "mailto:suhaimizainalshah@gmail.com"
  },
@@ -489,8 +489,8 @@
    "source_url": "https://oecd.ai/en/incidents/2025-08-06-3314",
    "more_sources": "",
    "confidence": "medium",
-   "verified_on": "2026-11-20",
-   "notes": "AIM summary only; the underlying article was not opened. A second AIM entry (2025-12-07-ca89) reports a similar AKPS aid-program deepfake in Dec 2025 — possibly a second video; not added as a separate incident pending confirmation it is distinct.",
+   "verified_on": "2026-11-21",
+   "notes": "AIM summary only; the underlying article was not opened. The second AIM entry (2025-12-07-ca89) is confirmed as a distinct incident — see MY-I-08 (two TikTok videos, 7 Dec 2025, false aid-support claims).",
    "aim_url": "https://oecd.ai/en/incidents/2025-08-06-3314"
   },
   {
@@ -507,8 +507,8 @@
    "source_url": "https://oecd.ai/en/incidents/2026-02-24-172e",
    "more_sources": "",
    "confidence": "medium",
-   "verified_on": "2026-11-20",
-   "notes": "AIM summary only; underlying article not opened. Official response (12 accounts shut down) is reported but the responding authority is not named in the AIM summary, so no response row is proposed yet.",
+   "verified_on": "2026-11-21",
+   "notes": "Response now recorded: MCMC took down the 12 accounts; announced by Johor police chief Datuk Ab Rahaman Arsad on 24 Feb 2026 — see MY-R-15. Police report lodged by Khairin-Nisa Ismail on 20 Feb 2026; some accounts active since 9 Feb 2026. Four of the 12 accounts used her face and voice via AI.",
    "aim_url": "https://oecd.ai/en/incidents/2026-02-24-172e"
   },
   {
@@ -906,6 +906,60 @@
    "verified_on": "2026-11-20",
    "notes": "The 9 Oct 2026 RBPF statement does not specify what the videos promoted; the same-day RBPF Instagram warning frames such fake TikTok accounts using AI videos of police officers as scams offering money or assistance via WhatsApp, which supports the deepfake-fraud theme. Exact first upload date unknown, hence onset approximate.",
    "aim_url": ""
+  },
+  {
+   "id": "MY-I-08",
+   "country": "MY",
+   "date": "2025-12-07",
+   "date_precision": "day",
+   "onset_certainty": "approximate",
+   "title": "Deepfake videos impersonating AKPS director-general falsely claim support for aid programmes",
+   "themes": "deepfake-fraud;political-deepfakes",
+   "event_id": "",
+   "summary": "Two viral TikTok videos showing a face and voice resembling AKPS director-general Datuk Seri Mohd Shuhaily Mohd Zain falsely expressed support for certain aid programmes. AKPS denied the videos' authenticity, warned the public and said legal action would be taken. Distinct from MY-I-06 (6 Aug 2025): that was a single video by TikTok user 'Hermano Kedutaan' about passport documentation issues, aimed at damaging the DG's reputation; this is two videos, four months later, with false aid-support claims.",
+   "source_title": "Malaysian Tribune (Bernama) 7 Dec 2025",
+   "source_url": "https://malaysiantribune.com/akps-viral-video-of-dg-supporting-aid-fake/",
+   "more_sources": "https://asianewstoday.com/akps-denies-authenticity-of-viral-video-of-director-general-supporting-aid-distribution/;https://oecd.ai/en/incidents/2025-12-07-ca89",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "notes": "Distinct from MY-I-06: different date (7 Dec vs 6 Aug 2025), different claims (aid-programme support vs passport documentation), two videos vs one. Date is the Bernama report date, the earliest public record found.",
+   "aim_url": "https://oecd.ai/en/incidents/2025-12-07-ca89"
+  },
+  {
+   "id": "VN-I-07",
+   "country": "VN",
+   "date": "2026-05-01",
+   "date_precision": "day",
+   "onset_certainty": "approximate",
+   "title": "AI deepfake videos impersonate director Lý Hải and his wife to promote unverified health products",
+   "themes": "deepfake-fraud",
+   "event_id": "",
+   "summary": "AI-generated videos and audio impersonating director Lý Hải and his wife promoted tonics, supplements and other unverified products; Lý Hải warned on 1 May 2026 that the fakes were sophisticated enough to deceive viewers, especially older people, into fraudulent purchases. He had previously warned about the same impersonation in June 2025.",
+   "source_title": "Kenh14, 2 May 2026",
+   "source_url": "https://kenh14.vn/ly-hai-canh-bao-21526050207134533.chn",
+   "more_sources": "https://oecd.ai/en/incidents/2026-05-01-a290;https://danviet.vn/tin-showbiz-24h-nsnd-xuan-bac-ve-tham-que-ly-hai-buc-xuc-vi-bi-gia-mao-d1423272.html",
+   "confidence": "medium",
+   "verified_on": "2026-11-21",
+   "notes": "Date is Lý Hải's 1 May 2026 warning, the earliest public record found; the videos had been circulating before that. No financial-loss figure verified. No response row: the AIM summary's 'authorities have intervened in some cases' names no authority, date or action; the only verifiable intervention found (HCMC police summoning two people, 8 Jan 2026) concerns the separate Quyền Linh fake-arrest videos (AIM 2025-12-08-ef7a), not this incident.",
+   "aim_url": "https://oecd.ai/en/incidents/2026-05-01-a290"
+  },
+  {
+   "id": "VN-I-08",
+   "country": "VN",
+   "date": "2026-06-26",
+   "date_precision": "day",
+   "onset_certainty": "approximate",
+   "title": "Ring sold 1,000+ bank accounts and used facial-data forgery software to defeat bank biometric checks (Thanh Hóa)",
+   "themes": "deepfake-fraud",
+   "event_id": "",
+   "summary": "From Sep 2025 to Jun 2026 a ring led by Nguyễn Tiến Đạt bought, collected and resold more than 1,000 bank accounts; it used software that hijacked the phone camera and injected the account holder's stored portrait photo or video into bank facial-biometric checks, so the accounts could be operated without the holder present. The accounts were used to pay for gambling, money laundering and illicit advertising; the ring made illicit profits of billions of VND.",
+   "source_title": "VietNamNet via Vietstock, 26 Jun 2026",
+   "source_url": "https://vietstock.vn/2026/06/triet-pha-duong-day-gan-1000-tai-khoan-lo-thu-doan-qua-mat-sinh-trac-hoc-757-1458887.htm",
+   "more_sources": "https://cafebiz.vn/bat-dau-so-nguyen-tien-dat-sn-2004-trong-chuyen-an-dac-biet-lien-quan-1000-tai-khoan-ngan-hang-176260626145803904.chn;https://congthuong.vn/ai-va-chuyen-doi-so-ngan-hang-truoc-nhung-rui-ro-phi-truyen-thong-ky-i-khi-ke-gian-biet-dung-ai-479152.html",
+   "confidence": "medium",
+   "verified_on": "2026-11-21",
+   "notes": "Date is the 26 Jun 2026 report; the bust is described only as recent, exact day not stated. METHOD CAVEAT: sources describe a camera-hijack tool injecting stored portrait photos (Vietstock: software builds a video from the holder's photos); they do not call the tool itself AI. The deepfake framing comes from OECD AIM 2026-11-03-d510 and the 4 Nov 2026 National Assembly debate, where a delegate cited this exact Thanh Hóa case while warning about deepfake biometric fraud. Do NOT carry over the 14-member gang / VND 1 trillion / $38.4m figures: those belong to a different June 2025 case (Ninh Binh/Hanoi police, Phạm Hồng Chuyên; Biometric Update 2 Jun 2025), and the >VND 1 trillion / 1m-account figures belong to the separate May 2025 Thai Binh KUBET case (21 arrested).",
+   "aim_url": "https://oecd.ai/en/incidents/2026-11-03-d510"
   }
  ],
  "responses": [
@@ -2314,6 +2368,63 @@
    "confidence": "medium",
    "verified_on": "2026-11-20",
    "notes": "Details per search-indexed summary of the official verified @upa.ppdb post; post not opened directly."
+  },
+  {
+   "id": "MY-R-15",
+   "incident_id": "MY-I-07",
+   "date": "2026-02-24",
+   "date_precision": "day",
+   "actor": "Malaysian Communications and Multimedia Commission (MCMC)",
+   "actor_role": "Regulator",
+   "type": "block_takedown",
+   "binding": "yes",
+   "legal_basis": "existing_law",
+   "instrument_id": "",
+   "summary": "Took down 12 unauthorised TikTok accounts and associated phishing websites impersonating Johor exco Khairin-Nisa Ismail to promote a fake Bantuan Kasih Johor aid scheme; announced by Johor police chief Datuk Ab Rahaman Arsad. Johor police CCID is investigating with MCMC under Penal Code s.420 and CMA s.233.",
+   "source_title": "Malay Mail 24 Feb 2026 (republished by Free Library)",
+   "source_url": "https://www.thefreelibrary.com/Johor+police+shut+down+12+fake+AI+TikTok+accounts+impersonating+exco.-a0876071423",
+   "more_sources": "https://malaysiantribune.com/tiktok-accounts-exploit-ai-image-of-johor-exco-in-alleged-scam/;https://theiskandarian.com/bkj-fake-news-12-tiktok-accounts-found-using-ai-to-impersonate-exco/",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "notes": "Takedown effected by MCMC; Johor police announced it and are investigating. Police report lodged by Khairin-Nisa Ismail on 20 Feb 2026; some accounts active since 9 Feb 2026. Four of the 12 accounts used her face and voice via AI."
+  },
+  {
+   "id": "MY-R-16",
+   "incident_id": "MY-I-08",
+   "date": "2025-12-07",
+   "date_precision": "day",
+   "actor": "Malaysian Border Control and Protection Agency (AKPS)",
+   "actor_role": "Government agency",
+   "type": "statement",
+   "binding": "no",
+   "legal_basis": "not_applicable",
+   "instrument_id": "",
+   "summary": "Denied the authenticity of two viral TikTok videos impersonating its director-general, warned the public against AI-based misinformation and deepfakes, advised the public to rely only on official channels for government assistance information, and said legal action would be taken against those responsible.",
+   "source_title": "Malaysian Tribune (Bernama) 7 Dec 2025",
+   "source_url": "https://malaysiantribune.com/akps-viral-video-of-dg-supporting-aid-fake/",
+   "more_sources": "https://asianewstoday.com/akps-denies-authenticity-of-viral-video-of-director-general-supporting-aid-distribution/",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "notes": ""
+  },
+  {
+   "id": "VN-R-10",
+   "incident_id": "VN-I-08",
+   "date": "2026-06-26",
+   "date_precision": "day",
+   "actor": "Thanh Hóa Provincial Police (Cyber Security and High-Tech Crime Prevention Department with the Investigation Security Department)",
+   "actor_role": "Police",
+   "type": "enforcement",
+   "binding": "yes",
+   "legal_basis": "none_stated",
+   "instrument_id": "",
+   "summary": "Dismantled the ring, arrested the group led by Nguyễn Tiến Đạt, and opened a criminal case with prosecution and detention orders for 8 suspects for illegal collection and trading of bank-account information, illegal computer-network intrusion and using computer networks to misappropriate property.",
+   "source_title": "Cafebiz, 26 Jun 2026",
+   "source_url": "https://cafebiz.vn/bat-dau-so-nguyen-tien-dat-sn-2004-trong-chuyen-an-dac-biet-lien-quan-1000-tai-khoan-ngan-hang-176260626145803904.chn",
+   "more_sources": "https://vietstock.vn/2026/06/triet-pha-duong-day-gan-1000-tai-khoan-lo-thu-doan-qua-mat-sinh-trac-hoc-757-1458887.htm",
+   "confidence": "medium",
+   "verified_on": "2026-11-21",
+   "notes": "Date is the 26 Jun 2026 report; exact bust day not stated. A follow-up (Cafebiz, 8 Oct 2026) confirms the same first case: 8 prosecuted, >1,000 accounts Sep 2025-Jun 2026."
   }
  ],
  "instruments": [
@@ -3628,7 +3739,7 @@
    "instrument_type": "strategy",
    "layer": "Strategy or declaration",
    "binding": "no",
-   "status": "adopted",
+   "status": "superseded",
    "themes": "general-ai",
    "names_risk": "no",
    "issuer": "Prime Minister of Vietnam",
@@ -3637,10 +3748,10 @@
    "source_url": "https://static.luatvietnam.vn/uploaded/VIETLAWFILE/2021/2/127_QD-TTg_220221093131.pdf",
    "more_sources": "https://aipolicytracker.org/policies/vietnam-national-strategy-on-research-development-and-application-of-artificial-intelligence-to-2030",
    "confidence": "high",
-   "verified_on": "2026-11-20",
-   "next_milestone": "Implementation progress check",
-   "next_check": "2027-03-01",
-   "notes": "Signed by Deputy Prime Minister Vu Duc Dam on behalf of the Prime Minister. Takes effect from the date of signing."
+   "verified_on": "2026-11-21",
+   "next_milestone": "",
+   "next_check": "",
+   "notes": "Signed by Deputy Prime Minister Vu Duc Dam on behalf of the Prime Minister. Takes effect from the date of signing. Superseded by Decision 1671/QĐ-TTg (National Strategy on Artificial Intelligence to 2030, vision to 2045), approved 28 Aug 2026 — see VN-P-07."
   },
   {
    "id": "VN-P-05",
@@ -4516,6 +4627,81 @@
    "next_milestone": "",
    "next_check": "",
    "notes": "Order number and Jornal da República publication (Series II No. 31A, 6 August 2026) from the official gazette PDF record; the committee is a coordination body, so the parent may prefer to treat this as context rather than an instrument row."
+  },
+  {
+   "id": "PH-P-09",
+   "jurisdiction": "PH",
+   "date": "2026-11-12",
+   "date_precision": "day",
+   "effective_date": "2026-11-14",
+   "title": "Executive Order No. 131: Adopting the Artificial Intelligence Governance Framework and Creating the National Artificial Intelligence Council",
+   "short_title": "EO 131 — AI Governance Framework and NAIC",
+   "instrument_type": "framework",
+   "layer": "Voluntary AI guidance",
+   "binding": "no",
+   "status": "in_force",
+   "themes": "general-ai",
+   "names_risk": "no",
+   "issuer": "President of the Philippines",
+   "summary": "Adopts the AI Governance Framework for the Philippines as the national strategic guide for policy formulation, regulatory coordination, institutional development and capacity-building, built on four elements (ethics and principles; standards and assurance; risk-based policy toolkit; enabling resources). Creates the National Artificial Intelligence Council (NAIC), chaired by the Executive Secretary with the Secretary of Economy, Planning and Development as vice-chair, reporting directly to the President; the NAIC coordinates, facilitates and monitors implementation and reviews the framework at least every two years.",
+   "source_title": "Executive Order No. 131, Official Gazette of the Philippines",
+   "source_url": "https://www.officialgazette.gov.ph/downloads/2026/11nov/20261112-EO-131-FRM-1.pdf",
+   "more_sources": "https://www.pna.gov.ph/article/pbbm-creates-national-council-to-oversee-ai-development-governance;https://bworldonline.com/technology/2026/11/20/795568/executive-order-no-131-or-the-adoption-of-the-philippine-ai-governance-framework-explained/",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "next_milestone": "First NAIC quarterly progress report to the President",
+   "next_check": "2027-02-01",
+   "notes": "Signed 12 Nov 2026; effective 14 Nov 2026 upon publication in the Official Gazette. Missed by the 20 Nov 2026 update — dated before it, not a new development since 20 Nov."
+  },
+  {
+   "id": "PH-P-10",
+   "jurisdiction": "PH",
+   "date": "2026-08-11",
+   "date_precision": "day",
+   "effective_date": "",
+   "title": "NOTICE TO THE PUBLIC: Use of Real Persons' Likenesses in AI-Generated Images",
+   "short_title": "NPC Notice on AI Likenesses (2026)",
+   "instrument_type": "advisory",
+   "layer": "Data protection",
+   "binding": "no",
+   "status": "in_force",
+   "themes": "data-protection",
+   "names_risk": "yes",
+   "issuer": "National Privacy Commission",
+   "summary": "The NPC states a person's face and likeness are personal information under the Data Privacy Act (RA 10173), and photos and videos may also be biometric information; generating AI media from a real person's face or likeness and posting or sharing it is processing of personal data, which needs a legitimate purpose and a lawful basis (consent is the most recognisable but not the only basis). Without a lawful basis it may be unauthorised processing under Sec. 25, with criminal, civil and administrative liability. A fabricated image or video is false personal data; under Sec. 16(e) the person depicted may demand blocking, removal or destruction and complain to the NPC, which may investigate and issue compliance or cease-and-desist orders. Satire, parody and journalistic uses are recognised but only to the minimum extent necessary; the notice applies equally to public officials, and complaints involving minors get utmost priority.",
+   "source_title": "National Privacy Commission, 11 Aug 2026",
+   "source_url": "https://privacy.gov.ph/notice-to-the-public-use-of-real-persons-likenesses-in-ai-generated-images/",
+   "more_sources": "https://bworldonline.com/opinion/2026/10/13/786676/a-privacy-caution-on-ai-generated-images/",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "next_milestone": "",
+   "next_check": "",
+   "notes": "New instrument, not an update to PH-P-02: the Data Privacy Act itself is unchanged; this is a distinct 11 Aug 2026 NPC interpretive notice under RA 10173 Secs 3(g), 12, 16(e) and 25. No circular number and no separate compliance date. Title and date verified on the NPC's own site."
+  },
+  {
+   "id": "VN-P-07",
+   "jurisdiction": "VN",
+   "date": "2026-08-28",
+   "date_precision": "day",
+   "effective_date": "2026-08-28",
+   "title": "National Strategy on Artificial Intelligence to 2030, with a vision to 2045 (Decision No. 1671/QĐ-TTg)",
+   "short_title": "National AI Strategy to 2030 (Decision 1671)",
+   "instrument_type": "strategy",
+   "layer": "Strategy or declaration",
+   "binding": "no",
+   "status": "adopted",
+   "themes": "general-ai",
+   "names_risk": "no",
+   "issuer": "Prime Minister of Vietnam",
+   "summary": "Approves a new national AI strategy to 2030 with a vision to 2045, replacing Decision 127/QĐ-TTg (2021). Shifts from AI research and application to economy-wide AI transformation. Targets include top-three ASEAN standing in AI R&D by 2030, top-ten in Asia by 2045, an AI economy of about 6% of GDP, about USD 5 billion in AI product and service exports, at least 10 Vietnamese AI brands, at least 8 Vietnamese-language AI models, and 100% of online public services integrated with AI.",
+   "source_title": "Straits AI Institute — State of Applied AI: Vietnam",
+   "source_url": "https://www.straitsai.institute/state-of-applied-ai/vietnam",
+   "more_sources": "https://www.ginc.org/100-national-ai-strategies-2027-update/;https://www.hkbav.org/digital-transformation-turned-into-practical-tools-for-people-businesses_news26407",
+   "confidence": "high",
+   "verified_on": "2026-11-21",
+   "next_milestone": "Implementation progress check",
+   "next_check": "2027-03-01",
+   "notes": "Replaces Decision 127/QĐ-TTg; VN-P-04 marked superseded. Verified from several agreeing independents; the primary Vietnamese decision text was not retrieved in this session — fetch it on the next run. Missed by the 20 Nov 2026 update — dated before it, not a new development since 20 Nov."
   }
  ],
  "events": [
@@ -4530,6 +4716,16 @@
   }
  ],
  "changelog": [
+  {
+   "date": "2026-11-21",
+   "change": "Saturday one-off update (brought forward from the Wednesday run so the Compliscope Advisory site can quote fresh numbers): 3 new incidents (MY-I-08 second AKPS deepfake; VN-I-07 Lý Hải celebrity deepfakes; VN-I-08 Thanh Hóa biometric bank-fraud ring), 3 new responses (MY-R-15 MCMC takedown of 12 Johor exco accounts; MY-R-16 AKPS denial; VN-R-10 Thanh Hóa arrests), 3 new instruments (PH-P-09 EO 131 AI Governance Framework and National AI Council; PH-P-10 NPC notice on AI likenesses; VN-P-07 Decision 1671 National AI Strategy to 2030). VN-P-04 (Decision 127, 2021) superseded by VN-P-07. Backlog 83 → 84 items (5 cleared, 6 added, 3 updated).",
+   "rows": "incidents;responses;instruments;backlog"
+  },
+  {
+   "date": "2026-11-21",
+   "change": "Sweeps this run: OECD AI Incidents Monitor (SG AIM 2026-07-07-5a78, MY AIM 2025-12-07-ca89, VN AIM 2026-05-01-a290, VN AIM 2026-11-03-d510); underlying articles (MHA, Malay Mail/Bernama, Kenh14/Danviet, VietNamNet/Cafebiz, Official Gazette of the Philippines, privacy.gov.ph, Straits AI/GINC); ministry and regulator press pages (IMDA/MDDI, MCMC, Komdigi, DICT/CICC/NPC, ETDA/MDES, MIC/MOST) and ASEAN Secretariat releases for 20–21 Nov 2026 — no new developments dated 20–21 Nov found. CCW Seventh Review Conference outcome (21 Nov) checked: out of scope (global UN disarmament process, no ASEAN action).",
+   "rows": "changelog"
+  },
   {
    "date": "2026-11-20",
    "change": "Weekly update (brought forward from 25 Nov): watch list cleared — SG-P-08 and SG-P-10 now in force; ID-P-05 and MY-P-05 still pending with corrected milestones; PH-P-07 lapsed with the 19th Congress. 21 new incidents, 20 new responses, 17 new instruments; first incidents on election-integrity, data-protection and online-safety themes. Backlog 22 → 15 items.",
@@ -4605,7 +4801,7 @@
   {
    "item": "Singapore: other deepfake cases in the OECD monitor, for example the 2025 finance-director video-call scam and school deepfake images",
    "country": "SG",
-   "why": "Finance-director video-call scam (SG-I-06), Sports School (SG-I-07) and public-servant sextortion emails (SG-I-08) added 20 Nov 2026. Remaining follow-up: OECD AIM 2026-07-07-5a78 (AI fake content targeting the Indian community; 'authorities blocked 14 posts' — verify against a primary source for a possible takedown response).",
+   "why": "Finance-director video-call scam (SG-I-06), Sports School (SG-I-07) and public-servant sextortion emails (SG-I-08) added 20 Nov 2026. OECD AIM 2026-07-07-5a78 checked 21 Nov 2026: MHA primary source confirms the blocking of 14 posts, but the AI link is unverified — held in the separate backlog item pending an AI-attribution source.",
    "priority": "high"
   },
   {
@@ -4623,37 +4819,7 @@
   {
    "item": "OECD AIM 2026-07-07-5a78 — AI-generated fake content targeting the Indian community in Singapore",
    "country": "SG",
-   "why": "'Authorities blocked 14 posts and are closely monitoring the situation' — verify against a primary/official source for a possible block_takedown response.",
-   "priority": "medium"
-  },
-  {
-   "item": "OECD AIM 2025-12-07-ca89 — second AKPS director-general deepfake (TikTok, false aid-program claims, Dec 2025)",
-   "country": "MY",
-   "why": "Confirm whether it is distinct from the Aug 2025 video (MY-I-06) before adding as a separate incident.",
-   "priority": "medium"
-  },
-  {
-   "item": "OECD AIM 2026-05-01-a290 — AI-generated deepfake videos used for celebrity impersonation and scams in Vietnam",
-   "country": "VN",
-   "why": "'Authorities have intervened in some cases' (unspecified) — verify from the underlying article.",
-   "priority": "medium"
-  },
-  {
-   "item": "OECD AIM 2026-11-03 — AI-generated deepfakes used to bypass biometric security and commit bank fraud in Vietnam",
-   "country": "VN",
-   "why": "Recover the AIM URL and verify from the underlying article (underlying case: Thanh Hóa police bust of a ring selling ~1,000 bank accounts, Jun 2025).",
-   "priority": "medium"
-  },
-  {
-   "item": "Johor exco deepfake (MY-I-07) — identify the responding authority",
-   "country": "MY",
-   "why": "Identify the responding authority that shut down 12 accounts from the underlying article, to add a response row.",
-   "priority": "medium"
-  },
-  {
-   "item": "NPC notice of 11 Aug 2026 — face/likeness is personal information",
-   "country": "PH",
-   "why": "Verify against the NPC primary notice: a person's face/likeness is personal information and generating/sharing AI media of an identifiable person is processing under the Data Privacy Act.",
+   "why": "MHA primary source (6 Jun 2026) confirms SPF issued OCHA Disabling Directions to YouTube, Facebook and X blocking 14 posts targeting the Indian community; the 7 Jul 2026 AIM date is the parliamentary-reply date. AI generation is NOT verified — no primary source says the posts were AI-generated; the label rests on the OECD AIM summary alone (marked '[AI generated]'). Hold until a source ties these specific posts to AI generation.",
    "priority": "medium"
   },
   {
@@ -4665,7 +4831,7 @@
   {
    "item": "Deepfake porn targeting Cambodian women (Kiripost 15 Oct 2025)",
    "country": "KH",
-   "why": "Kiripost reports AI deepfake nude images/videos of Cambodian women shared on a pornographic website; only expert/advocate calls for a data-protection/deepfake law were found, no official (government/police) response. Kiripost article body was not retrievable (only description metadata). Needs an official response or a named enforcement action before it can enter main data.",
+   "why": "Kiripost article (Meas Molika, 15 Oct 2025, updated 16 Oct 2025) verified: AI deepfake nude images/videos of Cambodian women shared on a pornographic website; only expert/advocate calls for a data-protection/deepfake law. No MPTC, National Police or Ministry of Women's Affairs response found as of 21 Nov 2026. The draft Personal Data Protection Law process (revised draft circulated Jun 2025; validation workshop 5 Aug 2026) is not a response to this incident.",
    "priority": "high"
   },
   {
@@ -4851,7 +5017,7 @@
   {
    "item": "National AI Strategy (2024-2030) and National AI Development Policy claimed issued 27 Feb 2026",
    "country": "MM",
-   "why": "Nusantara DFDL 2026 edition (p. Myanmar) says, citing a Drafting Committee member's social media post, that the strategy and policy 'were issued and took effect on 27 February 2026' but 'we have been unable to locate any official confirmation of their issuance from the Ministry or any gazette notification'. ASEAN in Data (locked 4 Oct 2026) still lists Myanmar as GAP for a national instrument. If confirmed, MM-P-03 upgrades from draft to adopted/in_force.",
+   "why": "No official confirmation found as of 21 Nov 2026: AI Regulation Map (data as of 2 Nov 2026) says the National AI Strategy (2025-2030) and National AI Policy 'remain unpublished and unadopted'; AIPolicyTracker (verified 26 Sep 2026) records no national AI instrument for Myanmar; ASEAN in Data (4 Oct 2026) still lists Myanmar as GAP. MM-P-03 stays draft.",
    "priority": "high"
   },
   {
@@ -5068,6 +5234,42 @@
    "item": "ANC \"Self Protection From Scams\" advisory (anc.tl)",
    "country": "TL",
    "why": "Undated official advisory with generic scam advice and a reporting route (report number to provider for blocking, then to ANC); no AI mention and no date, so it cannot be a dated response row. Keep as context.",
+   "priority": "low"
+  },
+  {
+   "item": "ASEAN–China Joint Statement, 16 Nov 2026 (29th ASEAN-China Summit)",
+   "country": "ASEAN",
+   "why": "MediaNama quotes AI safety and governance language ('Strengthen AI cooperation, including on AI safety and governance… in line with respective national policies and regulations, as well as the ASEAN Guide on AI Governance and Ethics where applicable'); also welcomed designating 2027 as ASEAN-China Year of AI Cooperation and supported DEFA implementation. Open the asean.org text before adding as ASEAN-P-10.",
+   "priority": "medium"
+  },
+  {
+   "item": "Malaysia: 13,883 deepfake items removed (1 Jan 2024–31 Oct 2026), incl. 1,178 involving political leaders; 61 AI-misuse cases investigated",
+   "country": "MY",
+   "why": "Digital Minister Fahmi Fadzil told Parliament 17 Nov 2026 that service providers removed 13,883 deepfake items following MCMC requests based on public complaints. Aggregate figure with no single incident_id — needs a modelling decision before any row.",
+   "priority": "medium"
+  },
+  {
+   "item": "Singapore: MDDI studying mandatory reporting for serious AI-related incidents",
+   "country": "SG",
+   "why": "MDDI written parliamentary answer 4 Nov 2026: IMDA/CSA studying mandatory reporting for serious AI-related incidents. Statement of intent only, no incident attached and no instrument in force.",
+   "priority": "medium"
+  },
+  {
+   "item": "ChatGPT used to plan a murder in Madiun, Indonesia (OECD AIM 2026-11-01)",
+   "country": "ID",
+   "why": "OECD AIM entry dated 1 Nov 2026: Dwi Bagus Martono used ChatGPT to plan the premeditated murder of his wife and her child in Madiun. Assess fit as a general-ai incident (AI-assisted crime; no official AI-governance response yet identified).",
+   "priority": "medium"
+  },
+  {
+   "item": "Vietnam: AI deepfakes targeting celebrities incl. MC Quyền Linh fake-arrest videos (OECD AIM 2025-12-08-ef7a)",
+   "country": "VN",
+   "why": "HCMC police summoned two people on 8 Jan 2026 (ANTV report) over AI videos falsely claiming MC Quyền Linh had been arrested (Dec 2025 fake-arrest videos). Verify the incident and the police action before adding as VN incident + response. Distinct from VN-I-07 (Lý Hải, May 2026).",
+   "priority": "medium"
+  },
+  {
+   "item": "Vietnam Decision 1671/QĐ-TTg primary text",
+   "country": "VN",
+   "why": "VN-P-07 is verified from several agreeing independents (Straits AI Institute, GINC, HKBAV, ISEAS); fetch the primary Vietnamese decision text to replace the secondary sources in the citation.",
    "priority": "low"
   }
  ]
