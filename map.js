@@ -52,7 +52,42 @@
         { code: 'GR', name: 'Greece', row: 6, col: 7 },
         { code: 'CY', name: 'Cyprus', row: 6, col: 8 }
       ],
-      cols: 9
+      cols: 9,
+      /* Narrower layout for phones: 5 columns instead of 9, so each tile is
+       * wide enough for its country name to fit on one line. Same countries,
+       * roughly the same geography (north at the top, west on the left). */
+      mobile: {
+        cols: 5,
+        places: [
+          { code: 'SE', name: 'Sweden', row: 0, col: 2 },
+          { code: 'FI', name: 'Finland', row: 0, col: 3 },
+          { code: 'EE', name: 'Estonia', row: 0, col: 4 },
+          { code: 'DK', name: 'Denmark', row: 1, col: 1 },
+          { code: 'LT', name: 'Lithuania', row: 1, col: 3 },
+          { code: 'LV', name: 'Latvia', row: 1, col: 4 },
+          { code: 'IE', name: 'Ireland', row: 2, col: 0 },
+          { code: 'NL', name: 'Netherlands', row: 2, col: 1 },
+          { code: 'DE', name: 'Germany', row: 2, col: 2 },
+          { code: 'PL', name: 'Poland', row: 2, col: 3 },
+          { code: 'BE', name: 'Belgium', row: 3, col: 1 },
+          { code: 'CZ', name: 'Czechia', row: 3, col: 2 },
+          { code: 'AT', name: 'Austria', row: 3, col: 3 },
+          { code: 'SK', name: 'Slovakia', row: 3, col: 4 },
+          { code: 'FR', name: 'France', row: 4, col: 0 },
+          { code: 'LU', name: 'Luxembourg', row: 4, col: 1 },
+          { code: 'SI', name: 'Slovenia', row: 4, col: 2 },
+          { code: 'HU', name: 'Hungary', row: 4, col: 3 },
+          { code: 'HR', name: 'Croatia', row: 4, col: 4 },
+          { code: 'ES', name: 'Spain', row: 5, col: 0 },
+          { code: 'IT', name: 'Italy', row: 5, col: 1 },
+          { code: 'RO', name: 'Romania', row: 5, col: 3 },
+          { code: 'BG', name: 'Bulgaria', row: 5, col: 4 },
+          { code: 'PT', name: 'Portugal', row: 6, col: 0 },
+          { code: 'MT', name: 'Malta', row: 6, col: 1 },
+          { code: 'GR', name: 'Greece', row: 6, col: 3 },
+          { code: 'CY', name: 'Cyprus', row: 6, col: 4 }
+        ]
+      }
     },
     asean: {
       label: 'ASEAN',
@@ -141,9 +176,20 @@
       .replace(/"/g, '&quot;');
   }
 
+  /* True when the viewport is a phone width and a region has a narrower
+   * mobile layout. Exposed so the viewer can re-render when the user
+   * crosses the breakpoint (e.g. rotating the phone). */
+  function isMobileLayout() {
+    return typeof window !== 'undefined' && window.matchMedia &&
+      window.matchMedia('(max-width: 640px)').matches;
+  }
+
   function render(container, opts) {
-    var layout = LAYOUTS[opts.region];
-    if (!layout) throw new Error('TileMap: unknown region ' + opts.region);
+    var base = LAYOUTS[opts.region];
+    if (!base) throw new Error('TileMap: unknown region ' + opts.region);
+    var layout = (base.mobile && isMobileLayout())
+      ? { label: base.label, regional: base.regional, places: base.mobile.places, cols: base.mobile.cols }
+      : base;
     var data = opts.data || {};
     var counts = computeCounts(data);
     var metric = opts.metric || 'total';
@@ -174,7 +220,12 @@
         ', ' + c.responses + ' response' + (c.responses === 1 ? '' : 's') +
         ', ' + c.instruments + ' instrument' + (c.instruments === 1 ? '' : 's') +
         ', ' + c.total + ' total';
-      var cls = 'tile bin-' + bin + (isRegional ? ' regional' : '') +
+      /* Tooltip alignment: edge tiles align the tooltip to their edge so it
+       * never hangs off the side of the screen on a phone. */
+      var tipCls = isRegional ? ' tip-left'
+        : (place.col <= 1 ? ' tip-left'
+          : (place.col >= layout.cols - 2 ? ' tip-right' : ''));
+      var cls = 'tile bin-' + bin + (isRegional ? ' regional' : '') + tipCls +
         (selected === code ? ' selected' : '');
       var pos = isRegional ? '' : ' style="grid-row:' + (place.row + 1) + ';grid-column:' + (place.col + 1) + '"';
       return '<button type="button" class="' + cls + '"' + pos +
@@ -197,11 +248,11 @@
     html += '<div class="map-metrics" role="group" aria-label="Colour the map by">';
     METRICS.forEach(function (m) {
       html += '<button type="button" class="metric' + (metric === m.key ? ' active' : '') +
-        '" data-metric="' + m.key + '">' + m.label + '</button>';
+        '" data-metric="' + m.key + '" aria-pressed="' + (metric === m.key) + '">' + m.label + '</button>';
     });
     html += '</div></div>';
     html += '<div class="map-regional">' + tileHTML(layout.regional, true) + '</div>';
-    html += '<div class="map-grid" style="grid-template-columns:repeat(' + layout.cols + ',1fr)">';
+    html += '<div class="map-grid" style="grid-template-columns:repeat(' + layout.cols + ',minmax(0,1fr))">';
     layout.places.forEach(function (p) { html += tileHTML(p, false); });
     html += '</div>';
     html += '<div class="map-legend"><span class="legend-title">Rows per place (' +
@@ -239,5 +290,5 @@
     });
   }
 
-  global.TileMap = { render: render, computeCounts: computeCounts };
+  global.TileMap = { render: render, computeCounts: computeCounts, isMobileLayout: isMobileLayout };
 })(typeof window !== 'undefined' ? window : this);
