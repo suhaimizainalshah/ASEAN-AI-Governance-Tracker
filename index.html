@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Security headers GitHub Pages cannot set server-side (see README,
+     "Privacy and security"): the meta equivalents that exist are set here.
+     X-Content-Type-Options and X-Frame-Options have no meta equivalent.
+     CSP notes: the viewer script and styles are inline, so 'unsafe-inline'
+     is required for both; the only external script is GoatCounter from
+     gc.zgo.at, and the only external fetch is its counting endpoint
+     (*.goatcounter.com, incl. the image-pixel fallback). If STATS_URL in
+     build.py is ever set to another host, add it to connect-src. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
 <title>ASEAN AI Governance Tracker</title>
 <meta name="description" content="Incidents, official responses and policies on AI governance in Singapore, Indonesia, Malaysia, Vietnam, the Philippines and ASEAN.">
 <style>
@@ -310,7 +321,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
     </div>
   </div>
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p><a href="PRIVACY.html">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p></div></footer>
 
 <div id="live" class="sr" aria-live="polite" style="position:absolute;left:-9999px"></div>
 <div id="tip" class="hidden" role="tooltip"></div>
@@ -640,6 +651,9 @@ function renderMap(container) {
     metric: mapMetric,
     selected: state.c.size === 1 ? [...state.c][0] : null,
     onSelect: function (code) {
+      /* The regional tile has no cases behind it: on the Cases tab it
+       * would otherwise set a filter that filters nothing (see show()). */
+      if (code === 'ASEAN' && state.tab === 'cases') { state.c = new Set(); refresh(); return; }
       state.c = code ? new Set([code]) : new Set();
       refresh();
     },
@@ -906,7 +920,7 @@ function renderMethod() {
     <li>Incidents come from public reporting and incident monitors, so better-reported events are over-represented.</li>
     <li>Themes are tags added by the researchers and are open to challenge.</li></ul>
     <h2>Privacy</h2>
-    <p>${privacyText()}</p>
+    <p>${privacyText()} <a href="PRIVACY.html">Read the full privacy notice</a>.</p>
     <h2>Cite and correct</h2>
     <p>Suggested citation: ASEAN AI Governance Tracker, version ${esc(DATA.meta.version)}, data verified ${esc(fmt(DATA.meta.verified, 'day'))}. Quote the row ID (for example MY-R-08) when citing or reporting an error.${DATA.meta.corrections_url ? ` <a href="${esc(DATA.meta.corrections_url)}">Report a correction</a>.` : ''}</p></div>`;
 }
@@ -944,6 +958,12 @@ function syncControls() {
   }).join('');
 }
 function show() {
+  /* ASEAN has no cases of its own, so a country filter of ASEAN alone on
+   * the Cases tab filters nothing while the badge claims one place is
+   * selected and no chip offers to clear it. Drop it here (e.g. after a
+   * #cases?c=ASEAN link, or switching tabs from Policies with ASEAN set)
+   * so the Cases view can never sit in that phantom-filter state. */
+  if (state.tab === 'cases') state.c.delete('ASEAN');
   TABS.forEach(([k]) => { const sel = k === state.tab; $('#tab-' + k).setAttribute('aria-selected', sel); $('#tab-' + k).tabIndex = sel ? 0 : -1; $('#panel-' + k).hidden = !sel; });
   $('#layout').classList.toggle('no-rail', !['cases', 'policies'].includes(state.tab));
   $('#csv').classList.toggle('hidden', !['cases', 'policies'].includes(state.tab));
@@ -1027,10 +1047,18 @@ window.addEventListener('hashchange', () => { readHash(); show(); });
 let lastRW = rulerW(), rsTimer;
 window.addEventListener('resize', () => { clearTimeout(rsTimer); rsTimer = setTimeout(() => { const w = rulerW(); if (w !== lastRW && state.tab === 'cases') { lastRW = w; show(); } }, 200); });
 const tip = $('#tip');
+/* Keep the timeline tooltip inside the viewport: it used to sit 16px below
+ * the cursor (or below the marker on keyboard focus) with no bottom clamp,
+ * so markers near the bottom of the screen pushed it off-screen. */
+function placeTip(x, y) {
+  const w = Math.min(300, innerWidth - 16), h = tip.offsetHeight || 60;
+  tip.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + 'px';
+  tip.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px';
+}
 document.addEventListener('mouseover', e => { const m = e.target.closest('.mk'); if (m) { tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); } });
-document.addEventListener('mousemove', e => { if (!tip.classList.contains('hidden')) { tip.style.left = Math.min(e.clientX + 14, innerWidth - 320) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; } });
+document.addEventListener('mousemove', e => { if (!tip.classList.contains('hidden')) placeTip(e.clientX + 14, e.clientY + 16); });
 document.addEventListener('mouseout', e => { if (e.target.closest('.mk')) tip.classList.add('hidden'); });
-document.addEventListener('focusin', e => { const m = e.target.closest?.('.mk'); if (m) { const r = m.getBoundingClientRect(); tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); tip.style.left = Math.max(8, Math.min(r.left, innerWidth - 320)) + 'px'; tip.style.top = (r.bottom + 8) + 'px'; } });
+document.addEventListener('focusin', e => { const m = e.target.closest?.('.mk'); if (m) { const r = m.getBoundingClientRect(); tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); placeTip(r.left, r.bottom + 8); } });
 document.addEventListener('focusout', e => { if (e.target.closest?.('.mk')) tip.classList.add('hidden'); });
 
 $('#theme').addEventListener('click', () => { const d = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = d ? 'light' : 'dark'; $('#theme').textContent = d ? 'Dark mode' : 'Light mode'; $('#theme').setAttribute('aria-pressed', !d); store.set('aat_theme_v1', d ? 'light' : 'dark'); });

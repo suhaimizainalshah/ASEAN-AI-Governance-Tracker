@@ -147,6 +147,33 @@ Then **you** open the source, confirm each field, and only then add the row. Tre
 
 There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the **Review tab** on the page — or add `#review` to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row (ticks are saved in your browser only). The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in `data/backlog.csv` instead.
 
+## Privacy and security
+
+**Privacy.** The page sets no cookies and does no fingerprinting. The full
+notice is [`PRIVACY.md`](PRIVACY.md) (rendered on the live site as
+`PRIVACY.html`, linked from the footer on every tab). Visitor counting is
+GoatCounter only, no cookies, aggregates only, and respects Do Not Track and
+Global Privacy Control. The only third parties a browser contacts to load or
+use the page are the host, GitHub Pages, and GoatCounter (`gc.zgo.at` for the
+counting script, `suhaimizs.goatcounter.com` for the counts). No other
+third-party script, font, tracker or advertisement is loaded. Followed items,
+theme choice, Review-tab ticks and last-visit date are kept in the reader's
+own browser (local storage) and never sent anywhere.
+
+**Security headers.** The site is hosted on GitHub Pages, which does not let
+a site set its own HTTP response headers — so `X-Content-Type-Options`,
+`X-Frame-Options` and the CSP `frame-ancestors` rule, which can only be set
+as headers, are not set here, and no claim is made that they are. What can
+be done in the page itself is done: `template.html` sets
+Content-Security-Policy, Referrer-Policy (`strict-origin-when-cross-origin`)
+and Permissions-Policy (`camera=(), microphone=(), geolocation=()`) through
+`<meta>` tags. The policy allows only the page's own inline scripts and
+styles plus GoatCounter (`gc.zgo.at` for the script, `*.goatcounter.com`
+for counts, including its image-pixel fallback); there are no other external
+resources to allow. If `STATS_URL` in `build.py` is ever set to another host,
+add that host to `connect-src` in `template.html` first, or the snapshot
+fetch will be blocked.
+
 ## Known limits (also on the Method tab)
 
 - A seed, not a census: many incidents and policies are still queued.
