@@ -310,7 +310,7 @@
    "more_sources": "https://www.bangkokpost.com/thailand/general/3321219/lovestruck-woman-learns-pilot-boyfriend-was-ai-creation;https://thethaiger.com/news/woman-chiang-mai-ai-generated-pilot",
    "confidence": "medium",
    "verified_on": "2026-11-15",
-   "notes": "Verified from the OECD monitor page and its list of articles; the news articles themselves were not opened. No official response found.",
+   "notes": "Underlying Bangkok Post article (17 Sep 2026) read in full 22 Nov 2026: a 66-year-old woman from Lampang travelled to Chiang Mai airport on the evening of 16 Sep to meet a man she believed was a pilot; officers concluded his photo appeared AI-generated and posted on Facebook. No financial loss reported. No official response found.",
    "aim_url": "https://oecd.ai/en/incidents/2026-09-17-3946"
   },
   {
@@ -346,7 +346,7 @@
    "more_sources": "https://philstarlife.com/amp/article/972296-pnp-warns-against-ai-love-scams;https://securitymatters.com.ph/?p=25846",
    "confidence": "medium",
    "verified_on": "2026-11-15",
-   "notes": "Verified from search listings and excerpts of the news pieces, not read in full. A repost dated 2 Feb 2026 suggests an earlier CICC warning; not confirmed.",
+   "notes": "Underlying articles read in full 22 Nov 2026: Philstar and PhilstarLife (both 4 Feb 2026) confirm the PNP Anti-Cybercrime Group and CICC warnings about AI-assisted love scams and deepfake personas; SecurityMatters (12 Feb 2026, citing PIA) confirms the Scam Watch Pilipinas case of a retired principal who lost ₱2.5 million. The PNP/CICC 'Red Alert' was issued 4 Feb 2026.",
    "aim_url": ""
   },
   {
@@ -373,16 +373,16 @@
    "date": "2024-06",
    "date_precision": "month",
    "onset_certainty": "approximate",
-   "title": "Deepfake nude photos of Singapore Sports School students created and shared by classmates",
+   "title": "Deepfake nude photos of students at a Singapore sports school created and shared by classmates",
    "themes": "sexual-deepfakes",
    "event_id": "",
-   "summary": "Male students at Singapore Sports School generated and circulated deepfake nude images of female schoolmates from June 2024, using two WhatsApp groups (one to generate, one to circulate). The case became public on 12 Nov 2024. The school lodged a police report and disciplined students involved, including caning, suspension and sports-trip bans.",
+   "summary": "Male students at a Singapore sports school generated and circulated deepfake nude images of female schoolmates from June 2024, using two WhatsApp groups (one to generate, one to circulate). The case became public on 12 Nov 2024. The school lodged a police report and disciplined students involved, including caning, suspension and sports-trip bans.",
    "source_title": "CNA, 12 Nov 2024",
    "source_url": "https://www.channelnewsasia.com/singapore/singapore-sports-school-deepfake-nude-images-students-police-investigating-4742506",
    "more_sources": "https://www.aiaaic.org/aiaaic-repository/ai-algorithmic-and-automation-incidents/singapore-sports-school-students-attacked-with-nude-deepfakes",
    "confidence": "medium",
    "verified_on": "2026-11-20",
-   "notes": "Onset month from a victim's parent via CNA ('dates back to June'); exact start day unknown. No OECD AIM entry found for this case. Students aged 13-18.",
+   "notes": "Onset month from a victim's parent via CNA ('dates back to June'); exact start day unknown. No OECD AIM entry found for this case. Students aged 13-18. School not named in the tracker text: schools are not named in sexual-deepfake cases involving minors (the school name stays in the source link).",
    "aim_url": ""
   },
   {
@@ -430,13 +430,13 @@
    "title": "AI-generated nude images of 300+ female students at a Seremban secondary school",
    "themes": "sexual-deepfakes",
    "event_id": "",
-   "summary": "A Form Five student allegedly used AI to generate around 200 explicit deepfake images of female schoolmates aged 14-17, stored on his phone and partly shared via Telegram and to his sister. Discovered 12 Aug 2026 when a Form Two student found the phone in the school surau; five police reports lodged 20-23 Aug 2026; school confirmed 300+ victims on 15 Sep 2026. Date is the first public reporting (The Star, 17 Oct 2026).",
-   "source_title": "The Star via AI Risk Wire: Parents urge police action over alleged explicit deepfakes at Seremban school",
-   "source_url": "https://airiskwire.com/cases/LR-2026-0773",
-   "more_sources": "https://mediaselangor.com/en/2026/10/401942;https://oecd.ai/en/incidents/2026-10-15-dc0c",
+   "summary": "A Form Five student allegedly used AI to generate explicit deepfake images of female schoolmates, stored on his phone and circulated among students, allegedly sold via Telegram. Discovered 12 Aug 2026 when a Form Two student found the phone in the school surau; five police reports lodged 20-23 Aug 2026; school confirmed 300+ victims on 15 Sep 2026. Date is the first public reporting (The Star, 17 Oct 2026).",
+   "source_title": "Media Selangor, 19 Oct 2026 (reporting Harian Metro; see also The Star, 17 Oct 2026)",
+   "source_url": "https://mediaselangor.com/en/2026/10/401942",
+   "more_sources": "https://airiskwire.com/cases/LR-2026-0773;https://oecd.ai/en/incidents/2026-10-15-dc0c",
    "confidence": "medium",
    "verified_on": "2026-11-20",
-   "notes": "OECD AIM has two entries for this case (2026-10-15-dc0c and 2026-10-18-8df8); treat as one incident.",
+   "notes": "OECD AIM has two entries for this case (2026-10-15-dc0c and 2026-10-18-8df8); treat as one incident. Source switched 22 Nov 2026 from the AI Risk Wire aggregator (machine-generated, unverified) to Media Selangor (19 Oct 2026, reporting Harian Metro), which supports the 300+ victims, Telegram circulation/sale, 12 Aug discovery, five reports 20-23 Aug and 15 Sep confirmation; the victims' ages and the 'around 200 images' figure could not be verified against an accessible source and were removed.",
    "aim_url": "https://oecd.ai/en/incidents/2026-10-15-dc0c"
   },
   {
@@ -556,13 +556,13 @@
    "title": "AI deepfake extortion scheme targets officials in Thanh Hóa",
    "themes": "sexual-deepfakes",
    "event_id": "",
-   "summary": "In Thanh Hóa, nearly 20 individuals including government officials were targeted by extortionists using AI-assisted technology to create fake, sensitive images and videos; victims were threatened with public exposure unless large sums were paid, causing psychological distress and financial harm.",
+   "summary": "In Thanh Hóa, nearly 20 individuals including government officials were targeted by extortionists using AI-assisted technology to create fake, sensitive images and videos; victims were threatened with public exposure unless large sums were paid, causing psychological distress and financial harm. (OECD AIM listing date; onset unconfirmed.)",
    "source_title": "OECD AI Incidents Monitor",
    "source_url": "https://oecd.ai/en/incidents/2026-10-03-5696",
-   "more_sources": "",
+   "more_sources": "https://vietreader.com/news/94767-authorities-warn-against-blackmail-using-fake-sensitive-videos.html",
    "confidence": "medium",
    "verified_on": "2026-11-20",
-   "notes": "Date is the AIM listing date; confirm onset and any police action from the underlying article. Overlaps VN-I-02's sextortion theme but is a distinct dated case with officials as targets.",
+   "notes": "Date is the AIM listing date; onset unconfirmed — the underlying VietReader article (4 Oct 2026, read in full 22 Nov 2026) reports Thanh Hóa police disclosing on 4 Oct that they had received multiple reports from victims, with demands up to VND 1.5 billion, but gives no earlier dated record of when the extortion began. No police action beyond the warning is recorded.",
    "aim_url": "https://oecd.ai/en/incidents/2026-10-03-5696"
   },
   {
@@ -628,13 +628,13 @@
    "title": "AI sexual deepfakes of Semarang high-school students and teacher spread on X; maker later convicted",
    "themes": "sexual-deepfakes;online-safety",
    "event_id": "",
-   "summary": "AI-edited pornographic photos and videos using the faces of female students and at least one teacher of SMAN 11 Semarang spread on X from the account of an 18-year-old university student and alumnus: 300+ posts and 1,100 files stored. Victims included students, alumni and teaching staff.",
+   "summary": "AI-edited pornographic photos and videos using the faces of female students and at least one teacher of a Semarang high school spread on X from the account of an 18-year-old university student and alumnus: 300+ posts and 1,100 files stored. Victims included students, alumni and teaching staff.",
    "source_title": "NOPE incident summary (Kompas)",
    "source_url": "https://nope.net/incidents/2025-semarang-university-student-ai-edited-sexual-images-of-former-schools-students-and-teacher-one-year-sentence",
    "more_sources": "https://journal.privietlab.org/index.php/IJLGR/article/view/2300;https://oecd.ai/en/incidents/2026-01-08-769c",
    "confidence": "high",
    "verified_on": "2026-11-20",
-   "notes": "Onset is the 20 Oct 2025 Kompas report date, the earliest public record found; the posts began earlier in October.",
+   "notes": "Onset is the 20 Oct 2025 Kompas report date, the earliest public record found; the posts began earlier in October. School not named in the tracker text: schools are not named in sexual-deepfake cases involving minors (the school name stays in the source link).",
    "aim_url": "https://oecd.ai/en/incidents/2026-01-08-769c"
   },
   {
@@ -949,16 +949,16 @@
    "date": "2026-06-26",
    "date_precision": "day",
    "onset_certainty": "approximate",
-   "title": "Ring sold 1,000+ bank accounts and used facial-data forgery software to defeat bank biometric checks (Thanh Hóa)",
+   "title": "Ring sold nearly 1,000 bank accounts and used facial-data forgery software to defeat bank biometric checks (Thanh Hóa)",
    "themes": "deepfake-fraud",
    "event_id": "",
-   "summary": "From Sep 2025 to Jun 2026 a ring led by Nguyễn Tiến Đạt bought, collected and resold more than 1,000 bank accounts; it used software that hijacked the phone camera and injected the account holder's stored portrait photo or video into bank facial-biometric checks, so the accounts could be operated without the holder present. The accounts were used to pay for gambling, money laundering and illicit advertising; the ring made illicit profits of billions of VND.",
+   "summary": "A ring bought, collected and resold nearly 1,000 bank accounts; it used software that hijacked the phone camera and injected the account holder's stored portrait photo or video into bank facial-biometric checks, so the accounts could be operated without the holder present. The accounts were used to pay for gambling, money laundering and illicit advertising.",
    "source_title": "VietNamNet via Vietstock, 26 Jun 2026",
    "source_url": "https://vietstock.vn/2026/06/triet-pha-duong-day-gan-1000-tai-khoan-lo-thu-doan-qua-mat-sinh-trac-hoc-757-1458887.htm",
    "more_sources": "https://cafebiz.vn/bat-dau-so-nguyen-tien-dat-sn-2004-trong-chuyen-an-dac-biet-lien-quan-1000-tai-khoan-ngan-hang-176260626145803904.chn;https://congthuong.vn/ai-va-chuyen-doi-so-ngan-hang-truoc-nhung-rui-ro-phi-truyen-thong-ky-i-khi-ke-gian-biet-dung-ai-479152.html",
    "confidence": "medium",
    "verified_on": "2026-11-21",
-   "notes": "Date is the 26 Jun 2026 report; the bust is described only as recent, exact day not stated. METHOD CAVEAT: sources describe a camera-hijack tool injecting stored portrait photos (Vietstock: software builds a video from the holder's photos); they do not call the tool itself AI. The deepfake framing comes from OECD AIM 2026-11-03-d510 and the 4 Nov 2026 National Assembly debate, where a delegate cited this exact Thanh Hóa case while warning about deepfake biometric fraud. Do NOT carry over the 14-member gang / VND 1 trillion / $38.4m figures: those belong to a different June 2025 case (Ninh Binh/Hanoi police, Phạm Hồng Chuyên; Biometric Update 2 Jun 2025), and the >VND 1 trillion / 1m-account figures belong to the separate May 2025 Thai Binh KUBET case (21 arrested).",
+   "notes": "Date is the 26 Jun 2026 report; the bust is described only as recent, exact day not stated. METHOD CAVEAT: sources describe a camera-hijack tool injecting stored portrait photos (Vietstock: software builds a video from the holder's photos); they do not call the tool itself AI. The deepfake framing comes from OECD AIM 2026-11-03-d510 and the 4 Nov 2026 National Assembly debate, where a delegate cited this exact Thanh Hóa case while warning about deepfake biometric fraud. Do NOT carry over the 14-member gang / VND 1 trillion / $38.4m figures: those belong to a different June 2025 case (Ninh Binh/Hanoi police, Phạm Hồng Chuyên; Biometric Update 2 Jun 2025), and the >VND 1 trillion / 1m-account figures belong to the separate May 2025 Thai Binh KUBET case (21 arrested). Name of the alleged ringleader withheld: private individual, accused not convicted, no official source names him. Counts follow the Vietstock/VietNamNet report ('nearly 1,000' accounts); the Sep 2025–Jun 2026 period and profit figures appear only in the non-official Cafebiz republication and are not used.",
    "aim_url": "https://oecd.ai/en/incidents/2026-11-03-d510"
   }
  ],
@@ -2418,13 +2418,13 @@
    "binding": "yes",
    "legal_basis": "none_stated",
    "instrument_id": "",
-   "summary": "Dismantled the ring, arrested the group led by Nguyễn Tiến Đạt, and opened a criminal case with prosecution and detention orders for 8 suspects for illegal collection and trading of bank-account information, illegal computer-network intrusion and using computer networks to misappropriate property.",
+   "summary": "Dismantled the ring, arrested the group, and opened a criminal case with prosecution and detention orders for 8 suspects for illegal collection and trading of bank-account information, illegal computer-network intrusion and using computer networks to misappropriate property.",
    "source_title": "Cafebiz, 26 Jun 2026",
    "source_url": "https://cafebiz.vn/bat-dau-so-nguyen-tien-dat-sn-2004-trong-chuyen-an-dac-biet-lien-quan-1000-tai-khoan-ngan-hang-176260626145803904.chn",
    "more_sources": "https://vietstock.vn/2026/06/triet-pha-duong-day-gan-1000-tai-khoan-lo-thu-doan-qua-mat-sinh-trac-hoc-757-1458887.htm",
    "confidence": "medium",
    "verified_on": "2026-11-21",
-   "notes": "Date is the 26 Jun 2026 report; exact bust day not stated. A follow-up (Cafebiz, 8 Oct 2026) confirms the same first case: 8 prosecuted, >1,000 accounts Sep 2025-Jun 2026."
+   "notes": "Date is the 26 Jun 2026 report; exact bust day not stated. A follow-up (Cafebiz, 8 Oct 2026) confirms the same first case: 8 prosecuted, >1,000 accounts Sep 2025-Jun 2026. Name of the alleged ringleader withheld: private individual, accused not convicted, no official source names him."
   }
  ],
  "instruments": [
@@ -4716,6 +4716,11 @@
   }
  ],
  "changelog": [
+  {
+   "date": "2026-11-22",
+   "change": "Audit and compliance fixes: VN-I-08 and VN-R-10 anonymised — the alleged ringleader's name withheld (private individual, accused not convicted, no official source names him); VN-I-08 counts softened to the Vietstock/VietNamNet report ('nearly 1,000' accounts), period/profit figures from the non-official Cafebiz republication removed. MY-I-03 now cites Media Selangor (19 Oct 2026) instead of the AI Risk Wire aggregator; unverified victim ages and image count removed. ID-I-05 and SG-I-07: schools no longer named in sexual-deepfake cases involving minors (rule adopted; names stay in source links). TH-I-03 and PH-I-04: underlying articles read in full, notes updated. VN-I-04: summary now flags the date as the OECD AIM listing date with onset unconfirmed. Template: dark-mode selected-state contrast fixed (--sel #2b6cb0), ASEAN-emblem non-affiliation disclaimer added (footer, Method, README), Permissions-Policy meta tag removed (browsers ignore it; it has no meta equivalent). PRIVACY.md corrected on localStorage, GoatCounter domains and collected data. Unused logo-edited.png deleted. No counts changed.",
+   "rows": "VN-I-08;VN-R-10;MY-I-03;ID-I-05;SG-I-07;TH-I-03;PH-I-04;VN-I-04"
+  },
   {
    "date": "2026-11-21",
    "change": "Saturday one-off update (brought forward from the Wednesday run so the Compliscope Advisory site can quote fresh numbers): 3 new incidents (MY-I-08 second AKPS deepfake; VN-I-07 Lý Hải celebrity deepfakes; VN-I-08 Thanh Hóa biometric bank-fraud ring), 3 new responses (MY-R-15 MCMC takedown of 12 Johor exco accounts; MY-R-16 AKPS denial; VN-R-10 Thanh Hóa arrests), 3 new instruments (PH-P-09 EO 131 AI Governance Framework and National AI Council; PH-P-10 NPC notice on AI likenesses; VN-P-07 Decision 1671 National AI Strategy to 2030). VN-P-04 (Decision 127, 2021) superseded by VN-P-07. Backlog 83 → 84 items (5 cleared, 6 added, 3 updated).",

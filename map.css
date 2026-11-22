@@ -28,7 +28,7 @@ html[data-theme="dark"] .tile:hover, html[data-theme="dark"] .tile:focus-visible
 .tile.bin-1, .swatch.bin-1 { background: #d6e9e1; }
 .tile.bin-2, .swatch.bin-2 { background: #a8d2bf; }
 .tile.bin-1, .tile.bin-2 { color: #1c2b26; }
-.tile.bin-3, .swatch.bin-3 { background: #5fae8d; color: #fff; }
+.tile.bin-3, .swatch.bin-3 { background: #5fae8d; color: #1c2b26; }
 .tile.bin-4, .swatch.bin-4 { background: #1b5e4f; color: #fff; }
 .tile.bin-3 .tile-name, .tile.bin-4 .tile-name { opacity: 0.9; }
 /* Tooltip: shown on hover / keyboard focus / tap (tap also selects). */
