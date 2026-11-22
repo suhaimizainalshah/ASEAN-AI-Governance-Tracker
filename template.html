@@ -107,6 +107,9 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .glance div:last-child{border-right:0}
 .glance b{display:block;font:700 1.7rem/1.1 var(--serif);font-variant-numeric:tabular-nums}
 .glance span{font-size:.85rem;color:var(--muted)}
+/* tile map: "Where the rows are" box above the Cases and Policies lists */
+.map-box{border:1px solid var(--line);background:var(--surface);border-radius:4px;box-shadow:var(--sh-card);padding:1rem 1.1rem;margin-bottom:1.1rem}
+.map-box h2{font-size:1.15rem;margin-bottom:.6rem}
 .resultbar{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;margin:.2rem 0 .4rem;color:var(--muted);font-size:.92rem;flex-wrap:wrap}
 .chipsrow{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 .8rem}
 .fchip{display:inline-flex;gap:.35rem;align-items:center;background:var(--soft);border:1px solid var(--line);border-radius:99px;padding:.15rem .3rem .15rem .65rem;font-size:.84rem}
@@ -239,6 +242,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
   details.more{display:block}details.more>*{display:block}
 }
 </style>
+<link rel="stylesheet" href="map.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -306,11 +310,12 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
     </div>
   </div>
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p></div></footer>
 
 <div id="live" class="sr" aria-live="polite" style="position:absolute;left:-9999px"></div>
 <div id="tip" class="hidden" role="tooltip"></div>
 
+<script src="map.js"></script>
 <script>
 const DATA = /*__DATA__*/null;
 
@@ -620,21 +625,43 @@ function chipsHTML() {
   return `<div class="chipsrow" aria-label="Active filters">${chipActions.map((c, k) => `<span class="fchip">${esc(c[0])}<button type="button" data-chip="${k}" aria-label="Remove filter ${esc(c[0])}">×</button></span>`).join('')}</div>`;
 }
 
+/* ------------------------------------------------------------------ tile map
+   "Where the rows are": a tile cartogram shared with the EU tracker
+   (map.js / map.css). Counts come from the tracker's own data at render
+   time. Clicking a tile sets the country filter to that place; clicking
+   the selected tile again clears it. The metric toggle is managed inside
+   the component, so it is not stored in the viewer state. */
+function renderMap(container) {
+  if (!container || !window.TileMap) return;
+  TileMap.render(container, {
+    region: 'asean',
+    data: DATA,
+    metric: 'total',
+    selected: state.c.size === 1 ? [...state.c][0] : null,
+    onSelect: function (code) {
+      state.c = code ? new Set([code]) : new Set();
+      refresh();
+    }
+  });
+}
+
 function renderCases() {
   const all = INC.filter(i => matchCase(i));
   const list = sortedCases(all);
   const nR = list.reduce((n, i) => n + i.responses.length, 0);
-  $('#panel-cases').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Cases</h2>${renderGlance(list.length, nR, POL.filter(p => !state.c.size || state.c.has(p.jurisdiction)).length)}
+  $('#panel-cases').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Cases</h2><section class="map-box" aria-label="Where the rows are"><h2>Where the rows are</h2><div id="map-cases"></div></section>${renderGlance(list.length, nR, POL.filter(p => !state.c.size || state.c.has(p.jurisdiction)).length)}
     <div class="resultbar"><span>Showing ${list.length} of ${INC.length} cases, newest first unless sorted otherwise.</span></div>${chipsHTML()}
     ${list.length ? list.map(caseHTML).join('') : '<div class="empty">No cases match these filters. Remove a filter or reset to see everything.</div>'}`;
+  renderMap($('#map-cases'));
   announce(`Showing ${list.length} of ${INC.length} cases`);
   return list;
 }
 function renderPolicies() {
   const list = sortedPolicies(POL.filter(p => matchPolicy(p)));
-  $('#panel-policies').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Policies</h2>
+  $('#panel-policies').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Policies</h2><section class="map-box" aria-label="Where the rows are"><h2>Where the rows are</h2><div id="map-policies"></div></section>
     <div class="resultbar"><span>Showing ${list.length} of ${POL.length} policies and instruments.</span></div>${chipsHTML()}
     ${list.length ? list.map(policyHTML).join('') : '<div class="empty">No policies match these filters. Remove a filter or reset to see everything.</div>'}`;
+  renderMap($('#map-policies'));
   announce(`Showing ${list.length} of ${POL.length} policies`);
   return list;
 }

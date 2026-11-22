@@ -1,0 +1,37 @@
+/* Tile-grid cartogram map — shared by the EU and ASEAN AI Governance Trackers.
+ * Colours follow the page's variables where the viewer defines them. */
+.map-head { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; align-items: center; justify-content: space-between; margin: 0 0 0.75rem; }
+.map-total { font-size: 0.95rem; }
+.map-metrics { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+.metric { border: 1px solid var(--border, #c9d4cf); background: var(--surface, #fff); color: var(--text, #1c2b26); border-radius: 999px; padding: 0.3rem 0.7rem; font-size: 0.85rem; cursor: pointer; }
+.metric.active { background: var(--accent, #1b5e4f); border-color: var(--accent, #1b5e4f); color: #fff; }
+.map-regional { margin: 0 0 0.6rem; }
+.map-regional .tile { max-width: 220px; }
+.map-grid { display: grid; gap: 0.45rem; }
+.tile { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.05rem; min-height: 64px; padding: 0.4rem 0.2rem; border: 1px solid var(--border, #c9d4cf); border-radius: 8px; background: var(--surface, #fff); color: var(--text, #1c2b26); cursor: pointer; font: inherit; text-align: center; }
+.tile:hover, .tile:focus-visible { outline: 2px solid var(--accent, #1b5e4f); outline-offset: 1px; }
+.tile.selected { outline: 3px solid var(--accent, #1b5e4f); outline-offset: 1px; }
+.tile-code { font-weight: 700; font-size: 0.95rem; line-height: 1.1; }
+.tile-name { font-size: 0.68rem; line-height: 1.15; opacity: 0.85; }
+.tile-value { font-weight: 700; font-size: 0.85rem; line-height: 1.1; }
+.tile.regional .tile-name { font-size: 0.75rem; }
+/* Colour bins: 0 = no rows (grey), 1-4 = quartiles of the busiest place. */
+.tile.bin-0, .swatch.bin-0 { background: #eceff0; color: #5a6b65; }
+.tile.bin-1, .swatch.bin-1 { background: #d6e9e1; }
+.tile.bin-2, .swatch.bin-2 { background: #a8d2bf; }
+.tile.bin-3, .swatch.bin-3 { background: #5fae8d; color: #fff; }
+.tile.bin-4, .swatch.bin-4 { background: #1b5e4f; color: #fff; }
+.tile.bin-3 .tile-name, .tile.bin-4 .tile-name { opacity: 0.9; }
+/* Tooltip: shown on hover / keyboard focus / tap (tap also selects). */
+.tile-tip { display: none; position: absolute; left: 50%; bottom: calc(100% + 6px); transform: translateX(-50%); z-index: 20; width: max-content; max-width: 240px; background: #1c2b26; color: #fff; font-size: 0.8rem; font-weight: 400; line-height: 1.4; text-align: left; padding: 0.5rem 0.65rem; border-radius: 6px; box-shadow: 0 4px 14px rgba(0,0,0,0.25); pointer-events: none; }
+.tile:hover .tile-tip, .tile:focus-visible .tile-tip, .tile.selected .tile-tip { display: block; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.9rem; align-items: center; margin: 0.75rem 0 0.25rem; font-size: 0.85rem; }
+.legend-title { font-weight: 600; }
+.legend-item { display: inline-flex; align-items: center; gap: 0.35rem; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid var(--border, #c9d4cf); }
+.map-note { font-size: 0.85rem; opacity: 0.85; margin: 0.5rem 0 0; }
+@media (max-width: 640px) {
+  .tile { min-height: 56px; }
+  .tile-name { display: none; }
+  .tile-code { font-size: 0.85rem; }
+}
