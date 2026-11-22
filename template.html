@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Security headers GitHub Pages cannot set server-side (see README,
+     "Privacy and security"): the meta equivalents that exist are set here.
+     X-Content-Type-Options, X-Frame-Options and Permissions-Policy have no
+     meta equivalent (browsers ignore a Permissions-Policy <meta> tag).
+     CSP notes: the viewer script and styles are inline, so 'unsafe-inline'
+     is required for both; the only external script is GoatCounter from
+     gc.zgo.at, and the only external fetch is its counting endpoint
+     (*.goatcounter.com, incl. the image-pixel fallback). If STATS_URL in
+     build.py is ever set to another host, add it to connect-src. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ASEAN AI Governance Tracker</title>
 <meta name="description" content="Incidents, official responses and policies on AI governance in Singapore, Indonesia, Malaysia, Vietnam, the Philippines and ASEAN.">
 <style>
@@ -24,7 +35,7 @@
   --navy:#071423; --gold:#d6ae5a; --gold-text:#e6c779; --link:#8ab8ff; --focus:#8ab8ff;
   --t-statement:#8fb0ff; --t-advisory:#4fd1c5; --t-enforcement:#bba2ff; --t-block:#ff8f85;
   --t-engagement:#aab9c9; --t-lifted:#6ee79a; --t-legislation:#f2c14e; --ok:#6ee79a; --warn:#f2c14e;
-  --sel:#3d8bdb; --sel-ink:#fff;
+  --sel:#2b6cb0; --sel-ink:#fff;
   --sh-btn:0 1px 3px rgba(0,0,0,.55),0 3px 10px rgba(0,0,0,.35);
   --sh-btn-hov:0 2px 6px rgba(0,0,0,.6),0 8px 20px rgba(0,0,0,.45);
   --sh-card:0 1px 3px rgba(0,0,0,.5),0 10px 28px rgba(0,0,0,.4);
@@ -310,7 +321,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
     </div>
   </div>
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p><a href="PRIVACY.html">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.</p></div></footer>
 
 <div id="live" class="sr" aria-live="polite" style="position:absolute;left:-9999px"></div>
 <div id="tip" class="hidden" role="tooltip"></div>
@@ -640,6 +651,9 @@ function renderMap(container) {
     metric: mapMetric,
     selected: state.c.size === 1 ? [...state.c][0] : null,
     onSelect: function (code) {
+      /* The regional tile has no cases behind it: on the Cases tab it
+       * would otherwise set a filter that filters nothing (see show()). */
+      if (code === 'ASEAN' && state.tab === 'cases') { state.c = new Set(); refresh(); return; }
       state.c = code ? new Set([code]) : new Set();
       refresh();
     },
@@ -890,6 +904,7 @@ function renderMethod() {
     <p>These labels depend on what the tracker contains. Missing incidents can make a policy look more pre-emptive than it is. Treat them as prompts to look closer.</p>
     <h2>Sources and confidence</h2>
     <p>Every row has at least one source link and the date it was checked. Rows with no confidence tag are <b>high</b>: an official or primary source, or several independent sources that agree. A <b>medium</b> tag means a single or secondary source, or sources that disagree (the disagreement is noted on the row). Where news pages were only seen as search listings, the row says so.</p>
+    <p><b>Naming.</b> Schools are not named in sexual-deepfake cases involving minors; the school name stays in the source link, not in the tracker's text.</p>
     <h2>Where cases come from, and the OECD AI Incidents and Hazards Monitor</h2>
     <p>Cases come from public reporting, the OECD AI Incidents and Hazards Monitor (AIM) and the AI Incident Database. AIM collects and classifies incidents automatically from news; the tracker keeps the subset where an official response or a relevant policy can be checked by a person. A case links to its AIM record where one was found. <b>The tracker does not claim to hold every AIM incident for these countries.</b> Sweeping AIM is done by hand, so each version states what was searched (see the Updates tab).</p>
     <h2>Coverage in this version</h2>
@@ -899,14 +914,14 @@ function renderMethod() {
     <h2>How the human in the loop checks a weekly update</h2>
     <p>There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the <a href="#review">Review tab</a> — or add <code>#review</code> to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row. The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in the backlog queue instead.</p>
     <h2>The emblem</h2>
-    <p>The emblem in the header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025.</p>
+    <p>The emblem in the header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025. This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.</p>
     <h2>Limits</h2>
     <ul><li>Version ${esc(DATA.meta.version)} is a seed, not a complete census. All eleven ASEAN member states are now in scope, plus ASEAN regional action, but coverage is uneven: the SEA-6 countries have the deepest verified coverage, and the other five are still being checked. Many incidents and policies are still queued (see the Updates tab).</li>
     <li>"No official response recorded" means none was found in the sources checked. It is not proof that none occurred.</li>
     <li>Incidents come from public reporting and incident monitors, so better-reported events are over-represented.</li>
     <li>Themes are tags added by the researchers and are open to challenge.</li></ul>
     <h2>Privacy</h2>
-    <p>${privacyText()}</p>
+    <p>${privacyText()} <a href="PRIVACY.html">Read the full privacy notice</a>.</p>
     <h2>Cite and correct</h2>
     <p>Suggested citation: ASEAN AI Governance Tracker, version ${esc(DATA.meta.version)}, data verified ${esc(fmt(DATA.meta.verified, 'day'))}. Quote the row ID (for example MY-R-08) when citing or reporting an error.${DATA.meta.corrections_url ? ` <a href="${esc(DATA.meta.corrections_url)}">Report a correction</a>.` : ''}</p></div>`;
 }
@@ -944,6 +959,12 @@ function syncControls() {
   }).join('');
 }
 function show() {
+  /* ASEAN has no cases of its own, so a country filter of ASEAN alone on
+   * the Cases tab filters nothing while the badge claims one place is
+   * selected and no chip offers to clear it. Drop it here (e.g. after a
+   * #cases?c=ASEAN link, or switching tabs from Policies with ASEAN set)
+   * so the Cases view can never sit in that phantom-filter state. */
+  if (state.tab === 'cases') state.c.delete('ASEAN');
   TABS.forEach(([k]) => { const sel = k === state.tab; $('#tab-' + k).setAttribute('aria-selected', sel); $('#tab-' + k).tabIndex = sel ? 0 : -1; $('#panel-' + k).hidden = !sel; });
   $('#layout').classList.toggle('no-rail', !['cases', 'policies'].includes(state.tab));
   $('#csv').classList.toggle('hidden', !['cases', 'policies'].includes(state.tab));
@@ -1027,10 +1048,18 @@ window.addEventListener('hashchange', () => { readHash(); show(); });
 let lastRW = rulerW(), rsTimer;
 window.addEventListener('resize', () => { clearTimeout(rsTimer); rsTimer = setTimeout(() => { const w = rulerW(); if (w !== lastRW && state.tab === 'cases') { lastRW = w; show(); } }, 200); });
 const tip = $('#tip');
+/* Keep the timeline tooltip inside the viewport: it used to sit 16px below
+ * the cursor (or below the marker on keyboard focus) with no bottom clamp,
+ * so markers near the bottom of the screen pushed it off-screen. */
+function placeTip(x, y) {
+  const w = Math.min(300, innerWidth - 16), h = tip.offsetHeight || 60;
+  tip.style.left = Math.max(8, Math.min(x, innerWidth - w - 8)) + 'px';
+  tip.style.top = Math.max(8, Math.min(y, innerHeight - h - 8)) + 'px';
+}
 document.addEventListener('mouseover', e => { const m = e.target.closest('.mk'); if (m) { tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); } });
-document.addEventListener('mousemove', e => { if (!tip.classList.contains('hidden')) { tip.style.left = Math.min(e.clientX + 14, innerWidth - 320) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; } });
+document.addEventListener('mousemove', e => { if (!tip.classList.contains('hidden')) placeTip(e.clientX + 14, e.clientY + 16); });
 document.addEventListener('mouseout', e => { if (e.target.closest('.mk')) tip.classList.add('hidden'); });
-document.addEventListener('focusin', e => { const m = e.target.closest?.('.mk'); if (m) { const r = m.getBoundingClientRect(); tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); tip.style.left = Math.max(8, Math.min(r.left, innerWidth - 320)) + 'px'; tip.style.top = (r.bottom + 8) + 'px'; } });
+document.addEventListener('focusin', e => { const m = e.target.closest?.('.mk'); if (m) { const r = m.getBoundingClientRect(); tip.textContent = m.dataset.tip; tip.classList.remove('hidden'); placeTip(r.left, r.bottom + 8); } });
 document.addEventListener('focusout', e => { if (e.target.closest?.('.mk')) tip.classList.add('hidden'); });
 
 $('#theme').addEventListener('click', () => { const d = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = d ? 'light' : 'dark'; $('#theme').textContent = d ? 'Dark mode' : 'Light mode'; $('#theme').setAttribute('aria-pressed', !d); store.set('aat_theme_v1', d ? 'light' : 'dark'); });

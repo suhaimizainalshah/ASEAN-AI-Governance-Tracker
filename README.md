@@ -4,7 +4,7 @@ A living record of **what went wrong, who officially responded and when, and whi
 
 **Status: proof of concept.** Version 0.3 · 53 cases · 77 official responses · 91 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
-The emblem in the page header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025.
+The emblem in the page header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025. This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.
 
 ## What is in this folder
 
@@ -146,6 +146,36 @@ Then **you** open the source, confirm each field, and only then add the row. Tre
 ## Checking a weekly update (the Review tab)
 
 There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the **Review tab** on the page — or add `#review` to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row (ticks are saved in your browser only). The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in `data/backlog.csv` instead.
+
+## Privacy and security
+
+**Privacy.** The page sets no cookies and does no fingerprinting. The full
+notice is [`PRIVACY.md`](PRIVACY.md) (rendered on the live site as
+`PRIVACY.html`, linked from the footer on every tab). Visitor counting is
+GoatCounter only, no cookies, aggregates only, and respects Do Not Track and
+Global Privacy Control. The only third parties a browser contacts to load or
+use the page are the host, GitHub Pages, and GoatCounter (`gc.zgo.at` for the
+counting script, `suhaimizs.goatcounter.com` for the counts). No other
+third-party script, font, tracker or advertisement is loaded. Followed items,
+theme choice, Review-tab ticks and last-visit date are kept in the reader's
+own browser (local storage) and never sent anywhere.
+
+**Security headers.** The site is hosted on GitHub Pages, which does not let
+a site set its own HTTP response headers — so `X-Content-Type-Options`,
+`X-Frame-Options` and the CSP `frame-ancestors` rule, which can only be set
+as headers, are not set here, and no claim is made that they are.
+Permissions-Policy has no `<meta>` equivalent at all (browsers ignore a
+Permissions-Policy `<meta>` tag), so it cannot be set either while the site
+is hosted on GitHub Pages. What can be done in the page itself is done:
+`template.html` sets Content-Security-Policy and Referrer-Policy
+(`strict-origin-when-cross-origin`) through `<meta>` tags. The policy allows
+only the page's own inline scripts and styles plus GoatCounter (`gc.zgo.at`
+for the script, `*.goatcounter.com` for counts, including its image-pixel
+fallback); there are no other external resources to allow. The CSP needs
+`'unsafe-inline'` because all page JavaScript and CSS is inline, so it is a
+partial mitigation. If `STATS_URL` in `build.py` is ever set to another host,
+add that host to `connect-src` in `template.html` first, or the snapshot
+fetch will be blocked.
 
 ## Known limits (also on the Method tab)
 
