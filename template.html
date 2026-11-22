@@ -629,19 +629,21 @@ function chipsHTML() {
    "Where the rows are": a tile cartogram shared with the EU tracker
    (map.js / map.css). Counts come from the tracker's own data at render
    time. Clicking a tile sets the country filter to that place; clicking
-   the selected tile again clears it. The metric toggle is managed inside
-   the component, so it is not stored in the viewer state. */
+   the selected tile again clears it. The chosen metric is kept in
+   mapMetric so a list re-render does not reset the toggle to Total. */
+var mapMetric = 'total';
 function renderMap(container) {
   if (!container || !window.TileMap) return;
   TileMap.render(container, {
     region: 'asean',
     data: DATA,
-    metric: 'total',
+    metric: mapMetric,
     selected: state.c.size === 1 ? [...state.c][0] : null,
     onSelect: function (code) {
       state.c = code ? new Set([code]) : new Set();
       refresh();
-    }
+    },
+    onMetric: function (m) { mapMetric = m; }
   });
 }
 
