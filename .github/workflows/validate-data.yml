@@ -1,0 +1,28 @@
+name: Validate tracker data
+
+# Runs on every pull request that touches the data, the schema or the build:
+# a bad row fails the check before it can be merged. The human review on the
+# Review tab still applies — this only automates the checks a person would
+# otherwise do by eye (duplicate IDs, malformed dates, missing sources).
+on:
+  pull_request:
+    paths:
+      - "data/**"
+      - "datapackage.json"
+      - "build.py"
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate CSVs against the schema
+        run: |
+          pip install frictionless
+          frictionless validate datapackage.json
+      - name: Run the tracker build (cross-file checks)
+        run: python3 build.py

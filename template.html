@@ -10,12 +10,18 @@
      CSP notes: the viewer script and styles are inline, so 'unsafe-inline'
      is required for both; the only external script is GoatCounter from
      gc.zgo.at, and the only external fetch is its counting endpoint
-     (*.goatcounter.com, incl. the image-pixel fallback). If STATS_URL in
-     build.py is ever set to another host, add it to connect-src. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+     (*.goatcounter.com, incl. the image-pixel fallback). Pagefind search
+     runs on WebAssembly, so 'wasm-unsafe-eval' is allowed for script-src:
+     it permits compiling WebAssembly and nothing else — JavaScript eval
+     stays blocked. If STATS_URL in build.py is ever set to another host,
+     add it to connect-src. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ASEAN AI Governance Tracker</title>
 <meta name="description" content="Incidents, official responses and policies on AI governance in Singapore, Indonesia, Malaysia, Vietnam, the Philippines and ASEAN.">
+<link rel="alternate" type="application/rss+xml" title="ASEAN AI Governance Tracker — Updates" href="feed.xml">
+<link rel="alternate" type="application/feed+json" title="ASEAN AI Governance Tracker — Updates" href="feed.json">
+<link rel="stylesheet" href="pagefind/pagefind-ui.css">
 <style>
 :root{
   --paper:#f4f6f9; --surface:#fff; --ink:#0d1b2a; --muted:#475669; --line:#d5dce5; --soft:#eaeef4;
@@ -142,7 +148,24 @@ fieldset{border:0;margin:0;padding:0;min-width:0}
 .pill.theme{background:var(--soft)}
 .follow{margin-left:auto;white-space:nowrap;flex-shrink:0;font:inherit;font-size:.84rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.15rem .55rem;border-radius:3px;cursor:pointer}
 .follow[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:#1b1305;font-weight:700}
-.head-row{display:flex;gap:.8rem;align-items:flex-start}
+.copylink{white-space:nowrap;flex-shrink:0;font:inherit;font-size:.84rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.15rem .55rem;border-radius:3px;cursor:pointer}
+.head-row{display:flex;gap:.8rem;align-items:flex-start;flex-wrap:wrap}
+
+/* full-text search (Pagefind): the box sits in the masthead so it is on
+ * every tab. The Pagefind UI is themed to the dark masthead in both light
+ * and dark mode; its results drop down over the page below. */
+#search{position:relative;z-index:20;margin:.55rem 0 .45rem;min-width:min(320px,100%);text-align:left;
+  --pagefind-ui-text:#fff;--pagefind-ui-background:#0a1f36;--pagefind-ui-border:#3a4d63;
+  --pagefind-ui-primary:#e6c779;--pagefind-ui-tag:#0a1f36;--pagefind-ui-border-radius:4px;--pagefind-ui-font:inherit}
+#search .pagefind-ui__result-link{color:#fff}
+#search .pagefind-ui__result-excerpt{color:#cfd9e6}
+#search .pagefind-ui__result-excerpt mark{background:var(--gold-text);color:#10243b}
+
+/* plain static list: hidden by the hidden attribute while JS runs; a noscript style rule in the page shows it when scripting is off, and Pagefind indexes it */
+#static-rows{max-width:900px;margin:24px auto 0;padding:0 20px}
+#static-rows article{border-top:2px solid var(--ink);padding:1rem 0}
+#static-rows h3{font-size:1.15rem;margin-bottom:.3rem}
+#static-rows p{margin:.2rem 0}
 .ruler{margin:.2rem 0 1rem;max-width:640px}
 .ruler > svg{width:100%;height:auto;display:block;overflow:visible}
 .ruler .cap{font-size:.78rem;color:var(--muted);margin:.1rem 0 0}
@@ -274,6 +297,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
     </div>
     <div class="mast-tools">
       <p>Version <span id="ver"></span>, last verified <time id="verified"></time></p>
+      <div id="search" role="search" aria-label="Search the tracker"></div>
       <button class="ghost" id="theme" type="button" aria-pressed="false">Dark mode</button>
     </div>
   </div>
@@ -320,6 +344,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
       <section id="panel-visitors" role="tabpanel" aria-labelledby="tab-visitors" tabindex="0" hidden></section>
     </div>
   </div>
+<!--__STATIC_ROWS__-->
 </main>
 <footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p><a href="PRIVACY.html">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.</p></div></footer>
 
@@ -327,6 +352,7 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
 <div id="tip" class="hidden" role="tooltip"></div>
 
 <script src="map.js"></script>
+<script src="pagefind/pagefind-ui.js" defer></script>
 <script>
 const DATA = /*__DATA__*/null;
 
@@ -430,7 +456,8 @@ function context(i) {
 const AN = (DATA.meta && DATA.meta.analytics) || {};
 const GC_CODE = /^[a-z0-9][a-z0-9-]{1,40}$/.test(AN.goatcounter || '') ? AN.goatcounter : '';
 const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],['review','Review'],['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
-const state = { tab:'cases', c:new Set(), t:'', rt:'', ps:'', b:false, f:false, q:'', sort:'new' };
+const state = { tab:'cases', c:new Set(), t:'', rt:'', ps:'', b:false, f:false, q:'', sort:'new', row:null };
+let keepHash = false;   // set when landing on a row link, so writeHash leaves #ROW-ID in the address bar
 const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 let following = new Set(store.get('aat_follow_v1', []));
 const lastVisit = store.get('aat_last_v1', null);
@@ -459,9 +486,19 @@ function track(path, title, isEvent) {
   document.head.appendChild(s);
 })();
 
+/* A row can be linked directly, for example #SG-I-01 or #VN-P-07: the
+ * first hash segment is a row ID (country-LETTER-number), not a tab. A
+ * response ID opens its case and scrolls to the response step. */
+const ROW_RE = /^(ASEAN|[A-Z]{2})-[IRP]-\d+$/;
 function readHash() {
   const [tab, qs = ''] = location.hash.slice(1).split('?');
-  state.tab = TABS.some(t => t[0] === tab) ? tab : 'cases';
+  if (ROW_RE.test(tab)) {
+    state.row = tab;
+    state.tab = tab.split('-')[1] === 'P' ? 'policies' : 'cases';
+  } else {
+    state.row = null;
+    state.tab = TABS.some(t => t[0] === tab) ? tab : 'cases';
+  }
   const p = new URLSearchParams(qs);
   state.c = new Set((p.get('c') || '').split(',').filter(x => ORDER.includes(x)));
   state.t = THEME[p.get('t')] ? p.get('t') : '';
@@ -472,6 +509,7 @@ function readHash() {
   state.sort = p.get('sort') || 'new';
 }
 function writeHash() {
+  if (keepHash) { keepHash = false; return; }   // landing on a row link: leave #ROW-ID in the address bar
   const p = new URLSearchParams();
   if (state.c.size) p.set('c', [...state.c].join(','));
   if (state.t) p.set('t', state.t); if (state.rt) p.set('rt', state.rt); if (state.ps) p.set('ps', state.ps);
@@ -523,6 +561,7 @@ const moreLinks = r => (r.more_sources || '').split(';').filter(Boolean).map((u,
 const confTag = r => r.confidence === 'high' ? '' : `<span class="conf" title="Single or secondary source, or sources disagree">${r.confidence} confidence</span>`;
 const bindTag = r => `<span class="bind ${r.binding}" title="${r.binding === 'yes' ? 'Creates legal obligations or restrictions' : 'No legal force: a statement, advice or request'}">${r.binding === 'yes' ? 'Binding' : 'Non-binding'}</span>`;
 const followBtn = id => `<button class="follow" type="button" data-follow="${esc(id)}" aria-pressed="${following.has(id)}" aria-label="${following.has(id) ? 'Stop following' : 'Follow'} ${esc(id)}">${following.has(id) ? '★ Following' : '☆ Follow'}</button>`;
+const copyLinkBtn = id => `<button class="copylink" type="button" data-copylink="${esc(id)}" aria-label="Copy link to ${esc(id)}">⧉ Link</button>`;
 
 function rulerW() {
   const vw = document.documentElement.clientWidth;
@@ -545,7 +584,7 @@ function ruler(i) {
 
 function stepHTML(i, r) {
   const lt = lagText(i, r);
-  return `<li><span class="ico t-${r.type}" title="${esc(RT[r.type].l)}">${ICON(r.type)}</span><div>
+  return `<li id="${esc(r.id)}"><span class="ico t-${r.type}" title="${esc(RT[r.type].l)}">${ICON(r.type)}</span><div>
     <div class="step-top"><span class="d num">${esc(fmt(r.date, r.date_precision))}</span>${lt ? `<span class="lag">${lt}</span>` : ''}<span class="typelabel t-${r.type}">${esc(RT[r.type].l)}</span>${bindTag(r)}${confTag(r)}</div>
     <p class="step-actor">${esc(r.actor)}</p>
     <p class="step-sum">${esc(r.summary)}${r.legal_basis === 'existing_law' || r.legal_basis === 'new_law' ? ` <span class="tag ${r.legal_basis === 'new_law' ? 'ok' : 'warn'}">${r.legal_basis === 'new_law' ? 'Used a new law' : 'Used an existing law'}${r.instrument_id && polById[r.instrument_id] ? ': ' + esc(polById[r.instrument_id].short_title || polById[r.instrument_id].title) : ''}</span>` : ''}</p>
@@ -575,10 +614,10 @@ function caseHTML(i) {
   if (i.aim_url) pills.push(`<span class="pill"><a href="${esc(i.aim_url)}" rel="noopener">OECD AIM record</a></span>`);
   if (i.event_id) pills.push(`<span class="pill event">Part of <a href="#compare">${esc(EVT[i.event_id].title)}</a></span>`);
   const approx = i.onset_certainty === 'documented' ? '' : `<span class="approx">${i.onset_certainty === 'unknown' ? 'earliest record found; onset unknown' : 'approximate start'}</span>`;
-  return `<article class="case" id="case-${esc(i.id)}">
+  return `<article class="case" id="${esc(i.id)}">
     <div class="case-side"><div class="when num">${esc(fmt(i.date, i.date_precision))}</div><span class="cc" title="${esc(CT[i.country])}">${esc(i.country)}</span><span class="cname">${esc(CT[i.country])}</span>${approx}</div>
     <div>
-      <div class="head-row"><h3>${esc(i.title)}</h3>${followBtn(i.id)}</div>
+      <div class="head-row"><h3>${esc(i.title)}</h3>${followBtn(i.id)}${copyLinkBtn(i.id)}</div>
       <p class="sum">${esc(i.summary)}</p>
       <div class="pills">${pills.join('')}</div>
       ${ruler(i)}
@@ -598,10 +637,10 @@ function caseHTML(i) {
 
 function policyHTML(p) {
   const t = p.timing;
-  return `<article class="pol" id="pol-${esc(p.id)}">
+  return `<article class="pol" id="${esc(p.id)}">
     <div><div class="when num">${esc(fmt(p.date, p.date_precision))}</div><span class="cc" title="${esc(CT[p.jurisdiction])}">${esc(p.jurisdiction)}</span><span class="cname">${esc(CT[p.jurisdiction])}</span><span class="status s-${p.status}">${STAT[p.status]}</span></div>
     <div>
-      <div class="head-row"><h3>${esc(p.title)}</h3>${followBtn(p.id)}</div>
+      <div class="head-row"><h3>${esc(p.title)}</h3>${followBtn(p.id)}${copyLinkBtn(p.id)}</div>
       <div class="pills"><span class="pill ${p.binding === 'yes' ? 'strong' : ''}">${p.binding === 'yes' ? 'Binding' : 'Non-binding'}</span><span class="pill">${esc(p.layer)}</span>${p.themes.map(x => `<span class="pill theme">${esc(THEME[x])}</span>`).join('')}</div>
       <p class="sum">${esc(p.summary)}</p>
       ${p.effective_date ? `<p class="small"><b>In effect from:</b> ${esc(fmt(p.effective_date, 'day'))}</p>` : ''}
@@ -813,7 +852,7 @@ Object.entries({
   Oceania: 'AU FJ KI MH FM NR NZ PW PG WS SB TO TV VU NC PF GU AS CK NU TK WF MP NF PN' }).forEach(([k, v]) => v.split(' ').forEach(c => { CONT[c] = k; }));
 const REGION_ORDER = ['ASEAN', 'Rest of Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania', 'Other or unknown'];
 function regionOf(code) { if (ASEAN_CODES.has(code)) return 'ASEAN'; const c = CONT[code]; return c === 'Asia' ? 'Rest of Asia' : (c || 'Other or unknown'); }
-const EVENT_LABEL = { 'csv-download-cases': 'CSV download (cases)', 'csv-download-policies': 'CSV download (policies)', 'copy-link': 'Link to a view copied' };
+const EVENT_LABEL = { 'csv-download-cases': 'CSV download (cases)', 'csv-download-policies': 'CSV download (policies)', 'copy-link': 'Link to a view copied', 'copy-row-link': 'Link to a row copied' };
 function normaliseStats(s) {                 // used for anything fetched from STATS_URL: never trust it, and never show a small group
   if (!s || typeof s !== 'object' || !Array.isArray(s.countries) || !Number.isInteger(s.total_visits) || typeof s.generated !== 'string') return null;
   const floor = Math.max(3, Number(s.min_group) || 3), clean = (rows, what) => {
@@ -923,7 +962,7 @@ function renderMethod() {
     <h2>Privacy</h2>
     <p>${privacyText()} <a href="PRIVACY.html">Read the full privacy notice</a>.</p>
     <h2>Cite and correct</h2>
-    <p>Suggested citation: ASEAN AI Governance Tracker, version ${esc(DATA.meta.version)}, data verified ${esc(fmt(DATA.meta.verified, 'day'))}. Quote the row ID (for example MY-R-08) when citing or reporting an error.${DATA.meta.corrections_url ? ` <a href="${esc(DATA.meta.corrections_url)}">Report a correction</a>.` : ''}</p></div>`;
+    <p>Suggested citation: ASEAN AI Governance Tracker, version ${esc(DATA.meta.version)}, data verified ${esc(fmt(DATA.meta.verified, 'day'))}. Quote the row ID (for example MY-R-08) — or link straight to it, for example #MY-R-08 — when citing or reporting an error.${DATA.meta.corrections_url ? ` <a href="${esc(DATA.meta.corrections_url)}">Report a correction</a>.` : ''}</p></div>`;
 }
 
 /* ------------------------------------------------------------------ chrome */
@@ -976,6 +1015,11 @@ function show() {
   else if (state.tab === 'visitors') renderVisitors();
   else renderMethod();
   makeScrollersFocusable();
+  if (state.row) {
+    const el = document.getElementById(state.row);
+    if (el) { el.scrollIntoView({ block: 'start' }); keepHash = true; }
+    state.row = null;
+  }
   if (state.tab !== lastTab) {
     if (lastTab === null) track(PAGE, document.title, false);     // one page view per visit
     lastTab = state.tab;
@@ -989,6 +1033,18 @@ function makeScrollersFocusable() {
 }
 
 function toCSV(rows) { const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`; return rows.map(r => r.map(q).join(',')).join('\r\n'); }
+async function copyRowLink(btn) {
+  const id = btn.dataset.copylink;
+  const url = location.href.split('#')[0] + '#' + id;
+  const done = () => { btn.textContent = 'Copied ✓'; setTimeout(() => btn.textContent = '⧉ Link', 2200); };
+  try { await navigator.clipboard.writeText(url); done(); }
+  catch {
+    const ta = document.createElement('textarea'); ta.value = url; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch { btn.textContent = 'Copy the address bar'; setTimeout(() => btn.textContent = '⧉ Link', 2200); }
+    ta.remove();
+  }
+  track('copy-row-link', 'Copied a link to a row', true);
+}
 function download(name, text) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + text], { type: 'text/csv;charset=utf-8' })); a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000); }
 function exportCSV() {
   if (state.tab === 'cases') {
@@ -1008,6 +1064,7 @@ document.addEventListener('click', e => {
   const c = e.target.closest('[data-c]'); if (c) { const k = c.dataset.c; state.c.has(k) ? state.c.delete(k) : state.c.add(k); refresh(); return; }
   const f = e.target.closest('[data-follow]'); if (f) { const id = f.dataset.follow; following.has(id) ? following.delete(id) : following.add(id); store.set('aat_follow_v1', [...following]); f.setAttribute('aria-pressed', following.has(id)); f.textContent = following.has(id) ? '★ Following' : '☆ Follow'; f.setAttribute('aria-label', (following.has(id) ? 'Stop following ' : 'Follow ') + id); announce(following.has(id) ? 'Following ' + id : 'Stopped following ' + id); if (state.f) refresh(); return; }
   const ch = e.target.closest('[data-chip]'); if (ch) { chipActions[+ch.dataset.chip][1](); refresh(); return; }
+  const cl = e.target.closest('[data-copylink]'); if (cl) { copyRowLink(cl); return; }
 });
 $('#tabs').addEventListener('keydown', e => {
   const keys = TABS.map(t => t[0]); let i = keys.indexOf(state.tab);
@@ -1064,6 +1121,36 @@ document.addEventListener('focusout', e => { if (e.target.closest?.('.mk')) tip.
 
 $('#theme').addEventListener('click', () => { const d = document.documentElement.dataset.theme === 'dark'; document.documentElement.dataset.theme = d ? 'light' : 'dark'; $('#theme').textContent = d ? 'Dark mode' : 'Light mode'; $('#theme').setAttribute('aria-pressed', !d); store.set('aat_theme_v1', d ? 'light' : 'dark'); });
 
+/* ------------------------------------------------------------------ search (Pagefind)
+   The search box is powered by Pagefind, a static index built from the
+   finished page (build.py runs it after writing index.html). The script is
+   loaded deferred, so the init waits for the page load; if the index was
+   never built, the box is hidden rather than left broken.
+   Pagefind records result URLs from the site root ("/"), which is wrong for
+   a site served from a sub-path, and row hits carry the "s-" prefix the
+   static list uses to avoid duplicate ids — so processResult rewrites every
+   result URL to this page, with the prefix stripped, before it is shown. */
+function initSearch() {
+  const box = document.getElementById('search');
+  if (!box) return;
+  const start = () => {
+    if (window.PagefindUI) {
+      new PagefindUI({ element: '#search', showSubResults: true, placeholder: 'Search cases, policies and responses',
+        processResult: function (result) {
+          const page = location.href.split('#')[0];
+          const fix = u => { const i = (u || '').indexOf('#'); return i >= 0 ? page + u.slice(i).replace('#s-', '#') : page; };
+          result.url = fix(result.url);
+          (result.sub_results || []).forEach(s => { s.url = fix(s.url); });
+          return result;
+        } });
+    } else {
+      box.hidden = true;
+    }
+  };
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
+}
+
 /* ------------------------------------------------------------------ boot */
 (function init() {
   const th = store.get('aat_theme_v1', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -1077,6 +1164,7 @@ $('#theme').addEventListener('click', () => { const d = document.documentElement
   show();
   store.set('aat_last_v1', new Date().toISOString().slice(0, 10));
   loadSnapshot();
+  initSearch();
 })();
 </script>
 </body>
