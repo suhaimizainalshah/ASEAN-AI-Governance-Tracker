@@ -4951,6 +4951,11 @@
    "rows": "changelog"
   },
   {
+   "date": "2026-11-23",
+   "change": "Template, 2026-11-23: the ASEAN emblem is no longer used; the non-affiliation statement is kept and the Method section explains this. Added a Back to top button and footer links, and a header link to AI Benar Advisory. The privacy notice link now points to its GitHub copy, so it works however the site is hosted. Map tiles: accessible names now start with their visible text (code, name, number) for voice-control users, hover tooltips are hidden from screen readers (the label carries the same details), and empty-tile names meet 4.5:1 contrast.",
+   "rows": ""
+  },
+  {
    "date": "2026-11-22",
    "change": "Audit and compliance fixes: VN-I-08 and VN-R-10 anonymised — the alleged ringleader's name withheld (private individual, accused not convicted, no official source names him); VN-I-08 counts softened to the Vietstock/VietNamNet report ('nearly 1,000' accounts), period/profit figures from the non-official Cafebiz republication removed. MY-I-03 now cites Media Selangor (19 Oct 2026) instead of the AI Risk Wire aggregator; unverified victim ages and image count removed. ID-I-05 and SG-I-07: schools no longer named in sexual-deepfake cases involving minors (rule adopted; names stay in source links). TH-I-03 and PH-I-04: underlying articles read in full, notes updated. VN-I-04: summary now flags the date as the OECD AIM listing date with onset unconfirmed. Template: dark-mode selected-state contrast fixed (--sel #2b6cb0), ASEAN-emblem non-affiliation disclaimer added (footer, Method, README), Permissions-Policy meta tag removed (browsers ignore it; it has no meta equivalent). PRIVACY.md corrected on localStorage, GoatCounter domains and collected data. Unused logo-edited.png deleted. No counts changed.",
    "rows": "VN-I-08;VN-R-10;MY-I-03;ID-I-05;SG-I-07;TH-I-03;PH-I-04;VN-I-04"

@@ -4,7 +4,7 @@ A living record of **what went wrong, who officially responded and when, and whi
 
 **Status: proof of concept.** Version 0.4 · 55 cases · 79 official responses · 97 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
-The emblem in the page header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025. This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.
+This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem. Timor-Leste became ASEAN’s eleventh member on 26 October 2025, and all eleven member states are in scope.
 
 ## What is in this folder
 
