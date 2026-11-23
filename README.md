@@ -2,7 +2,7 @@
 
 A living record of **what went wrong, who officially responded and when, and which policies were already in place**, for all eleven ASEAN member states — Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — plus ASEAN regional action.
 
-**Status: proof of concept.** Version 0.3 · 53 cases · 77 official responses · 91 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
+**Status: proof of concept.** Version 0.4 · 55 cases · 79 official responses · 97 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
 The emblem in the page header is the official ASEAN emblem, revised on 15 November 2026 to eleven stalks of padi — one for each member state — after Timor-Leste became ASEAN's eleventh member on 26 October 2025. This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat; the emblem is used only to identify the region covered.
 
@@ -185,5 +185,5 @@ fetch will be blocked.
 - Day counts depend on the earliest public record found, so a response on "day 0" may simply be the first record.
 - Themes and the "pre-emptive" label are researcher judgements and can be challenged.
 
-*Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic). Version 0.3, data verified 21 November 2026.*
+*Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic). Version 0.4, data verified 23 November 2026.*
 *Built and maintained by Suhaimi Zainal Shah · [AI Benar Advisory](https://suhaimizainalshah.github.io/AI-Benar-Advisory/) — independent AI compliance and governance.*
