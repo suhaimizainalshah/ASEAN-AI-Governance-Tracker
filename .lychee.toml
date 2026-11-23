@@ -1,0 +1,68 @@
+# Link checker configuration (see .github/workflows/links.yml).
+# Note: no custom user-agent is set — a browser user-agent was tried and it
+# fixed malaymail.com but broke rfi.fr (403 with a browser UA, 200 with
+# lychee's default), so the default is kept and each bot-blocking host is
+# listed below instead.
+
+# Excluded, with reasons. Everything here was checked by hand on 23 Nov 2026
+# (curl with a browser user-agent); a 403 from these hosts is bot protection,
+# not a dead link — the rows were verified against these sources when added.
+exclude = [
+  # Bot protection: 403 to automated requests (checked 22 Nov 2026 audit).
+  "ohchr\\.org",
+  "economie\\.gouv\\.fr",
+  # Bot protection: 999 to automated requests.
+  "linkedin\\.com",
+  # Serves error pages to automated requests.
+  "calendly\\.com",
+  # Bot protection: 403 even with a browser user-agent (checked 23 Nov 2026).
+  "archive\\.opengovasia\\.com",
+  "businessmirror\\.com\\.ph",
+  "engagemedia\\.org",
+  "kabar24\\.bisnis\\.com",
+  "privacy\\.gov\\.ph",
+  "sigma\\.world",
+  "www\\.dti\\.gov\\.ph",
+  "www\\.khmertimeskh\\.com",
+  "www\\.merahputih\\.com",
+  "www\\.mobileworldlive\\.com",
+  "www\\.officialgazette\\.gov\\.ph",
+  "www\\.phnompenhpost\\.com",
+  "www\\.thefreelibrary\\.com",
+  "en\\.tempo\\.co",
+  "www\\.lexology\\.com",
+  "www\\.malaymail\\.com",
+  "www\\.mofa\\.go\\.jp",
+  # Bot protection: 403 on the GitHub Actions run of PR #12 (23 Nov 2026)
+  # — these pass from a browser on a residential IP but block datacenter IPs.
+  "newsinfo\\.inquirer\\.net",
+  "www\\.scmp\\.com",
+  "vietnamnews\\.vn",
+  "pia\\.gov\\.ph",
+  "www\\.bsp\\.gov\\.ph",
+  "elibrary\\.judiciary\\.gov\\.ph",
+  "www\\.businesstoday\\.com\\.my",
+  "www\\.reuters\\.com",
+  # Time out for automated requests (checked on the GitHub Actions runs of
+  # PR #12, 23 Nov 2026, and from here); the rows were verified against
+  # these sources when added, so this is a checker limit, not a dead link.
+  "www\\.lsp\\.moic\\.gov\\.la",
+  "www\\.digital\\.gov\\.my",
+  # Sucuri bot challenge: 307 with no usable redirect target (checked 23 Nov 2026).
+  # The ASEAN Responsible AI Roadmap page loads for a human reader.
+  "asean\\.org/book/asean-responsible-ai-roadmap-2025-2030/",
+  # Known-dead links (404, verified 23 Nov 2026). These are data problems, not
+  # checker problems: the rows that cite them need re-sourcing in the data
+  # CSVs (do not delete the rows). Excluded here so the link check stays
+  # meaningful instead of permanently red; remove the exclusion when the rows
+  # are re-sourced.
+  "legal500\\.com/guides/\\?p=85730",
+  "practiceguides\\.chambers\\.com/practice-guides/artificial-intelligence-2025/malaysia",
+  "practiceguides\\.chambers\\.com/practice-guides/artificial-intelligence-2025/singapore",
+  "vietbao\\.vn/en/video-mc-quyen-linh-livestream-len-tieng-ve-tin-don-ac-y-576085\\.html",
+  # PRIVACY.html does not exist as a file in the repo; GitHub Pages renders it
+  # from PRIVACY.md with Jekyll, so the link is live on the site but not here.
+  "PRIVACY\\.html",
+]
+# mailto: links (the corrections address) are not checked by default
+# (include_mail defaults to false), so no exclude is needed for them.

@@ -7,11 +7,15 @@ Build the ASEAN AI Governance Tracker.
 Reads data/*.csv, checks every row, and writes:
   index.html          the self-contained tracker (open it in any browser)
   tracker-data.json   the same data as JSON (for reuse or the atlas)
-
+  data.json           the same dataset under its canonical name
+  data/*.json         one JSON file per row type (incidents, responses, ...)
+  feed.xml / feed.json  update feeds generated from data/changelog.csv
+  pagefind/           full-text search index, if Pagefind is available
 The build STOPS if a row is invalid, so mistakes never reach the page.
 Python 3.8+ standard library only.
 """
 import csv, json, os, re, sys, datetime, pathlib
+from xml.sax.saxutils import escape as xml_escape
 
 ROOT = pathlib.Path(__file__).parent
 DATA = ROOT / "data"
@@ -46,6 +50,13 @@ COUNTRIES = {"ASEAN", "SG", "ID", "MY", "VN", "PH", "TH", "KH", "LA", "MM", "BN"
 THEMES = {"deepfake-fraud", "sexual-deepfakes", "political-deepfakes", "election-integrity",
           "online-safety", "general-ai", "data-protection"}
 RTYPES = {"statement", "advisory", "enforcement", "block_takedown", "engagement", "restriction_lifted", "legislation"}
+RT_LABEL = {"statement": "Statement or warning", "advisory": "Formal advisory or guidance",
+            "enforcement": "Investigation or enforcement", "block_takedown": "Block or takedown",
+            "engagement": "Engagement with a platform", "restriction_lifted": "Restriction lifted",
+            "legislation": "New law, regulation or declaration"}
+# Public address of the live tracker; used for the feeds and for feed item links.
+SITE_URL = "https://suhaimizainalshah.github.io/ASEAN-AI-Governance-Tracker/"
+FEED_TITLE = "ASEAN AI Governance Tracker — Updates"
 STATUS = {"in_force", "adopted", "draft", "proposed", "superseded"}
 LEGAL = {"existing_law", "new_law", "none_stated", "not_applicable"}
 PREC = {"day", "month", "year"}
@@ -195,9 +206,130 @@ payload = dict(
 
 public = json.loads(json.dumps(payload)); public.pop("visitors", None); public["meta"].pop("analytics", None)   # the reusable dataset carries no visitor data
 (ROOT / "tracker-data.json").write_text(json.dumps(public, ensure_ascii=False, indent=1), encoding="utf-8")
+
+# ---- reusable JSON exports ---------------------------------------------------
+# data.json is the same public dataset as tracker-data.json (kept under both
+# names: tracker-data.json for existing links, data.json as the canonical
+# name). One JSON file per row type lives next to the CSVs in data/, so
+# researchers and other tools can fetch a single table without the whole set.
+(ROOT / "data.json").write_text(json.dumps(public, ensure_ascii=False, indent=1), encoding="utf-8")
+for _name, _rows in [("incidents", incidents), ("responses", responses), ("instruments", instruments),
+                     ("events", events), ("changelog", changelog), ("backlog", backlog)]:
+    (DATA / f"{_name}.json").write_text(json.dumps(_rows, ensure_ascii=False, indent=1), encoding="utf-8")
+
+# ---- feeds -------------------------------------------------------------------
+# feed.xml (RSS 2.0) and feed.json (JSON Feed 1.1) are generated from the
+# changelog at build time, so followers are notified of each weekly update.
+# Both are listed in template.html with autodiscovery <link> tags.
+def _rfc2822(d):
+    dt = datetime.datetime.strptime(d, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+    return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
+
+def write_feeds():
+    items = sorted(changelog, key=lambda c: c["date"], reverse=True)
+    last = items[0]["date"] if items else datetime.date.today().isoformat()
+    rss = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<rss version="2.0"><channel>',
+           f"<title>{xml_escape(FEED_TITLE)}</title>",
+           f"<link>{xml_escape(SITE_URL)}</link>",
+           f"<description>{xml_escape('What changed in the ASEAN AI Governance Tracker: new cases, official responses and policies, and what is still queued for verification.')}</description>",
+           "<language>en</language>",
+           f"<lastBuildDate>{_rfc2822(last)}</lastBuildDate>"]
+    for n, c in enumerate(items):
+        rss.append("<item>"
+                   f"<title>{xml_escape('Tracker update — ' + c['date'])}</title>"
+                   f"<link>{xml_escape(SITE_URL + '#updates')}</link>"
+                   f"<guid isPermaLink=\"false\">{xml_escape(SITE_URL + '#updates-' + c['date'] + '-' + str(n))}</guid>"
+                   f"<pubDate>{_rfc2822(c['date'])}</pubDate>"
+                   f"<description>{xml_escape(c['change'])}</description>"
+                   "</item>")
+    rss.append("</channel></rss>")
+    (ROOT / "feed.xml").write_text("\n".join(rss) + "\n", encoding="utf-8")
+    feed = {"version": "https://jsonfeed.org/version/1.1",
+            "title": FEED_TITLE, "home_page_url": SITE_URL, "feed_url": SITE_URL + "feed.json",
+            "items": [{"id": SITE_URL + "#updates-" + c["date"] + "-" + str(n),
+                       "url": SITE_URL + "#updates",
+                       "title": "Tracker update — " + c["date"],
+                       "content_text": c["change"],
+                       "date_published": c["date"] + "T00:00:00Z"} for n, c in enumerate(items)]}
+    (ROOT / "feed.json").write_text(json.dumps(feed, ensure_ascii=False, indent=1), encoding="utf-8")
+
+write_feeds()
+
+# ---- plain static list, for readers without JavaScript and for search -------
+# The page renders its rows with JavaScript, so the built HTML on its own
+# contains no row text. build.py therefore also writes a plain list of every
+# row (template placeholder <!--__STATIC_ROWS__-->): readers without
+# JavaScript get a usable list, and the Pagefind search index (built after
+# this step) can find the rows. The list is hidden while JavaScript runs
+# (the <noscript> style below shows it again when scripting is off).
+# Each row carries its own id and data-pagefind-title, so a search hit links
+# straight to that row. The ids here are prefixed with "s-" because the
+# JavaScript viewer puts the same row IDs on the live cards, and an id must
+# not appear twice in one page; the search box rewrites the "s-" prefix
+# away (see initSearch in template.html), so a hit links to #SG-I-01, the
+# same link the ⧉ Link button on the row copies.
+def static_rows():
+    import html as _html
+    def esc(s): return _html.escape(s or "", quote=True)
+    parts = ['<div id="static-rows" hidden>',
+             '<h2>All rows (plain list)</h2>',
+             '<p class="small muted">This plain list is shown when JavaScript is off. With JavaScript on, use the Cases and Policies tabs above; every row there also has its own link, for example #SG-I-01.</p>']
+    for i in incidents:
+        parts.append(f'<article id="s-{esc(i["id"])}" data-pagefind-title="{esc(i["title"])}">'
+                     f'<h3>{esc(i["title"])}</h3>'
+                     f'<p>{esc(i["summary"])}</p>'
+                     f'<p class="src">Case {esc(i["id"])} · {esc(i["country"])} · {esc(i["date"])} · '
+                     f'<a href="{esc(i["source_url"])}">{esc(i["source_title"])}</a></p></article>')
+    for r in responses:
+        title = f"{r['actor']} — {RT_LABEL.get(r['type'], r['type'])} on {r['incident_id']}"
+        parts.append(f'<article id="s-{esc(r["id"])}" data-pagefind-title="{esc(title)}">'
+                     f'<h3>{esc(title)}</h3>'
+                     f'<p>{esc(r["summary"])}</p>'
+                     f'<p class="src">Response {esc(r["id"])} · {esc(r["date"])} · '
+                     f'<a href="{esc(r["source_url"])}">{esc(r["source_title"])}</a></p></article>')
+    for p in instruments:
+        parts.append(f'<article id="s-{esc(p["id"])}" data-pagefind-title="{esc(p["title"])}">'
+                     f'<h3>{esc(p["title"])}</h3>'
+                     f'<p>{esc(p["summary"])}</p>'
+                     f'<p class="src">Policy {esc(p["id"])} · {esc(p["jurisdiction"])} · {esc(p["date"])} · '
+                     f'<a href="{esc(p["source_url"])}">{esc(p["source_title"])}</a></p></article>')
+    parts.append('</div>')
+    parts.append('<noscript><style>#static-rows{display:block}</style></noscript>')
+    return "\n".join(parts)
+
 tpl = (ROOT / "template.html").read_text(encoding="utf-8")
+if "<!--__STATIC_ROWS__-->" not in tpl:
+    sys.exit("template.html is missing the <!--__STATIC_ROWS__--> placeholder")
+tpl = tpl.replace("<!--__STATIC_ROWS__-->", static_rows())
 blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")      # keep </script> out of the data
 (ROOT / "index.html").write_text(tpl.replace("/*__DATA__*/null", blob), encoding="utf-8")
 print(f"Built index.html and tracker-data.json (version {VERSION}, verified {verified}).")
+print(f"Also wrote data.json, data/*.json (one per row type), feed.xml and feed.json ({len(changelog)} changelog entries).")
 print("Visitor counting:", f"ON ({GOATCOUNTER_CODE}.goatcounter.com)" if GOATCOUNTER_CODE else "OFF (no tracking code in the page)")
 print("Visitor snapshot:", ("SAMPLE DATA, for layout preview only, do not publish" if stats.get("sample") else f"embedded, generated {stats['generated']}") if stats else "none")
+
+# ---- search index (Pagefind) -------------------------------------------------
+# The search box on the page is powered by Pagefind, a static search index
+# built from the finished index.html (it reads the plain list above, because
+# the tabs themselves are rendered by JavaScript). Runs only if Pagefind is
+# available; otherwise the build still succeeds and says how to build the
+# index by hand. The index lives in pagefind/ and is committed with the page.
+def run_pagefind():
+    import shutil, subprocess
+    if shutil.which("pagefind"):
+        cmd = ["pagefind", "--site", ".", "--glob", "index.html"]
+    elif shutil.which("npx"):
+        cmd = ["npx", "-y", "pagefind", "--site", ".", "--glob", "index.html"]
+    else:
+        print("Pagefind not found (no `pagefind` or `npx` on PATH): search index not rebuilt. Install it, or run: npx pagefind --site . --glob index.html")
+        return False
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode != 0:
+        print("Pagefind failed; search index not rebuilt:")
+        print((r.stdout or "") + (r.stderr or ""))
+        return False
+    print("Pagefind index rebuilt in pagefind/.")
+    return True
+
+run_pagefind()

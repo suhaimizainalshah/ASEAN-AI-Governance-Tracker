@@ -15,6 +15,14 @@ The emblem in the page header is the official ASEAN emblem, revised on 15 Novemb
 | `build.py` | Checks every row, then rebuilds `index.html`. | No |
 | `template.html` | The look and behaviour of the page. | Only to change the design |
 | `tracker-data.json` | The same data as JSON, for reuse (for example in the atlas). | No (generated) |
+| `data.json` | The same dataset under its canonical name. | No (generated) |
+| `data/*.json` | One JSON file per row type (`incidents`, `responses`, `instruments`, `events`, `changelog`, `backlog`), for reuse without the whole set. | No (generated) |
+| `feed.xml`, `feed.json` | Update feeds (RSS 2.0 and JSON Feed 1.1), generated from `data/changelog.csv` at build time. | No (generated) |
+| `datapackage.json` | The schema for the CSVs: required fields, allowed values, unique IDs, source URLs. Checked by `frictionless validate` and by the validate-data workflow on every pull request. | Yes, when a field or allowed value changes |
+| `.lychee.toml` | Link checker exclusions (hosts that block automated requests, and `PRIVACY.html`, which GitHub Pages renders from `PRIVACY.md`). | Yes, when a host needs excluding |
+| `.github/workflows/validate-data.yml` | Checks the CSVs against the schema and runs the build on every pull request. | No |
+| `.github/workflows/links.yml` | Checks every link in the built page and the docs on pull requests, and once a week. | No |
+| `pagefind/` | Full-text search index, built from the finished page by `build.py` (needs Pagefind, installed automatically with `npx` when available). | No (generated) |
 | `fetch_stats.py` | Optional. Fetches aggregate visitor numbers from GoatCounter into `data/visitor-stats.json`. | No |
 | `.github/workflows/update-visitor-stats.yml` | Optional. Refreshes those numbers daily on GitHub. | No |
 
@@ -30,7 +38,7 @@ Double-click `index.html`. To publish, upload that one file to GitHub Pages, Net
 4. If a row is wrong, the build stops and tells you which row and why. Fix it and run again.
 5. Open `index.html` to check. Add a line to `data/changelog.csv` saying what changed.
 
-The build refuses bad data (impossible dates, missing sources, unknown links, a response dated before its incident, duplicate IDs), so mistakes never reach the page.
+The build refuses bad data (impossible dates, missing sources, unknown links, a response dated before its incident, duplicate IDs), so mistakes never reach the page. Two further checks run on every pull request: `frictionless validate datapackage.json` checks the CSVs against the schema (required fields, allowed values, unique IDs, well-formed source URLs), and the link checker follows every link in the freshly built page. You can run both by hand: `frictionless validate datapackage.json` (install with `pip install frictionless`) and, after building, `lychee --config .lychee.toml index.html README.md PRIVACY.md`.
 
 ## The rules that keep it trustworthy
 
@@ -74,6 +82,16 @@ The page already calculates both, so nothing needs adding to the CSVs:
 - **Policy before incident.** Each policy is compared with the first incident on the same theme in the same place, and is labelled pre-emptive only if it also names the risk.
 
 Both depend on honest dates. A case whose start is unknown (`onset_certainty` = `unknown`) or dated only to a month or year gets no day count, and most cases added in 0.2 are of that kind, so the speed medians still rest on a small number of cases. Treat them as indicative.
+
+## Search, feeds and reuse
+
+**Search.** The search box in the header is powered by [Pagefind](https://pagefind.app/) (MIT), a static full-text index built from the finished page — no server, no third party. It runs entirely in the browser and is self-hosted in `pagefind/`. The page renders its rows with JavaScript, so the built HTML on its own contains no row text; that is why `build.py` also writes a plain list of every row into a hidden `<div id="static-rows">` (readers without JavaScript get the list, shown by a `<noscript>` style rule, and Pagefind can find the rows). Each row in that list carries its own id and title, so a search hit links straight to that row — the list's ids carry an `s-` prefix to avoid clashing with the live cards, and the search box strips it before showing a result. `build.py` rebuilds the index automatically when Pagefind is available (it uses `npx`, which downloads it on first use); if it is not available the build still succeeds and says how to build the index by hand (`npx pagefind --site . --glob index.html`). Commit `pagefind/` with the page, or the search box hides itself.
+
+**Link to a row.** Every case, response and policy has its own link: `#SG-I-01`, `#VN-R-10`, `#ASEAN-P-01`. Use the ⧉ Link button on a row to copy it, or quote the row ID when citing. Opening such a link opens the right tab and scrolls to the row.
+
+**Feeds.** `feed.xml` (RSS 2.0) and `feed.json` (JSON Feed 1.1) are generated from `data/changelog.csv` at build time, one item per changelog entry, and are listed in the page header so feed readers can discover them. Nothing is maintained by hand.
+
+**Reuse the data.** `data.json` (the whole public dataset) and `data/*.json` (one file per row type) are generated at build time alongside the CSV downloads on the page. All data is CC BY 4.0; cite the tracker and the version.
 
 ## Publishing
 
@@ -173,7 +191,10 @@ only the page's own inline scripts and styles plus GoatCounter (`gc.zgo.at`
 for the script, `*.goatcounter.com` for counts, including its image-pixel
 fallback); there are no other external resources to allow. The CSP needs
 `'unsafe-inline'` because all page JavaScript and CSS is inline, so it is a
-partial mitigation. If `STATS_URL` in `build.py` is ever set to another host,
+partial mitigation. It also allows `'wasm-unsafe-eval'` in `script-src`,
+because the Pagefind search index runs on WebAssembly: that keyword permits
+compiling WebAssembly and nothing else, so JavaScript `eval` stays blocked.
+If `STATS_URL` in `build.py` is ever set to another host,
 add that host to `connect-src` in `template.html` first, or the snapshot
 fetch will be blocked.
 
