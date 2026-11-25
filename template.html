@@ -378,7 +378,7 @@ details.fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset
       <details id="filters" open>
         <summary>Filters and sort<span class="fcount" id="fcount" hidden>0</span></summary>
         <div class="rail-body">
-          <div class="field"><label for="q">Search</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
+          <div class="field"><label for="q">Filter this list</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
           <fieldset class="field"><legend>Where</legend><div class="where" id="where"></div><p class="small muted" style="margin:.4rem 0 0">Tap a country to narrow to it — no selection shows all eleven.</p></fieldset>
           <div class="field"><div class="seabtns"><button type="button" class="btn" id="sea-all">All 11 countries</button><button type="button" class="btn" id="sea-6">SEA-6 only</button></div><p class="small muted" style="margin:.4rem 0 0">SEA-6 is the six countries the tracker started with, where coverage is deepest. <a href="#method">Why it matters</a>.</p></div>
           <div class="field"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div>
@@ -1277,17 +1277,27 @@ $('#theme').addEventListener('click', () => { const d = document.documentElement
    a site served from a sub-path, and row hits carry the "s-" prefix the
    static list uses to avoid duplicate ids — so processResult rewrites every
    result URL to this page, with the prefix stripped, before it is shown. */
+var SEARCH_INPUT = '#search input';
+// Press "/" to jump to the full-text search, as on many sites; ignored while typing in a field.
+document.addEventListener('keydown', function (e) {
+  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+  var t = e.target, tag = (t && t.tagName) || '';
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (t && t.isContentEditable)) return;
+  var box = document.querySelector(SEARCH_INPUT);
+  if (box) { e.preventDefault(); box.focus(); }
+});
 function initSearch() {
   const box = document.getElementById('search');
   if (!box) return;
   const start = () => {
     if (window.PagefindUI) {
-      new PagefindUI({ element: '#search', showSubResults: true, placeholder: 'Search cases, policies and responses',
+      new PagefindUI({ element: '#search', showSubResults: true, translations: { placeholder: 'Search the tracker' },   // Pagefind reads the placeholder from translations
         processResult: function (result) {
           const page = location.href.split('#')[0];
           const fix = u => { const i = (u || '').indexOf('#'); return i >= 0 ? page + u.slice(i).replace('#s-', '#') : page; };
           result.url = fix(result.url);
           (result.sub_results || []).forEach(s => { s.url = fix(s.url); });
+      const si = document.querySelector('#search input'); if (si) si.title = 'Full-text search. Press / to jump here.';
           return result;
         } });
     } else {
