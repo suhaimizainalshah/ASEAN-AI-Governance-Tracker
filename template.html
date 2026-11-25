@@ -344,6 +344,7 @@ details.fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset
 .foldbtn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
 @media (prefers-reduced-motion:reduce){details.fold>summary h2::before{transition:none}}
 @media print{.foldbar{display:none}}
+.previewbar{background:#7a3e00;color:#fff;padding:.55rem 1rem;text-align:center;font-weight:600}
 </style>
 <link rel="stylesheet" href="map.css">
 </head>
@@ -426,6 +427,11 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 <script src="pagefind/pagefind-ui.js" defer></script>
 <script>
 const DATA = /*__DATA__*/null;
+if (DATA && DATA.meta && DATA.meta.preview) {            // a pull-request preview, never the public site
+  var addPreviewBar = function () { document.body.insertAdjacentHTML('afterbegin', '<div class="previewbar" role="note">Preview of a pull request. Nothing here is on the public site until the pull request is merged.</div>'); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addPreviewBar); else addPreviewBar();
+}
+
 
 /* ------------------------------------------------------------------ helpers */
 const $ = (s, r = document) => r.querySelector(s);
@@ -526,7 +532,7 @@ function context(i) {
 /* ------------------------------------------------------------------ state */
 const AN = (DATA.meta && DATA.meta.analytics) || {};
 const GC_CODE = /^[a-z0-9][a-z0-9-]{1,40}$/.test(AN.goatcounter || '') ? AN.goatcounter : '';
-const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],['review','Review'],['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
+const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],...((DATA.meta && DATA.meta.preview) ? [['review','Review']] : []),['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
 const state = { tab:'cases', c:new Set(), t:'', rt:'', ps:'', b:false, f:false, q:'', sort:'new', row:null };
 let keepHash = false;   // set when landing on a row link, so writeHash leaves #ROW-ID in the address bar
 const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
@@ -909,12 +915,27 @@ function renderCompare() {
   foldCompare($('#panel-compare'), function () { if (window.ChartBuilder) ChartBuilder.mount($('#chart-builder'), { data: DATA, names: CT, tracker: 'ASEAN AI Governance Tracker', region: 'ASEAN' }); });
 }
 
+// What's new in this update: the rows verified on the latest date, read-only, each with its source.
+function whatsNewHTML() {
+  const v = DATA.meta.verified;
+  const link = (u, t) => u ? `<a href="${esc(u)}" rel="noopener">${esc(t || 'Source')}</a>` : '';
+  const cut = t => { t = String(t || ''); return t.length > 160 ? t.slice(0, 159) + '\u2026' : t; };
+  const rows = [
+    ...INC.filter(i => i.verified_on === v).map(i => ['Case', i.id, i.title, CT[i.country] || i.country, i.date, link(i.source_url, i.source_title)]),
+    ...RESP.filter(r => r.verified_on === v).map(r => ['Official response', r.id, `${r.actor || ''}: ${r.summary || ''}`, `Case ${r.incident_id}`, r.date, link(r.source_url, r.source_title)]),
+    ...POL.filter(p => p.verified_on === v).map(p => ['Policy', p.id, p.short_title || p.title, CT[p.jurisdiction] || p.jurisdiction, p.date, link(p.source_url, p.source_title)])];
+  if (!rows.length) return '';
+  return `<div class="sect"><h2>What\u2019s new in this update</h2><p>${rows.length} rows were added or re-checked in the update verified ${esc(fmt(v, 'day'))}. Each one links to its source.</p>
+    <div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">Rows in the latest update</caption><thead><tr><th scope="col">Kind</th><th scope="col">ID</th><th scope="col">What</th><th scope="col">Where</th><th scope="col">Date</th><th scope="col">Source</th></tr></thead><tbody>
+    ${rows.map(r => `<tr><td>${esc(r[0])}</td><th scope="row">${esc(r[1])}</th><td>${esc(cut(r[2]))}</td><td>${esc(r[3] || '')}</td><td>${esc(r[4] || '')}</td><td>${r[5]}</td></tr>`).join('')}</tbody></table></div></div>`;
+}
 function renderUpdates() {
   const cl = DATA.changelog;
   const isNew = c => lastVisit && c.date > lastVisit;
   const watch = POL.filter(p => p.next_check).sort((a, b) => a.next_check.localeCompare(b.next_check));
   const fol = [...following].map(id => incById[id] || polById[id]).filter(Boolean);
   $('#panel-updates').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Updates</h2>
+    ${whatsNewHTML()}
     <div class="sect"><h2>What changed</h2><ul class="feed">${cl.map(c => `<li><time datetime="${esc(c.date)}">${esc(fmt(c.date, 'day'))}</time><span>${esc(c.change)}${isNew(c) ? '<span class="tag ok">New since your last visit</span>' : ''}</span></li>`).join('')}</ul></div>
     <div class="sect"><h2>Watch list</h2><p>Pending items with a date to check back. "Check due" means the date has passed and the item should be looked at again.</p>
       <div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">Pending policies to re-check</caption><thead><tr><th scope="col">Item</th><th scope="col">Place</th><th scope="col">Status</th><th scope="col">Watching for</th><th scope="col">Check by</th></tr></thead><tbody>
@@ -943,9 +964,9 @@ function renderReview() {
   const polRows = newPol.map(p => `<tr><td>${rowCheck(p.id)}</td><th scope="row">${esc(p.id)}</th><td>${esc(p.short_title || p.title)} <span class="muted">(${esc(CT[p.jurisdiction])}, ${esc(fmt(p.date, p.date_precision))}, ${STAT[p.status]})</span></td><td>${srcLink(p)}${p.more_sources ? '. ' + moreLinks(p) : ''}</td><td>${p.confidence === 'high' ? 'High' : 'Medium'}</td></tr>`).join('');
   $('#panel-review').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Review</h2>
     <div class="sect"><h2>Check this update before it goes live</h2>
-    <p>Everything below was added or changed in the latest update (verified ${esc(fmt(latest, 'day'))}). Nothing here is published until the pull request is merged. Work through it row by row:</p>
+    <p>Everything below was added or changed in the latest update (verified ${esc(fmt(latest, 'day'))}). This is a preview build: nothing here is on the public site until the pull request is merged. Ticks here are saved only in this browser; the official record is the checklist comment on the pull request. Work through it row by row:</p>
     <ol><li>Open the source link and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says.</li>
-    <li>Tick the row when it checks out. Anything you cannot confirm stays unticked — leave a comment on the pull request instead of merging.</li>
+    <li>Tick the row, here and in the checklist comment on the pull request, when it checks out. Anything you cannot confirm stays unticked — leave a comment on the pull request instead of merging.</li>
     <li>When every new row is ticked, merge the pull request. Rows that could not be verified belong in the backlog queue, not in the data.</li></ol>
     <p><span id="rv-count"><b>Checked ${nChecked} of ${allIds.length} new rows.</b>${allIds.length && nChecked === allIds.length ? ' All new rows checked — ready to merge.' : ''}</span> <button type="button" class="btn" id="rv-all">Tick all</button> <button type="button" class="btn" id="rv-clear">Clear ticks</button></p>
     <p class="small muted">Ticks are saved in this browser only. The pull request itself carries a review file quoting the exact source sentence behind each date and actor — check the row against that sentence.</p></div>
