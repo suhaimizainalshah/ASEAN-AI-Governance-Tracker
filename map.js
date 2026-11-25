@@ -249,7 +249,7 @@
     html += '<div class="map-head"><div class="map-total"><strong>' + esc(layout.label) +
       ' total: ' + totals.incidents + ' incidents · ' + totals.responses +
       ' responses · ' + totals.instruments + ' instruments · ' + totals.total +
-      ' rows</strong></div>';
+      ' records</strong></div>';
     html += '<div class="map-metrics" role="group" aria-label="Colour the map by">';
     METRICS.forEach(function (m) {
       html += '<button type="button" class="metric' + (metric === m.key ? ' active' : '') +
