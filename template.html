@@ -19,7 +19,7 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>ASEAN AI Governance Tracker</title>
 <meta name="description" content="Incidents, official responses and policies on AI governance in Singapore, Indonesia, Malaysia, Vietnam, the Philippines and ASEAN.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230032a1'/%3E%3Ccircle cx='8' cy='8' r='5.5' fill='%23ef3240'/%3E%3Cpath d='M4.6 6.5 L7 11 M6.3 5.8 L7.6 11 M8 5.5 L8 11.2 M9.7 5.8 L8.4 11 M11.4 6.5 L9 11' stroke='%23f8e702' stroke-width='1' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%230a1f36'/%3E%3Cpath d='M4.6 11.6V8.4M7 11.6V5.4M9.4 11.6V8.9M11.8 11.6V7' stroke='%23e6c779' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="alternate" type="application/rss+xml" title="ASEAN AI Governance Tracker — Updates" href="feed.xml">
 <link rel="alternate" type="application/feed+json" title="ASEAN AI Governance Tracker — Updates" href="feed.json">
 <link rel="stylesheet" href="pagefind/pagefind-ui.css">
@@ -66,7 +66,7 @@ h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
 .masthead h1{font-size:clamp(1.55rem,3.4vw,2.25rem);font-weight:700;letter-spacing:.2px}
 .lede{margin:.4rem 0 0;max-width:62ch;color:#cfd9e6;font-size:1rem}
 .mast-title{display:flex;gap:.9rem;align-items:flex-start}
-.emblem{flex:none;width:58px;height:58px;background:#fff;border-radius:50%;padding:3px;box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.emblem{flex:none;width:58px;height:58px}
 .emblem svg{width:100%;height:100%;display:block}
 .seabtns{display:flex;gap:3px;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:3px;box-shadow:inset 0 1px 3px rgba(10,25,45,.10)}
 .seabtns .btn{flex:1;border:0;background:transparent;box-shadow:none;padding:.5rem .35rem;border-radius:4px;color:var(--muted);white-space:nowrap;font-size:.84rem}
@@ -308,15 +308,27 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
   .mast-row{align-items:stretch;gap:1rem}
   .mast-tools{flex-basis:100%;text-align:left;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.55rem .75rem;align-items:center}
   .mast-tools > p{margin:0}
-  .mast-tools > p:nth-of-type(2){text-align:right}
+  .mast-tools > p:nth-of-type(1){grid-row:1;grid-column:1}
+  .mast-tools > p:nth-of-type(2){grid-row:1;grid-column:1/-1;justify-self:end;text-align:right} /* shares the first row with the link, so the right column is only as wide as the button */
   .mast-tools #search{margin:0;min-width:0}
-  .mast-tools #theme{align-self:start;white-space:nowrap}
+  .mast-tools #theme{align-self:start;justify-self:end;width:auto;white-space:nowrap} /* button-sized, at the right, not stretched to the version line */
 }
 @media (max-width:520px){
-  .mast-tools > p:nth-of-type(2){grid-column:1/-1;text-align:left}
+  .mast-tools > p:nth-of-type(2){grid-row:auto;grid-column:1/-1;justify-self:start;text-align:left}
   .mast-tools{grid-template-columns:minmax(0,1fr)}
   .mast-tools #theme{justify-self:start}
 }
+
+/* Light mode: the masthead follows the theme (it used to stay navy, so only the
+ * page below changed). The gold rule beneath it stays as the tracker's signature. */
+html:not([data-theme=dark]) .masthead{background:var(--surface);color:var(--ink)}
+html:not([data-theme=dark]) .lede,html:not([data-theme=dark]) .mast-tools{color:var(--muted)}
+html:not([data-theme=dark]) .tabs [role=tab]{color:var(--muted)}
+html:not([data-theme=dark]) .tabs [role=tab]:hover,html:not([data-theme=dark]) .tabs [role=tab][aria-selected=true]{color:var(--ink)}
+html:not([data-theme=dark]) .tabs [role=tab][aria-selected=true]{border-bottom-color:var(--gold)}
+html:not([data-theme=dark]) #search{--pagefind-ui-text:var(--ink);--pagefind-ui-background:var(--surface);--pagefind-ui-border:var(--line);--pagefind-ui-primary:var(--link);--pagefind-ui-tag:var(--soft)}
+html:not([data-theme=dark]) #search .pagefind-ui__result-link{color:var(--link)}
+html:not([data-theme=dark]) #search .pagefind-ui__result-excerpt{color:var(--muted)}
 .home-link{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .foot-nav a{margin-right:1rem}
 </style>
@@ -327,14 +339,14 @@ footer{border-top:1px solid var(--line);margin-top:2rem;padding:1.2rem 0 2.5rem;
 <header class="masthead">
   <div class="wrap mast-row">
     <div class="mast-title">
-      <span class="emblem" aria-hidden="true"><svg viewBox="0 0 48 48" width="44" height="44" aria-hidden="true" focusable="false"><path d="M11 36V24M19 36V14M27 36V26M35 36V19" fill="none" stroke="#13294b" stroke-width="4.2" stroke-linecap="round"/><circle cx="35" cy="10.5" r="3.6" fill="#13294b"/></svg></span>
+      <span class="emblem" aria-hidden="true"><svg viewBox="0 0 48 48" width="58" height="58" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="23" fill="#0a1f36" stroke="#e6c779" stroke-width="1.6"/><path d="M13 35V26M20 35V16M27 35V27M34 35V21" fill="none" stroke="#e6c779" stroke-width="4" stroke-linecap="round"/><circle cx="34" cy="13" r="3.2" fill="#e6c779"/></svg></span>
       <div>
       <h1>ASEAN AI Governance Tracker</h1>
       <p class="lede">What went wrong, who officially responded and when, and which policies were already in place. Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — all eleven ASEAN member states — plus ASEAN regional action.</p>
       </div>
     </div>
     <div class="mast-tools">
-      <p><a class="home-link" href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a></p>
+      <p><a class="home-link" href="https://suhaimizainalshah.github.io/AI-Benar-Advisory/">AI Benar Advisory</a> · <a class="home-link" href="https://suhaimizainalshah.github.io/EU-AI-Governance-Tracker/">EU tracker</a></p>
       <p>Version <span id="ver"></span>, last verified <time id="verified"></time></p>
       <div id="search" role="search" aria-label="Search the tracker"></div>
       <button class="ghost" id="theme" type="button" aria-pressed="false">Dark mode</button>
@@ -397,6 +409,7 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 <div id="tip" class="hidden" role="tooltip"></div>
 
 <script src="map.js"></script>
+<script src="chart-builder.js"></script>
 <script src="pagefind/pagefind-ui.js" defer></script>
 <script>
 const DATA = /*__DATA__*/null;
@@ -831,9 +844,11 @@ function renderCompare() {
       <div class="insight">${obs.map(o => `<p>${o}</p>`).join('')}</div>${tbl}</div>`;
   }
   $('#panel-compare').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Compare</h2>
+    <div class="sect"><h2>Chart an event</h2><p>For an event several places responded to, see how quickly each acted. Choose what to show, then download the chart with its source line.</p><div id="chart-builder"></div></div>
     ${focus}
     <div class="sect"><h2>Policy stack</h2><p>Which layers of policy exist where. Superseded items are hidden. "Passed" means adopted but not yet in effect.</p>${stack}<p class="small muted"><b>Reading a dash:</b> it means none is recorded in this tracker, not that none exists. Several known instruments are still queued for verification (see Updates).</p></div>
     <div class="sect"><h2>Speed of official response</h2><p>Days from the earliest public record of a case to the first official action. Samples are small and dates come from public reporting, so read these as indications, not league tables. "Same day" can mean that the official statement is itself the earliest record found.</p>${speed}</div>`;
+  if (window.ChartBuilder) ChartBuilder.mount($('#chart-builder'), { data: DATA, names: CT, tracker: 'ASEAN AI Governance Tracker', region: 'ASEAN' });
 }
 
 function renderUpdates() {
