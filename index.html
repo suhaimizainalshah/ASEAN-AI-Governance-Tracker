@@ -345,6 +345,8 @@ details.fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset
 @media (prefers-reduced-motion:reduce){details.fold>summary h2::before{transition:none}}
 @media print{.foldbar{display:none}}
 .previewbar{background:#7a3e00;color:#fff;padding:.55rem 1rem;text-align:center;font-weight:600}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+table.live tr.lead th,table.live tr.lead td{font-weight:700}
 </style>
 <link rel="stylesheet" href="map.css">
 </head>
@@ -1241,14 +1243,61 @@ async function loadSnapshot() {
   if (!AN.stats_url || location.protocol === 'file:') return;
   try { const r = await fetch(AN.stats_url, { cache: 'no-store' }); if (!r.ok) return; const s = normaliseStats(await r.json()); if (s) { VIS = s; if (state.tab === 'visitors') renderVisitors(); } } catch {}
 }
+/* Live visitor counts, straight from GoatCounter's public counter: no key, nothing to upload. Needs "Allow adding visitor counts
+   on your website" switched on in GoatCounter's site settings. Aggregate numbers only; GoatCounter caches them for up to four hours.
+   Nothing is fetched from a local file, or for a visitor whose browser asks not to be tracked. */
+function gcCountedPath() {
+  try { if (window.goatcounter && window.goatcounter.get_data) { var p = window.goatcounter.get_data().p; if (p) return p; } } catch (e) {}
+  var c = document.querySelector('link[rel=canonical]');
+  if (c && c.href) { try { return new URL(c.href).pathname; } catch (e) {} }
+  return location.pathname.replace(/index\.html$/, '');
+}
+function gcWhenReady(cb) {                       // the counted path is exact once count.js has loaded; give it a few seconds
+  var tries = 0;
+  (function wait() { if ((window.goatcounter && window.goatcounter.get_data) || tries++ > 25) cb(); else setTimeout(wait, 150); })();
+}
+function gcCount(code, path, start) {
+  var u = 'https://' + code + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json' + (start ? '?start=' + start : '');
+  return fetch(u, { cache: 'no-store' }).then(function (r) {
+    if (r.status === 404) return 0;              // not counted yet
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json().then(function (j) { return parseInt(String(j.count).replace(/[^0-9]/g, ''), 10) || 0; });
+  });
+}
+function gcCountPage(code, path, start) {        // GoatCounter stores paths without a trailing slash; try that first, then as given
+    var bare = path.replace(/\/+$/, '') || '/';
+    var u = function (p) { return 'https://' + code + '.goatcounter.com/counter/' + encodeURIComponent(p) + '.json' + (start ? '?start=' + start : ''); };
+    var get = function (p) { return fetch(u(p), { cache: 'no-store' }).then(function (r) { return r.status === 404 ? null : (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))); }); };
+    return get(bare).then(function (j) { return j || (bare !== path ? get(path) : null); })
+      .then(function (j) { return j ? (parseInt(String(j.count).replace(/[^0-9]/g, ''), 10) || 0) : 0; });
+  }
+  function gcLiveTable(el, code, tabs, prefix, optedOut) {
+  if (!el) return;
+  if (!code || location.protocol === 'file:') { el.innerHTML = '<p>This copy of the page does not count visits, so there are no figures to show.</p>'; return; }
+  if (optedOut) { el.innerHTML = '<p>Your browser asks sites not to track you, so this page does not contact the counting service and the figures are not shown to you.</p>'; return; }
+  el.innerHTML = '<p>Loading the latest counts\u2026</p>';
+  gcWhenReady(function () {
+    var rows = [['Visits to the tracker', gcCountedPath(), true]].concat(tabs.map(function (t) { return ['Opened the ' + t[1] + ' tab', prefix + t[0], false]; }));
+    Promise.all(rows.map(function (r) { var f = r[2] ? gcCountPage : gcCount; return Promise.all([f(code, r[1], 'month'), f(code, r[1])]); })).then(function (res) {
+      var fmtN = function (n) { return Number(n).toLocaleString('en-GB'); };
+      var head = rows.slice(0, 1).map(function (r, i) { return [r, res[i]]; });
+      var tabsSorted = rows.slice(1).map(function (r, i) { return [r, res[i + 1]]; }).sort(function (a, b) { return b[1][1] - a[1][1]; });
+      var tr = function (x) { return '<tr' + (x[0][2] ? ' class="lead"' : '') + '><th scope="row">' + esc(x[0][0]) + '</th><td class="num">' + fmtN(x[1][0]) + '</td><td class="num">' + fmtN(x[1][1]) + '</td></tr>'; };
+      el.innerHTML = '<div class="tablewrap"><table class="data live"><caption class="vh">Visits and tabs opened, last 30 days and all time</caption>' +
+        '<thead><tr><th scope="col">What</th><th scope="col" class="num">Last 30 days</th><th scope="col" class="num">All time</th></tr></thead><tbody>' +
+        head.map(tr).join('') + tabsSorted.map(tr).join('') + '</tbody></table></div>' +
+        '<p class="small muted">Live from GoatCounter, which refreshes these counts every few hours. A visit counts once; each tab opened counts separately. No cookies, and no individual is ever shown.</p>';
+    }).catch(function () { el.innerHTML = '<p>The live counts could not be loaded just now. Please try again later.</p>'; });
+  });
+}
+
 async function loadLive() {
   const n = $('#v-live'); if (!n) return;
   if (!GC_CODE || location.protocol === 'file:') { n.textContent = 'not counting here'; return; }
+  if (OPTED_OUT) { n.textContent = 'not shown'; return; }
+  await new Promise(res => gcWhenReady(res));
   try {
-    const r = await fetch(`https://${GC_CODE}.goatcounter.com/counter/${encodeURIComponent(PAGE)}.json`, { cache: 'no-store' });
-    if (!r.ok) throw new Error(r.status);
-    const j = await r.json(); n.textContent = j.count ?? 'not available';
-    if (j.count_unique && $('#v-uniq')) { $('#v-uniq').textContent = j.count_unique; $('#v-uniq').closest('.stat').hidden = false; }
+    n.textContent = (await gcCountPage(GC_CODE, gcCountedPath())).toLocaleString('en-GB');
   } catch { n.textContent = 'not available'; }
 }
 function vTable(caption, head, rows) {
@@ -1258,7 +1307,7 @@ function renderVisitors() {
   const min = AN.min_visits || 30, v = VIS, N = n => Number(n).toLocaleString('en');
   const pct = (n, tot) => tot ? Math.round(1000 * n / tot) / 10 : 0;
   let body = '';
-  if (!v) body = `<div class="sect"><p>The country and referrer breakdown will appear here once it has been published.</p></div>`;
+  if (!v) body = '';                                  // no snapshot: the live table above is all there is, with nothing to wait for
   else if (v.total_visits < min) body = `<div class="sect"><h2>Where visitors come from</h2><p>The breakdown appears once there are at least ${min} visits, so that no individual reader can be picked out. So far: ${N(v.total_visits)}.</p></div>`;
   else {
     const reg = {}; v.countries.forEach(c => { const r = c.other ? 'Other or unknown' : regionOf(c.code); reg[r] = (reg[r] || 0) + c.count; });
@@ -1281,15 +1330,17 @@ function renderVisitors() {
   const when = v ? esc(fmt(v.generated.slice(0, 10), 'day')) : '';
   $('#panel-visitors').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Visitors</h2>
     <div class="sect"><h2>Who is using this tracker</h2>
-    <p>Counts of visits, collected without cookies. They show totals, places and what was opened, never individuals. The live figure can lag by up to 30 minutes. The tables are a snapshot, refreshed on a schedule.</p>
+    <p>Counts of visits, collected without cookies. They show totals and what was opened, never individuals. The live figures come straight from GoatCounter and can lag by a few hours.${v ? ' The tables further down are a snapshot, refreshed on a schedule.' : ''}</p>
     ${v && v.sample ? '<p class="warn"><b>Sample data.</b> These numbers are invented, to show the layout. Do not publish a page that shows this notice.</p>' : ''}
     <div class="statrow">
       ${GC_CODE ? `<div class="stat"><span class="n num" id="v-live">…</span><span class="l">visits to this copy of the page (live)</span></div><div class="stat" hidden><span class="n num" id="v-uniq">…</span><span class="l">unique visitors to this copy (live)</span></div>` : ''}
       ${v ? `<div class="stat"><span class="n num">${N(v.total_visits)}</span><span class="l">visits in the snapshot, all copies, ${esc(v.period ? fmt(v.period.start, 'day') + ' to ' + fmt(v.period.end, 'day') : '')}</span></div>
       <div class="stat"><span class="n num">${N(v.countries.filter(c => !c.other).length)}</span><span class="l">countries shown</span></div>
       <div class="stat"><span class="n">${when}</span><span class="l">snapshot date</span></div>` : ''}
-    </div></div>${body}`;
+    </div></div>
+    <div class="sect"><h2>Visits so far</h2><div id="v-livetbl"></div></div>${body}`;
   loadLive();
+  gcLiveTable($('#v-livetbl'), GC_CODE, TABS.filter(t => t[0] !== 'visitors' && t[0] !== 'review'), 'tab-', OPTED_OUT);
 }
 function privacyText() {
   const mine = 'Your browser does keep the items you follow and your light or dark choice; these stay on your device and are never sent anywhere.';
