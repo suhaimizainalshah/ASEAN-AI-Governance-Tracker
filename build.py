@@ -355,7 +355,11 @@ tpl = (ROOT / "template.html").read_text(encoding="utf-8")
 if "<!--__STATIC_ROWS__-->" not in tpl:
     sys.exit("template.html is missing the <!--__STATIC_ROWS__--> placeholder")
 tpl = tpl.replace("<!--__STATIC_ROWS__-->", static_rows())
-blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")      # keep </script> out of the data
+PREVIEW = "--preview" in sys.argv or os.environ.get("PREVIEW") == "1"     # pull-request preview: shows the Review tab and a banner
+page = {**payload, "meta": {**payload["meta"], "preview": True}} if PREVIEW else payload
+blob = json.dumps(page, ensure_ascii=False).replace("</", "<\\/")      # keep </script> out of the data
+if PREVIEW:
+    print("PREVIEW build: the Review tab and a preview banner are shown. Do not commit this index.html.")
 (ROOT / "index.html").write_text(tpl.replace("/*__DATA__*/null", blob), encoding="utf-8")
 print(f"Built index.html and tracker-data.json (version {VERSION}, verified {verified}).")
 print(f"Also wrote data.json, data/*.json (one per row type), feed.xml and feed.json ({len(changelog)} changelog entries).")
