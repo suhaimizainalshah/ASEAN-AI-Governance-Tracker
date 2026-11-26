@@ -1,0 +1,55 @@
+name: Review checklist
+
+# On every pull request: posts one comment listing each new or changed case, response and policy, with a tick box
+# and its source link (see REVIEWING.md). The ticked comment is the official record of the review. On later commits
+# the same comment is updated: ticks stay on unchanged rows, and are cleared on edited ones.
+# It also builds a preview of the site (with the Review tab and a banner) to download from the run, under Artifacts.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write      # to post and update the checklist comment
+  issues: write             # pull-request comments use the issues API
+
+concurrency:
+  group: review-checklist-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  checklist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: The pull request
+        uses: actions/checkout@v4
+        with:
+          path: head
+      - name: The main branch, to compare with
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build the data for both
+        run: |
+          (cd base && python3 build.py > /dev/null) && cp base/data.json /tmp/base.json
+          (cd head && python3 build.py) && cp head/data.json /tmp/head.json
+      - name: Post or update the checklist comment
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 head/scripts/review_checklist.py /tmp/base.json /tmp/head.json --post
+      - name: Build the preview of the site (never committed)
+        run: cd head && PREVIEW=1 python3 build.py
+      - name: Keep the preview to download
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-site
+          path: |
+            head/
+            !head/.git
+          retention-days: 14

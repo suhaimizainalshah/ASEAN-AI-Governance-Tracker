@@ -43,6 +43,11 @@ exclude = [
   "elibrary\\.judiciary\\.gov\\.ph",
   "www\\.businesstoday\\.com\\.my",
   "www\\.reuters\\.com",
+  # Bot protection: 403 on the GitHub Actions run of PR #18 (26 Nov 2026). The
+  # pages load for a reader (checked by hand on 26 Nov 2026), so this is a
+  # checker limit, not a dead link. Covers nst.com.my with and without www.
+  "nst\\.com\\.my",
+  "feuadvocate\\.net",
   # Time out for automated requests (checked on the GitHub Actions runs of
   # PR #12, 23 Nov 2026, and from here); the rows were verified against
   # these sources when added, so this is a checker limit, not a dead link.
