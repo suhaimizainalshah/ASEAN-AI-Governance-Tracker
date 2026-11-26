@@ -43,5 +43,9 @@ jobs:
       - name: Check links
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --verbose --no-progress --root-dir ${{ env.SITE_ROOT }} --config .lychee.toml index.html README.md PRIVACY.md
+          # Pull requests accept timeouts, so one slow foreign site can't block a merge; they still fail on
+          # real breakage (404s, missing sites). The weekly run is strict, and is the alert to check by hand.
+          # The version is pinned so that a future release can't silently change how these options behave.
+          lycheeVersion: v0.24.2
+          args: --verbose --no-progress ${{ github.event_name == 'pull_request' && '--accept-timeouts' || '' }} --root-dir ${{ env.SITE_ROOT }} --config .lychee.toml index.html README.md PRIVACY.md
           fail: true
