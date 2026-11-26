@@ -430,7 +430,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
   </div>
 <!--__STATIC_ROWS__-->
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Sources are also saved to the Internet Archive each week: where a copy exists, an <em>archived copy</em> link appears beside the source. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
 <a href="#top" class="to-top" id="toTop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
 <script>
 /* Back to top: shown after about one screen of scrolling; returns keyboard focus to the page title */
@@ -1442,6 +1442,31 @@ function initSearch() {
   store.set('aat_last_v1', new Date().toISOString().slice(0, 10));
   loadSnapshot();
   initSearch();
+})();
+</script>
+<script>
+/* Archived copies of sources, from data/archive.json (kept up to date weekly by .github/workflows/archive-sources.yml).
+   Beside each source link that has one, it adds "archived copy", linking to the Internet Archive's saved page. */
+(function () {
+  var map = null, M = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function mark() {
+    document.querySelectorAll('a[href^="http"]:not([data-arch])').forEach(function (a) {
+      a.setAttribute('data-arch', '');
+      var e = map[a.getAttribute('href')] || map[a.href];
+      if (!e || !e.snapshot) return;
+      var t = e.timestamp || '', when = t.length >= 8 ? (+t.slice(6, 8)) + ' ' + M[+t.slice(4, 6) - 1] + ' ' + t.slice(0, 4) : '';
+      var c = document.createElement('a'); c.className = 'arch'; c.href = e.snapshot; c.target = '_blank'; c.rel = 'noopener'; c.setAttribute('data-arch', '');
+      c.textContent = 'archived copy'; c.title = 'A copy kept by the Internet Archive' + (when ? ', saved ' + when : '');
+      c.setAttribute('aria-label', 'Archived copy of ' + (a.textContent || 'this source').trim().slice(0, 120) + (when ? ', saved ' + when : '') + ' (opens in a new tab)');
+      var sep = document.createElement('span'); sep.className = 'arch-sep'; sep.textContent = ' · ';
+      a.after(sep, c);
+    });
+  }
+  fetch('data/archive.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+    if (!d || !d.links) return; map = d.links; mark();
+    var queued = false;
+    new MutationObserver(function () { if (queued) return; queued = true; requestAnimationFrame(function () { queued = false; mark(); }); }).observe(document.body, { childList: true, subtree: true });
+  }).catch(function () {});
 })();
 </script>
 </body>
