@@ -66,6 +66,17 @@ The build refuses bad data (impossible dates, missing sources, unknown links, a 
 
 Allowed themes: `deepfake-fraud`, `sexual-deepfakes`, `political-deepfakes`, `election-integrity`, `online-safety`, `general-ai`, `data-protection`. Allowed response types: `statement`, `advisory`, `enforcement`, `block_takedown`, `engagement`, `restriction_lifted`, `legislation`.
 
+## The Compute tab (chips, data centres and verification)
+Three files in `data/`, checked by `build.py` like the others:
+- `compute_capacity.csv`: data centre capacity by market. **Always fill in `measure`** (operational IT capacity, live capacity, pipeline…), because
+  firms count differently, and keep one firm's figures per row. Planned capacity is pipeline minus under construction, when a report gives both.
+- `compute_sites.csv`: named projects, with `status`, `capacity_mw` (empty if not published), `ai_focus` and `source_language`.
+- `compute_measures.csv`: rules, government responses, permits, investigations, charges and seizures about AI chips. For investigations and
+  charges, the summary must say that they are not findings (the build refuses a row without it). Never name people.
+
+Every row records `source_language`. The tab shows the share of sources in each language, so a gap in Malay, Indonesian, Thai or Vietnamese
+sources is visible. A regional model such as SEA-LION can give a first reading of a source; a person who reads the language checks the summary.
+
 ## Countries covered, and adding one
 
 Covered now: all eleven member states — `SG`, `ID`, `MY`, `VN`, `PH`, `TH`, `KH`, `LA`, `MM`, `BN`, `TL` — plus `ASEAN` for regional policies. The six **SEA-6** countries (`SG`, `ID`, `MY`, `VN`, `PH`, `TH`) have the deepest verified coverage so far; the other five joined the scope on 20 November 2026 and their coverage is still being built. (An earlier rule — add a country only once it has two verified cases — was retired on 20 November 2026: all eleven are in scope from that date, and the gaps are shown rather than hidden.) The page has an **All 11 countries** / **SEA-6 only** switch in the filter rail: SEA-6 is the mature dataset, the 11-country view is the full scope. To add rows for a country, its code goes in `COUNTRIES` in `build.py` and its name in `CT`, `ORDER` and `NATIONAL` in `template.html` — all eleven are already there.

@@ -331,22 +331,6 @@ html:not([data-theme=dark]) #search .pagefind-ui__result-link{color:var(--link)}
 html:not([data-theme=dark]) #search .pagefind-ui__result-excerpt{color:var(--muted)}
 .home-link{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
 .foot-nav a{margin-right:1rem}
-/* Compare tab: fold-out sections */
-details.fold>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .6rem;color:var(--ink);border-radius:6px}
-details.fold>summary::-webkit-details-marker{display:none}
-details.fold>summary h2{margin:0;display:inline}
-details.fold>summary h2::before{content:"\25B8";display:inline-block;width:1.1em;color:var(--link);transition:transform .15s}
-details.fold[open]>summary h2::before{transform:rotate(90deg)}
-details.fold[open]>summary{margin-bottom:.7rem}
-details.fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
-.foldhint{flex-basis:100%;padding-left:1.1em;color:var(--muted);font-size:.93rem;font-weight:400}
-.foldbar{display:flex;gap:.5rem;justify-content:flex-end;margin:0 0 .7rem}
-.foldbtn:disabled{opacity:.5;cursor:default;transform:none;box-shadow:none}
-@media (prefers-reduced-motion:reduce){details.fold>summary h2::before{transition:none}}
-@media print{.foldbar{display:none}}
-.previewbar{background:#7a3e00;color:#fff;padding:.55rem 1rem;text-align:center;font-weight:600}
-.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-table.live tr.lead th,table.live tr.lead td{font-weight:700}
 </style>
 <link rel="stylesheet" href="map.css">
 </head>
@@ -380,9 +364,9 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
       <details id="filters" open>
         <summary>Filters and sort<span class="fcount" id="fcount" hidden>0</span></summary>
         <div class="rail-body">
-          <div class="field"><label for="q">Filter this list</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
+          <div class="field"><label for="q">Search</label><input id="q" type="search" placeholder="Agency, keyword or ID" autocomplete="off"></div>
           <fieldset class="field"><legend>Where</legend><div class="where" id="where"></div><p class="small muted" style="margin:.4rem 0 0">Tap a country to narrow to it — no selection shows all eleven.</p></fieldset>
-          <div class="field"><div class="seabtns"><button type="button" class="btn" id="sea-all">All 11 countries</button><button type="button" class="btn" id="sea-6">SEA-6 only</button></div><p class="small muted" style="margin:.4rem 0 0">SEA-6 is the six countries the tracker started with, where coverage is deepest. <a href="#method">Why it matters</a>.</p></div>
+          <div class="field"><div class="seabtns"><button type="button" class="btn" id="sea-all">All 11 countries</button><button type="button" class="btn" id="sea-6">SEA-6 only</button></div><p class="small muted" style="margin:.4rem 0 0">SEA-6 is the six countries with verified cases so far. <a href="#method">Why it matters</a>.</p></div>
           <div class="field"><label for="theme-sel">Theme</label><select id="theme-sel"></select></div>
           <div class="field" id="f-rt"><label for="rt-sel">Type of official response</label><select id="rt-sel"></select></div>
           <div class="field hidden" id="f-ps"><label for="ps-sel">Policy status</label><select id="ps-sel"></select></div>
@@ -404,6 +388,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
     <div id="content">
       <section id="panel-cases" role="tabpanel" aria-labelledby="tab-cases" tabindex="0"></section>
       <section id="panel-policies" role="tabpanel" aria-labelledby="tab-policies" tabindex="0" hidden></section>
+      <section id="panel-compute" role="tabpanel" aria-labelledby="tab-compute" tabindex="0" hidden></section>
       <section id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" tabindex="0" hidden></section>
       <section id="panel-updates" role="tabpanel" aria-labelledby="tab-updates" tabindex="0" hidden></section>
       <section id="panel-review" role="tabpanel" aria-labelledby="tab-review" tabindex="0" hidden></section>
@@ -426,14 +411,10 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 
 <script src="map.js"></script>
 <script src="chart-builder.js"></script>
+<script src="compute.js"></script>
 <script src="pagefind/pagefind-ui.js" defer></script>
 <script>
 const DATA = /*__DATA__*/null;
-if (DATA && DATA.meta && DATA.meta.preview) {            // a pull-request preview, never the public site
-  var addPreviewBar = function () { document.body.insertAdjacentHTML('afterbegin', '<div class="previewbar" role="note">Preview of a pull request. Nothing here is on the public site until the pull request is merged.</div>'); };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addPreviewBar); else addPreviewBar();
-}
-
 
 /* ------------------------------------------------------------------ helpers */
 const $ = (s, r = document) => r.querySelector(s);
@@ -534,7 +515,7 @@ function context(i) {
 /* ------------------------------------------------------------------ state */
 const AN = (DATA.meta && DATA.meta.analytics) || {};
 const GC_CODE = /^[a-z0-9][a-z0-9-]{1,40}$/.test(AN.goatcounter || '') ? AN.goatcounter : '';
-const TABS = [['cases','Cases'],['policies','Policies'],['compare','Compare'],['updates','Updates'],...((DATA.meta && DATA.meta.preview) ? [['review','Review']] : []),['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
+const TABS = [['cases','Cases'],['policies','Policies'],['compute','Compute'],['compare','Compare'],['updates','Updates'],['review','Review'],['method','Method']].concat(GC_CODE || DATA.visitors || AN.stats_url ? [['visitors','Visitors']] : []);
 const state = { tab:'cases', c:new Set(), t:'', rt:'', ps:'', b:false, f:false, q:'', sort:'new', row:null };
 let keepHash = false;   // set when landing on a row link, so writeHash leaves #ROW-ID in the address bar
 const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
@@ -800,51 +781,6 @@ function renderPolicies() {
   return list;
 }
 
-// Compare tab: each section folds away behind a clear heading and a one-line description, with Expand all and
-// Collapse all. Everything starts folded (an event opens if a link names it); choices are remembered
-// for the visit. The chart builder loads only when its section is opened. Printing opens every section.
-var FOLD_HINTS = {
-  'Chart an event': ['cmp-chart', 'Build and download your own chart of how quickly each place acted.'],
-  'Policy stack': ['cmp-stack', 'Table: which layers of policy exist in each place.'],
-  'Speed of official response': ['cmp-speed', 'Table: days from the first public record to the first official action.'],
-  'Coverage by place': ['cmp-coverage', 'Table: cases, responses and policies recorded for each place.'],
-  'Policies by layer': ['cmp-layers', 'Table: how many policies sit in each layer.']
-};
-function foldSaved(id, dflt) { try { var v = sessionStorage.getItem('fold:' + id); return v === null ? dflt : v === '1'; } catch (e) { return dflt; } }
-function foldSave(id, open) { try { sessionStorage.setItem('fold:' + id, open ? '1' : '0'); } catch (e) {} }
-function foldCompare(root, mountChart) {
-  var blocks = Array.prototype.slice.call(root.children).filter(function (b) { return (b.classList.contains('sect') || b.matches('section.panel')) && b.querySelector(':scope > h2'); });
-  var folds = [];
-  blocks.forEach(function (b) {
-    var h = b.querySelector(':scope > h2'), title = h.textContent.trim(), spec = FOLD_HINTS[title];
-    var id = spec ? spec[0] : 'cmp-event', hint = spec ? spec[1] : 'Timeline and table of official actions in this event.';
-    var d = document.createElement('details'); d.className = (b.className + ' fold').trim(); d.id = id;
-    var s = document.createElement('summary'); s.appendChild(h);
-    var hs = document.createElement('span'); hs.className = 'foldhint'; hs.textContent = hint; s.appendChild(hs);
-    d.appendChild(s);
-    while (b.firstChild) d.appendChild(b.firstChild);
-    b.parentNode.replaceChild(d, b);
-    d.open = foldSaved(id, !spec && /[?&]event=/.test(location.hash));   // all start folded; an event opens only when a link names it
-    folds.push(d);
-  });
-  if (!folds.length) return;
-  var bar = document.createElement('div'); bar.className = 'foldbar'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Show or hide sections');
-  bar.innerHTML = '<button type="button" class="btn foldbtn" data-act="open">Expand all</button><button type="button" class="btn foldbtn" data-act="close">Collapse all</button>';
-  folds[0].parentNode.insertBefore(bar, folds[0]);
-  var btns = bar.querySelectorAll('button');
-  function sync() { var n = folds.filter(function (d) { return d.open; }).length; btns[0].disabled = n === folds.length; btns[1].disabled = n === 0; }
-  var chart = document.getElementById('cmp-chart'), mounted = false;
-  function maybeMount() { if (chart && chart.open && !mounted) { mounted = true; mountChart(); } }
-  folds.forEach(function (d) { d.addEventListener('toggle', function () { foldSave(d.id, d.open); sync(); if (d === chart) maybeMount(); }); });
-  bar.addEventListener('click', function (ev) {
-    var b = ev.target.closest('button[data-act]'); if (!b) return;
-    folds.forEach(function (d) { d.open = b.getAttribute('data-act') === 'open'; });
-  });
-  if (!chart) mountChart(); else maybeMount();
-  sync();
-}
-if (!window.__foldPrint) { window.__foldPrint = true; window.addEventListener('beforeprint', function () { Array.prototype.forEach.call(document.querySelectorAll('details.fold'), function (d) { d.open = true; }); }); }
-
 function renderCompare() {
   // A. policy stack
   const cols = ORDER;
@@ -914,30 +850,15 @@ function renderCompare() {
     ${focus}
     <div class="sect"><h2>Policy stack</h2><p>Which layers of policy exist where. Superseded items are hidden. "Passed" means adopted but not yet in effect.</p>${stack}<p class="small muted"><b>Reading a dash:</b> it means none is recorded in this tracker, not that none exists. Several known instruments are still queued for verification (see Updates).</p></div>
     <div class="sect"><h2>Speed of official response</h2><p>Days from the earliest public record of a case to the first official action. Samples are small and dates come from public reporting, so read these as indications, not league tables. "Same day" can mean that the official statement is itself the earliest record found.</p>${speed}</div>`;
-  foldCompare($('#panel-compare'), function () { if (window.ChartBuilder) ChartBuilder.mount($('#chart-builder'), { data: DATA, names: CT, tracker: 'ASEAN AI Governance Tracker', region: 'ASEAN' }); });
+  if (window.ChartBuilder) ChartBuilder.mount($('#chart-builder'), { data: DATA, names: CT, tracker: 'ASEAN AI Governance Tracker', region: 'ASEAN' });
 }
 
-// What's new in this update: the rows verified on the latest date, read-only, each with its source.
-function whatsNewHTML() {
-  const v = DATA.meta.verified;
-  const link = (u, t) => u ? `<a href="${esc(u)}" rel="noopener">${esc(t || 'Source')}</a>` : '';
-  const cut = t => { t = String(t || ''); return t.length > 160 ? t.slice(0, 159) + '\u2026' : t; };
-  const rows = [
-    ...INC.filter(i => i.verified_on === v).map(i => ['Case', i.id, i.title, CT[i.country] || i.country, i.date, link(i.source_url, i.source_title)]),
-    ...RESP.filter(r => r.verified_on === v).map(r => ['Official response', r.id, `${r.actor || ''}: ${r.summary || ''}`, `Case ${r.incident_id}`, r.date, link(r.source_url, r.source_title)]),
-    ...POL.filter(p => p.verified_on === v).map(p => ['Policy', p.id, p.short_title || p.title, CT[p.jurisdiction] || p.jurisdiction, p.date, link(p.source_url, p.source_title)])];
-  if (!rows.length) return '';
-  return `<div class="sect"><h2>What\u2019s new in this update</h2><p>${rows.length} rows were added or re-checked in the update verified ${esc(fmt(v, 'day'))}. Each one links to its source.</p>
-    <div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">Rows in the latest update</caption><thead><tr><th scope="col">Kind</th><th scope="col">ID</th><th scope="col">What</th><th scope="col">Where</th><th scope="col">Date</th><th scope="col">Source</th></tr></thead><tbody>
-    ${rows.map(r => `<tr><td>${esc(r[0])}</td><th scope="row">${esc(r[1])}</th><td>${esc(cut(r[2]))}</td><td>${esc(r[3] || '')}</td><td>${esc(r[4] || '')}</td><td>${r[5]}</td></tr>`).join('')}</tbody></table></div></div>`;
-}
 function renderUpdates() {
   const cl = DATA.changelog;
   const isNew = c => lastVisit && c.date > lastVisit;
   const watch = POL.filter(p => p.next_check).sort((a, b) => a.next_check.localeCompare(b.next_check));
   const fol = [...following].map(id => incById[id] || polById[id]).filter(Boolean);
   $('#panel-updates').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Updates</h2>
-    ${whatsNewHTML()}
     <div class="sect"><h2>What changed</h2><ul class="feed">${cl.map(c => `<li><time datetime="${esc(c.date)}">${esc(fmt(c.date, 'day'))}</time><span>${esc(c.change)}${isNew(c) ? '<span class="tag ok">New since your last visit</span>' : ''}</span></li>`).join('')}</ul></div>
     <div class="sect"><h2>Watch list</h2><p>Pending items with a date to check back. "Check due" means the date has passed and the item should be looked at again.</p>
       <div class="tablewrap"><table><caption class="sr" style="position:absolute;left:-9999px">Pending policies to re-check</caption><thead><tr><th scope="col">Item</th><th scope="col">Place</th><th scope="col">Status</th><th scope="col">Watching for</th><th scope="col">Check by</th></tr></thead><tbody>
@@ -966,9 +887,9 @@ function renderReview() {
   const polRows = newPol.map(p => `<tr><td>${rowCheck(p.id)}</td><th scope="row">${esc(p.id)}</th><td>${esc(p.short_title || p.title)} <span class="muted">(${esc(CT[p.jurisdiction])}, ${esc(fmt(p.date, p.date_precision))}, ${STAT[p.status]})</span></td><td>${srcLink(p)}${p.more_sources ? '. ' + moreLinks(p) : ''}</td><td>${p.confidence === 'high' ? 'High' : 'Medium'}</td></tr>`).join('');
   $('#panel-review').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Review</h2>
     <div class="sect"><h2>Check this update before it goes live</h2>
-    <p>Everything below was added or changed in the latest update (verified ${esc(fmt(latest, 'day'))}). This is a preview build: nothing here is on the public site until the pull request is merged. Ticks here are saved only in this browser; the official record is the checklist comment on the pull request. Work through it row by row:</p>
+    <p>Everything below was added or changed in the latest update (verified ${esc(fmt(latest, 'day'))}). Nothing here is published until the pull request is merged. Work through it row by row:</p>
     <ol><li>Open the source link and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says.</li>
-    <li>Tick the row, here and in the checklist comment on the pull request, when it checks out. Anything you cannot confirm stays unticked — leave a comment on the pull request instead of merging.</li>
+    <li>Tick the row when it checks out. Anything you cannot confirm stays unticked — leave a comment on the pull request instead of merging.</li>
     <li>When every new row is ticked, merge the pull request. Rows that could not be verified belong in the backlog queue, not in the data.</li></ol>
     <p><span id="rv-count"><b>Checked ${nChecked} of ${allIds.length} new rows.</b>${allIds.length && nChecked === allIds.length ? ' All new rows checked — ready to merge.' : ''}</span> <button type="button" class="btn" id="rv-all">Tick all</button> <button type="button" class="btn" id="rv-clear">Clear ticks</button></p>
     <p class="small muted">Ticks are saved in this browser only. The pull request itself carries a review file quoting the exact source sentence behind each date and actor — check the row against that sentence.</p></div>
@@ -1008,61 +929,14 @@ async function loadSnapshot() {
   if (!AN.stats_url || location.protocol === 'file:') return;
   try { const r = await fetch(AN.stats_url, { cache: 'no-store' }); if (!r.ok) return; const s = normaliseStats(await r.json()); if (s) { VIS = s; if (state.tab === 'visitors') renderVisitors(); } } catch {}
 }
-/* Live visitor counts, straight from GoatCounter's public counter: no key, nothing to upload. Needs "Allow adding visitor counts
-   on your website" switched on in GoatCounter's site settings. Aggregate numbers only; GoatCounter caches them for up to four hours.
-   Nothing is fetched from a local file, or for a visitor whose browser asks not to be tracked. */
-function gcCountedPath() {
-  try { if (window.goatcounter && window.goatcounter.get_data) { var p = window.goatcounter.get_data().p; if (p) return p; } } catch (e) {}
-  var c = document.querySelector('link[rel=canonical]');
-  if (c && c.href) { try { return new URL(c.href).pathname; } catch (e) {} }
-  return location.pathname.replace(/index\.html$/, '');
-}
-function gcWhenReady(cb) {                       // the counted path is exact once count.js has loaded; give it a few seconds
-  var tries = 0;
-  (function wait() { if ((window.goatcounter && window.goatcounter.get_data) || tries++ > 25) cb(); else setTimeout(wait, 150); })();
-}
-function gcCount(code, path, start) {
-  var u = 'https://' + code + '.goatcounter.com/counter/' + encodeURIComponent(path) + '.json' + (start ? '?start=' + start : '');
-  return fetch(u, { cache: 'no-store' }).then(function (r) {
-    if (r.status === 404) return 0;              // not counted yet
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json().then(function (j) { return parseInt(String(j.count).replace(/[^0-9]/g, ''), 10) || 0; });
-  });
-}
-function gcCountPage(code, path, start) {        // GoatCounter stores paths without a trailing slash; try that first, then as given
-    var bare = path.replace(/\/+$/, '') || '/';
-    var u = function (p) { return 'https://' + code + '.goatcounter.com/counter/' + encodeURIComponent(p) + '.json' + (start ? '?start=' + start : ''); };
-    var get = function (p) { return fetch(u(p), { cache: 'no-store' }).then(function (r) { return r.status === 404 ? null : (r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status))); }); };
-    return get(bare).then(function (j) { return j || (bare !== path ? get(path) : null); })
-      .then(function (j) { return j ? (parseInt(String(j.count).replace(/[^0-9]/g, ''), 10) || 0) : 0; });
-  }
-  function gcLiveTable(el, code, tabs, prefix, optedOut) {
-  if (!el) return;
-  if (!code || location.protocol === 'file:') { el.innerHTML = '<p>This copy of the page does not count visits, so there are no figures to show.</p>'; return; }
-  if (optedOut) { el.innerHTML = '<p>Your browser asks sites not to track you, so this page does not contact the counting service and the figures are not shown to you.</p>'; return; }
-  el.innerHTML = '<p>Loading the latest counts\u2026</p>';
-  gcWhenReady(function () {
-    var rows = [['Visits to the tracker', gcCountedPath(), true]].concat(tabs.map(function (t) { return ['Opened the ' + t[1] + ' tab', prefix + t[0], false]; }));
-    Promise.all(rows.map(function (r) { var f = r[2] ? gcCountPage : gcCount; return Promise.all([f(code, r[1], 'month'), f(code, r[1])]); })).then(function (res) {
-      var fmtN = function (n) { return Number(n).toLocaleString('en-GB'); };
-      var head = rows.slice(0, 1).map(function (r, i) { return [r, res[i]]; });
-      var tabsSorted = rows.slice(1).map(function (r, i) { return [r, res[i + 1]]; }).sort(function (a, b) { return b[1][1] - a[1][1]; });
-      var tr = function (x) { return '<tr' + (x[0][2] ? ' class="lead"' : '') + '><th scope="row">' + esc(x[0][0]) + '</th><td class="num">' + fmtN(x[1][0]) + '</td><td class="num">' + fmtN(x[1][1]) + '</td></tr>'; };
-      el.innerHTML = '<div class="tablewrap"><table class="data live"><caption class="vh">Visits and tabs opened, last 30 days and all time</caption>' +
-        '<thead><tr><th scope="col">What</th><th scope="col" class="num">Last 30 days</th><th scope="col" class="num">All time</th></tr></thead><tbody>' +
-        head.map(tr).join('') + tabsSorted.map(tr).join('') + '</tbody></table></div>' +
-        '<p class="small muted">Live from GoatCounter, which refreshes these counts every few hours. A visit counts once; each tab opened counts separately. No cookies, and no individual is ever shown.</p>';
-    }).catch(function () { el.innerHTML = '<p>The live counts could not be loaded just now. Please try again later.</p>'; });
-  });
-}
-
 async function loadLive() {
   const n = $('#v-live'); if (!n) return;
   if (!GC_CODE || location.protocol === 'file:') { n.textContent = 'not counting here'; return; }
-  if (OPTED_OUT) { n.textContent = 'not shown'; return; }
-  await new Promise(res => gcWhenReady(res));
   try {
-    n.textContent = (await gcCountPage(GC_CODE, gcCountedPath())).toLocaleString('en-GB');
+    const r = await fetch(`https://${GC_CODE}.goatcounter.com/counter/${encodeURIComponent(PAGE)}.json`, { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    const j = await r.json(); n.textContent = j.count ?? 'not available';
+    if (j.count_unique && $('#v-uniq')) { $('#v-uniq').textContent = j.count_unique; $('#v-uniq').closest('.stat').hidden = false; }
   } catch { n.textContent = 'not available'; }
 }
 function vTable(caption, head, rows) {
@@ -1072,7 +946,7 @@ function renderVisitors() {
   const min = AN.min_visits || 30, v = VIS, N = n => Number(n).toLocaleString('en');
   const pct = (n, tot) => tot ? Math.round(1000 * n / tot) / 10 : 0;
   let body = '';
-  if (!v) body = '';                                  // no snapshot: the live table above is all there is, with nothing to wait for
+  if (!v) body = `<div class="sect"><p>The country and referrer breakdown will appear here once it has been published.</p></div>`;
   else if (v.total_visits < min) body = `<div class="sect"><h2>Where visitors come from</h2><p>The breakdown appears once there are at least ${min} visits, so that no individual reader can be picked out. So far: ${N(v.total_visits)}.</p></div>`;
   else {
     const reg = {}; v.countries.forEach(c => { const r = c.other ? 'Other or unknown' : regionOf(c.code); reg[r] = (reg[r] || 0) + c.count; });
@@ -1095,17 +969,15 @@ function renderVisitors() {
   const when = v ? esc(fmt(v.generated.slice(0, 10), 'day')) : '';
   $('#panel-visitors').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Visitors</h2>
     <div class="sect"><h2>Who is using this tracker</h2>
-    <p>Counts of visits, collected without cookies. They show totals and what was opened, never individuals. The live figures come straight from GoatCounter and can lag by a few hours.${v ? ' The tables further down are a snapshot, refreshed on a schedule.' : ''}</p>
+    <p>Counts of visits, collected without cookies. They show totals, places and what was opened, never individuals. The live figure can lag by up to 30 minutes. The tables are a snapshot, refreshed on a schedule.</p>
     ${v && v.sample ? '<p class="warn"><b>Sample data.</b> These numbers are invented, to show the layout. Do not publish a page that shows this notice.</p>' : ''}
     <div class="statrow">
       ${GC_CODE ? `<div class="stat"><span class="n num" id="v-live">…</span><span class="l">visits to this copy of the page (live)</span></div><div class="stat" hidden><span class="n num" id="v-uniq">…</span><span class="l">unique visitors to this copy (live)</span></div>` : ''}
       ${v ? `<div class="stat"><span class="n num">${N(v.total_visits)}</span><span class="l">visits in the snapshot, all copies, ${esc(v.period ? fmt(v.period.start, 'day') + ' to ' + fmt(v.period.end, 'day') : '')}</span></div>
       <div class="stat"><span class="n num">${N(v.countries.filter(c => !c.other).length)}</span><span class="l">countries shown</span></div>
       <div class="stat"><span class="n">${when}</span><span class="l">snapshot date</span></div>` : ''}
-    </div></div>
-    <div class="sect"><h2>Visits so far</h2><div id="v-livetbl"></div></div>${body}`;
+    </div></div>${body}`;
   loadLive();
-  gcLiveTable($('#v-livetbl'), GC_CODE, TABS.filter(t => t[0] !== 'visitors' && t[0] !== 'review'), 'tab-', OPTED_OUT);
 }
 function privacyText() {
   const mine = 'Your browser does keep the items you follow and your light or dark choice; these stay on your device and are never sent anywhere.';
@@ -1122,6 +994,11 @@ function coverageHTML() {
 function renderMethod() {
   const defs = Object.entries(RT).map(([k, v]) => `<dt><span class="t-${k}" style="display:inline-flex;gap:.4rem;align-items:center">${ICON(k)}</span> ${esc(v.l)}</dt><dd>${esc(v.d)}</dd>`).join('');
   $('#panel-method').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Method</h2><div class="prose">
+    <h2>The Compute tab</h2>
+    <p>The Compute tab records published facts about chips and data centres in the region: capacity figures from named reports, named projects, and rules, responses and cases about where AI chips go.
+    Capacity figures are shown with <b>what each one measures</b>, because firms count capacity differently; figures from different firms are never added together.
+    Investigations and charges are recorded as reported, with the reminder that <b>an investigation is not a finding, and a charge is an allegation until a court decides</b>; the build refuses a row without it.
+    The tab names companies only as their sources do, and never names people. Its list of public signals points to questions worth checking, not to evidence of wrongdoing.</p>
     <h2>What counts as an official response</h2>
     <p>Any action by a government body, or by a person with official authority in that country, counts. That includes public statements and warnings, formal advisories, investigations and arrests, blocking and takedown orders, engagement with a platform, lifting of a restriction, and new laws or regulations. Statements by heads of government, ministers, regulators, police and agencies are all recorded. Statements by parties, companies, researchers or news outlets are not.</p>
     <p>Each response is marked <b>binding</b> if it creates legal obligations or restrictions (for example a blocking order or a formal notice) and <b>non-binding</b> if it is a statement, advice or a request.</p>
@@ -1141,12 +1018,12 @@ function renderMethod() {
     <h2>Coverage in this version</h2>
     ${coverageHTML()}
     <h2>What SEA-6 means</h2>
-    <p><b>SEA-6</b> is Singapore, Indonesia, Malaysia, Vietnam, the Philippines and Thailand: the six countries the tracker started with, and the six economies that regional reports such as e-Conomy SEA often group together. The other five member states (Brunei, Cambodia, Laos, Myanmar and Timor-Leste) joined the tracker's scope on 20 November 2026. Cases are now recorded in ${new Set(INC.map(i => i.country)).size} of the 11 countries, but coverage outside SEA-6 is thinner and still growing. Use <b>SEA-6 only</b> to compare the six with the deepest coverage, and <b>All 11 countries</b> for the full scope, gaps included. The gaps are the point of the wider view: they show where verification still has to happen, rather than pretending the record is complete.</p>
+    <p><b>SEA-6</b> is Singapore, Indonesia, Malaysia, Vietnam, the Philippines and Thailand — the six countries the tracker started with. The other five member states (Brunei, Cambodia, Laos, Myanmar and Timor-Leste) joined the tracker's scope on 20 November 2026, and their verified data is still being gathered. The filter rail has a <b>SEA-6 only</b> button: use it when you want the mature dataset without the gaps, and <b>All 11 countries</b> when you want the full scope, gaps included. The gap is the point of the wider view — it shows where verification still has to happen, rather than pretending the record is complete.</p>
     <h2>How the human in the loop checks a weekly update</h2>
-    <p>There is no admin backend: the tracker is a static page. Every update is checked row by row against its sources before it is published. When an update is proposed as a pull request, it also gets a <b>review checklist</b> comment listing every row it adds or changes, with its source link, and a downloadable preview of the site with a Review tab. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row in the checklist. Only when every row is ticked and the automatic checks have passed is the pull request merged; anything that cannot be confirmed stays in the backlog queue instead. Each update's rows are listed under <b>What’s new in this update</b> in the Updates tab.</p>
+    <p>There is no admin backend: the tracker is a static page, and checking happens on the pull request before anything is merged. Open the <a href="#review">Review tab</a> — or add <code>#review</code> to the page address — for the checklist: every row added or changed in the latest update, with its source link, confidence and check date. For each row, open the source and confirm the date is the earliest public record, the actor is a government body or official, and the summary says only what the source says, then tick the row. The pull request also carries a review file quoting the exact source sentence behind each date and actor. When every new row is ticked, merge the pull request; anything that cannot be confirmed stays in the backlog queue instead.</p>
     <h2>Independence</h2><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem. Timor-Leste became ASEAN’s eleventh member on 26 October 2025, and all eleven member states are in scope.</p>
     <h2>Limits</h2>
-    <ul><li>Version ${esc(DATA.meta.version)} is a seed, not a complete census. All eleven ASEAN member states are now in scope, plus ASEAN regional action, but coverage is uneven: the SEA-6 countries have the deepest verified coverage, and the other five have fewer verified entries so far. Many incidents and policies are still queued (see the Updates tab).</li>
+    <ul><li>Version ${esc(DATA.meta.version)} is a seed, not a complete census. All eleven ASEAN member states are now in scope, plus ASEAN regional action, but coverage is uneven: the SEA-6 countries have the deepest verified coverage, and the other five are still being checked. Many incidents and policies are still queued (see the Updates tab).</li>
     <li>"No official response recorded" means none was found in the sources checked. It is not proof that none occurred.</li>
     <li>Incidents come from public reporting and incident monitors, so better-reported events are over-represented.</li>
     <li>Themes are tags added by the researchers and are open to challenge.</li></ul>
@@ -1200,6 +1077,7 @@ function show() {
   $('#csv').classList.toggle('hidden', !['cases', 'policies'].includes(state.tab));
   if (state.tab === 'cases') { syncControls(); renderCases(); }
   else if (state.tab === 'policies') { syncControls(); renderPolicies(); }
+  else if (state.tab === 'compute') { if (window.ComputeTab) ComputeTab.render($('#panel-compute'), DATA); }
   else if (state.tab === 'compare') renderCompare();
   else if (state.tab === 'updates') renderUpdates();
   else if (state.tab === 'review') renderReview();
@@ -1328,27 +1206,17 @@ $('#theme').addEventListener('click', () => { const d = document.documentElement
    a site served from a sub-path, and row hits carry the "s-" prefix the
    static list uses to avoid duplicate ids — so processResult rewrites every
    result URL to this page, with the prefix stripped, before it is shown. */
-var SEARCH_INPUT = '#search input';
-// Press "/" to jump to the full-text search, as on many sites; ignored while typing in a field.
-document.addEventListener('keydown', function (e) {
-  if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
-  var t = e.target, tag = (t && t.tagName) || '';
-  if (/^(INPUT|TEXTAREA|SELECT)$/.test(tag) || (t && t.isContentEditable)) return;
-  var box = document.querySelector(SEARCH_INPUT);
-  if (box) { e.preventDefault(); box.focus(); }
-});
 function initSearch() {
   const box = document.getElementById('search');
   if (!box) return;
   const start = () => {
     if (window.PagefindUI) {
-      new PagefindUI({ element: '#search', showSubResults: true, translations: { placeholder: 'Search the tracker' },   // Pagefind reads the placeholder from translations
+      new PagefindUI({ element: '#search', showSubResults: true, placeholder: 'Search cases, policies and responses',
         processResult: function (result) {
           const page = location.href.split('#')[0];
           const fix = u => { const i = (u || '').indexOf('#'); return i >= 0 ? page + u.slice(i).replace('#s-', '#') : page; };
           result.url = fix(result.url);
           (result.sub_results || []).forEach(s => { s.url = fix(s.url); });
-      const si = document.querySelector('#search input'); if (si) si.title = 'Full-text search. Press / to jump here.';
           return result;
         } });
     } else {
