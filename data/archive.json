@@ -1,7 +1,842 @@
 {
  "about": "Archived copies of this tracker's sources, in the Internet Archive's Wayback Machine. Updated by scripts/archive_sources.py.",
- "updated": null,
+ "updated": "2026-11-26",
  "sources": 346,
- "archived": 0,
- "links": {}
+ "archived": 84,
+ "links": {
+  "https://abs-cbn.com/news/2024/4/23/pco-refutes-audio-deep-fake-of-marcos-jr-018": {
+   "snapshot": "https://web.archive.org/web/20261008081932/https://abs-cbn.com/news/2024/4/23/pco-refutes-audio-deep-fake-of-marcos-jr-018",
+   "timestamp": "20261008081932",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://airiskwire.com/cases/LR-2026-0773": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://asean.org/wp-content/uploads/2024/07/ASEAN-for-Business-Bulletin-Special-Edition.pdf": {
+   "snapshot": "https://web.archive.org/web/20260630183412/https://asean.org/wp-content/uploads/2024/07/ASEAN-for-Business-Bulletin-Special-Edition.pdf",
+   "timestamp": "20260630183412",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://asiadaily.org/news/19102/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://asianewstoday.com/akps-denies-authenticity-of-viral-video-of-director-general-supporting-aid-distribution/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://blackbird.ai/blog/deepfakes-softfakes-social-media-indonesian-presidential-election/": {
+   "snapshot": "https://web.archive.org/web/20251208132619/https://blackbird.ai/blog/deepfakes-softfakes-social-media-indonesian-presidential-election/",
+   "timestamp": "20251208132619",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://cafebiz.vn/bat-dau-so-nguyen-tien-dat-sn-2004-trong-chuyen-an-dac-biet-lien-quan-1000-tai-khoan-ngan-hang-176260626145803904.chn": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://congthuong.vn/ai-va-chuyen-doi-so-ngan-hang-truoc-nhung-rui-ro-phi-truyen-thong-ky-i-khi-ke-gian-biet-dung-ai-479152.html": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://cw-prod-gblgws-a-cm.cushwake.com/en/singapore/news/2026/08/apac-dc-h1-2026": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://danviet.vn/tin-showbiz-24h-nsnd-xuan-bac-ve-tham-que-ly-hai-buc-xuc-vi-bi-gia-mao-d1423272.html": {
+   "snapshot": "https://web.archive.org/web/20260507094016/https://danviet.vn/tin-showbiz-24h-nsnd-xuan-bac-ve-tham-que-ly-hai-buc-xuc-vi-bi-gia-mao-d1423272.html",
+   "timestamp": "20260507094016",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://digitalpolicyalert.org/change/10876-elections-integrity-of-online-advertising-amendment-bill-no-292024": {
+   "snapshot": "https://web.archive.org/web/20260608090247/https://digitalpolicyalert.org/change/10876-elections-integrity-of-online-advertising-amendment-bill-no-292024",
+   "timestamp": "20260608090247",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://digitalpolicyalert.org/change/12693-policy-recommendations-for-artificial-intelligence-ai-governing-authorities-in-expanded-asean-guide-of-ai-governance-and-ethics": {
+   "snapshot": "https://web.archive.org/web/20251107033731/https://digitalpolicyalert.org/change/12693-policy-recommendations-for-artificial-intelligence-ai-governing-authorities-in-expanded-asean-guide-of-ai-governance-and-ethics",
+   "timestamp": "20251107033731",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://digitalpolicyalert.org/event/37863-hanoi-digital-declaration-6th-asean-digital-ministers-meeting-including-artificial-intelligence-commitments": {
+   "snapshot": "https://web.archive.org/web/20260521144433/https://digitalpolicyalert.org/event/37863-hanoi-digital-declaration-6th-asean-digital-ministers-meeting-including-artificial-intelligence-commitments",
+   "timestamp": "20260521144433",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://edgeprop.my/content/1917257/johor-leads-apac-data-centre-boom-malaysia-tops-construction-—-cw": {
+   "snapshot": "https://web.archive.org/web/20261012123628/https://edgeprop.my/content/1917257/johor-leads-apac-data-centre-boom-malaysia-tops-construction-—-cw",
+   "timestamp": "20261012123628",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://en.tempo.co/read/2041186/sri-mulyani-denies-video-calling-teachers-state-burden-hoax-deepfake": {
+   "snapshot": "https://web.archive.org/web/20250907021958/https://en.tempo.co/read/2041186/sri-mulyani-denies-video-calling-teachers-state-burden-hoax-deepfake",
+   "timestamp": "20250907021958",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://en.vietnamplus.vn/vietnam-draws-hyperscalers-cloud-titans-ai-players-post349644.vnp": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://en.wikipedia.org/wiki/2024_in_Singapore": {
+   "snapshot": "https://web.archive.org/web/20260113041337/https://en.wikipedia.org/wiki/2024_in_Singapore",
+   "timestamp": "20260113041337",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://en.wikipedia.org/wiki/Grok_sexual_deepfake_scandal": {
+   "snapshot": "https://web.archive.org/web/20261115191418/https://en.wikipedia.org/wiki/Grok_sexual_deepfake_scandal",
+   "timestamp": "20261115191418",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://epoch.ai/data/ai-data-centers/directory/dayone-nusajaya": {
+   "snapshot": "https://web.archive.org/web/20261015173125/https://epoch.ai/data/ai-data-centers/directory/dayone-nusajaya",
+   "timestamp": "20261015173125",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://epoch.ai/data/ai-data-centers/directory/ytl-johor": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://fortune.com/2026/11/17/sg-us-ai-chip-controls-southeast-asia/": {
+   "snapshot": "https://web.archive.org/web/20261118075846/https://fortune.com/2026/11/17/sg-us-ai-chip-controls-southeast-asia/",
+   "timestamp": "20261118075846",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1127/": {
+   "snapshot": "https://web.archive.org/web/20261031012919/https://incidentdatabase.ai/cite/1127/",
+   "timestamp": "20261031012919",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1128/": {
+   "snapshot": "https://web.archive.org/web/20261031004123/https://incidentdatabase.ai/cite/1128/",
+   "timestamp": "20261031004123",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1147/": {
+   "snapshot": "https://web.archive.org/web/20261031002737/https://incidentdatabase.ai/cite/1147/",
+   "timestamp": "20261031002737",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1148/": {
+   "snapshot": "https://web.archive.org/web/20261031002048/https://incidentdatabase.ai/cite/1148/",
+   "timestamp": "20261031002048",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1254/": {
+   "snapshot": "https://web.archive.org/web/20261031010036/https://incidentdatabase.ai/cite/1254/",
+   "timestamp": "20261031010036",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/1255/": {
+   "snapshot": "https://web.archive.org/web/20261031003337/https://incidentdatabase.ai/cite/1255/",
+   "timestamp": "20261031003337",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/902/": {
+   "snapshot": "https://web.archive.org/web/20261107055436/https://incidentdatabase.ai/cite/902/",
+   "timestamp": "20261107055436",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/918/": {
+   "snapshot": "https://web.archive.org/web/20261107055436/https://incidentdatabase.ai/cite/918/",
+   "timestamp": "20261107055436",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/cite/986/": {
+   "snapshot": "https://web.archive.org/web/20261031015423/https://incidentdatabase.ai/cite/986/",
+   "timestamp": "20261031015423",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/entities/general-public-of-singapore/": {
+   "snapshot": "https://web.archive.org/web/20261031004543/https://incidentdatabase.ai/entities/general-public-of-singapore/",
+   "timestamp": "20261031004543",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/4964": {
+   "snapshot": "https://web.archive.org/web/20261031065927/https://incidentdatabase.ai/reports/4964",
+   "timestamp": "20261031065927",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/4969": {
+   "snapshot": "https://web.archive.org/web/20261031072222/https://incidentdatabase.ai/reports/4969",
+   "timestamp": "20261031072222",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/5442/": {
+   "snapshot": "https://web.archive.org/web/20261031094811/https://incidentdatabase.ai/reports/5442/",
+   "timestamp": "20261031094811",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/5447/": {
+   "snapshot": "https://web.archive.org/web/20261031073009/https://incidentdatabase.ai/reports/5447/",
+   "timestamp": "20261031073009",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/5459": {
+   "snapshot": "https://web.archive.org/web/20261031065635/https://incidentdatabase.ai/reports/5459",
+   "timestamp": "20261031065635",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/6334/": {
+   "snapshot": "https://web.archive.org/web/20261031053414/https://incidentdatabase.ai/reports/6334/",
+   "timestamp": "20261031053414",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/6335/": {
+   "snapshot": "https://web.archive.org/web/20261031074324/https://incidentdatabase.ai/reports/6335/",
+   "timestamp": "20261031074324",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://incidentdatabase.ai/reports/6975/": {
+   "snapshot": "https://web.archive.org/web/20261031064238/https://incidentdatabase.ai/reports/6975/",
+   "timestamp": "20261031064238",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://insiderph.com/npc-issues-cease-and-desist-against-world-app-in-ph": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://insightplus.bakermckenzie.com/bm/technology-media-telecommunications_1/singapore-launch-of-expanded-asean-guide-on-ai-governance-and-ethics-generative-ai": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://journal.privietlab.org/index.php/IJLGR/article/view/2300": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://kenh14.vn/ly-hai-canh-bao-21526050207134533.chn": {
+   "snapshot": "https://web.archive.org/web/20260502060850/https://kenh14.vn/ly-hai-canh-bao-21526050207134533.chn",
+   "timestamp": "20260502060850",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://malaysiantribune.com/akps-viral-video-of-dg-supporting-aid-fake/": {
+   "snapshot": "https://web.archive.org/web/20260108045254/https://malaysiantribune.com/akps-viral-video-of-dg-supporting-aid-fake/",
+   "timestamp": "20260108045254",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://manilatimes.com/philippine-officials-face-scrutiny-over-ai-generated-fake-news": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://mediaselangor.com/en/2026/10/401942": {
+   "snapshot": "https://web.archive.org/web/20261110024047/https://mediaselangor.com/en/2026/10/401942",
+   "timestamp": "20261110024047",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://mothership.sg/2026/05/pm-wong-zoom-deepfake-scam/": {
+   "snapshot": "https://web.archive.org/web/20260522160143/https://mothership.sg/2026/05/pm-wong-zoom-deepfake-scam/",
+   "timestamp": "20260522160143",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://news.svinnovation.com/finance-minister-deepfake-investment-scam-ads/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://newsare.net/news/1083920": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://newsinfo.inquirer.net/1933697/remulla-on-deep-fake-audio": {
+   "snapshot": "https://web.archive.org/web/20250725075953/https://newsinfo.inquirer.net/1933697/remulla-on-deep-fake-audio",
+   "timestamp": "20250725075953",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://nope.net/incidents/2025-semarang-university-student-ai-edited-sexual-images-of-former-schools-students-and-teacher-one-year-sentence": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2023-12-05-b2db": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2024-01-18-5504": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2025-03-02-5747": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://oecd.ai/en/incidents/2025-04-23-0d58": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2025-08-06-3314": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://oecd.ai/en/incidents/2025-08-20-b4e1": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2025-09-15-7836": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://oecd.ai/en/incidents/2025-12-07-ca89": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2025-12-08-ef7a": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://oecd.ai/en/incidents/2026-01-08-769c": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-01-16-79fb": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-02-24-172e": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-05-01-a290": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-07-10-acb9": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-07-22-813e": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-09-11-3c86": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-09-17-3946": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-10-03-5696": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://oecd.ai/en/incidents/2026-10-08-9ad2": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-10-15-dc0c": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-11-01-7c7b": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://oecd.ai/en/incidents/2026-11-03-d510": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://parliament.gov.sg/docs/default-source/bills-introduced/elections-(integrity-of-online-advertising)-(amendment)-bill-29-2024.pdf": {
+   "snapshot": "https://web.archive.org/web/20251206130753/https://parliament.gov.sg/docs/default-source/bills-introduced/elections-(integrity-of-online-advertising)-(amendment)-bill-29-2024.pdf",
+   "timestamp": "20251206130753",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://philstarlife.com/amp/article/972296-pnp-warns-against-ai-love-scams": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://production.marketing-interactive.com/halimah-yacob-files-police-report-over-deepfake-criticising-government": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://rsis.edu.sg/wp-content/uploads/2026/01/CO26015.pdf": {
+   "snapshot": "https://web.archive.org/web/20260202133133/https://rsis.edu.sg/wp-content/uploads/2026/01/CO26015.pdf",
+   "timestamp": "20260202133133",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://securitymatters.com.ph/?p=25846": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://stratnewsglobal.com/?p=127695": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://theedgemalaysia.com/node/812609": {
+   "snapshot": "https://web.archive.org/web/20260730064201/https://theedgemalaysia.com/node/812609",
+   "timestamp": "20260730064201",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://theedgemalaysia.com/node/826272": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://thethaiger.com/news/woman-chiang-mai-ai-generated-pilot": {
+   "snapshot": "https://web.archive.org/web/20261025231726/https://thethaiger.com/news/woman-chiang-mai-ai-generated-pilot",
+   "timestamp": "20261025231726",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://verihubs.com/blog/kasus-deepfake-indonesia": {
+   "snapshot": "https://web.archive.org/web/20260716072921/https://verihubs.com/blog/kasus-deepfake-indonesia",
+   "timestamp": "20260716072921",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://vietnaminsiders.com/vietnam-arrests-three-south-korean-fugitives-running-a-deepfake-scam-operation-in-cambodia/": {
+   "snapshot": "https://web.archive.org/web/20251205060224/https://vietnaminsiders.com/vietnam-arrests-three-south-korean-fugitives-running-a-deepfake-scam-operation-in-cambodia/",
+   "timestamp": "20251205060224",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://vietnamnews.vn/politics-laws/1763904/asean-digital-ministers-meeting-adopts-hanoi-declaration-on-digital-cooperation.html": {
+   "snapshot": "https://web.archive.org/web/20260118060658/https://vietnamnews.vn/politics-laws/1763904/asean-digital-ministers-meeting-adopts-hanoi-declaration-on-digital-cooperation.html",
+   "timestamp": "20260118060658",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://vietnamnews.vn/society/1532928/criminals-use-deepfake-ai-video-technology-to-scam-people-out-of-money.html": {
+   "snapshot": "https://web.archive.org/web/20260612180509/https://vietnamnews.vn/society/1532928/criminals-use-deepfake-ai-video-technology-to-scam-people-out-of-money.html",
+   "timestamp": "20260612180509",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://vietnamnews.vn/society/1694933/vietnamese-authorities-warn-of-rising-ai-driven-deepfake-extortion-scams.html": {
+   "snapshot": "https://web.archive.org/web/20260608075515/https://vietnamnews.vn/society/1694933/vietnamese-authorities-warn-of-rising-ai-driven-deepfake-extortion-scams.html",
+   "timestamp": "20260608075515",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://vietreader.com/news/94767-authorities-warn-against-blackmail-using-fake-sensitive-videos.html": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://vietstock.vn/2026/06/triet-pha-duong-day-gan-1000-tai-khoan-lo-thu-doan-qua-mat-sinh-trac-hoc-757-1458887.htm": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.aiaaic.org/aiaaic-repository/ai-algorithmic-and-automation-incidents/singapore-sports-school-students-attacked-with-nude-deepfakes": {
+   "snapshot": "https://web.archive.org/web/20260217203527/https://www.aiaaic.org/aiaaic-repository/ai-algorithmic-and-automation-incidents/singapore-sports-school-students-attacked-with-nude-deepfakes",
+   "timestamp": "20260217203527",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.aljazeera.com/economy/2026/11/17/us-moves-to-block-chinas-remote-access-to-ai-chips-amid-nvidia-scandal": {
+   "snapshot": "https://web.archive.org/web/20261118000446/https://www.aljazeera.com/economy/2026/11/17/us-moves-to-block-chinas-remote-access-to-ai-chips-amid-nvidia-scandal",
+   "timestamp": "20261118000446",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.asiaone.com/malaysia/malaysia-says-data-centres-must-comply-us-ai-chip-rules": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.bangkokpost.com/thailand/general/3321219/lovestruck-woman-learns-pilot-boyfriend-was-ai-creation": {
+   "snapshot": "https://web.archive.org/web/20260918072549/https://www.bangkokpost.com/thailand/general/3321219/lovestruck-woman-learns-pilot-boyfriend-was-ai-creation",
+   "timestamp": "20260918072549",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.bdcb.gov.bn/publications/details?id=01kys8kmds8haqhw5tceddp7ka": {
+   "snapshot": "https://web.archive.org/web/20260810103523/https://www.bdcb.gov.bn/publications/details?id=01kys8kmds8haqhw5tceddp7ka",
+   "timestamp": "20260810103523",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.bdcb.gov.bn/search?search=alert+list": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.bernama.com/en/news.php?id=2557146": {
+   "snapshot": "https://web.archive.org/web/20260515024918/https://www.bernama.com/en/news.php?id=2557146",
+   "timestamp": "20260515024918",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.brokersview.com/news/singapore-officials-extorted-by-email-scam-using-deepfake-technology-253082": {
+   "snapshot": "https://web.archive.org/web/20250708111858/https://www.brokersview.com/news/singapore-officials-extorted-by-email-scam-using-deepfake-technology-253082",
+   "timestamp": "20250708111858",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.businesstoday.com.my/2026/07/30/johor-propels-malaysia-in-asia-pacific-as-the-regions-largest-data-centre-hub/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.channelnewsasia.com/singapore/singapore-sports-school-deepfake-nude-images-students-police-investigating-4742506": {
+   "snapshot": "https://web.archive.org/web/20261023065057/https://www.channelnewsasia.com/singapore/singapore-sports-school-deepfake-nude-images-students-police-investigating-4742506",
+   "timestamp": "20261023065057",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.chiangraitimes.com/crime/thailand-warns-of-deepfakes/": {
+   "snapshot": "https://web.archive.org/web/20261115073441/https://www.chiangraitimes.com/crime/thailand-warns-of-deepfakes/",
+   "timestamp": "20261115073441",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.clydeco.com/en/insights/2024/05/singapore-s-model-ai-governance-framework-for-gene": {
+   "snapshot": "https://web.archive.org/web/20261016022038/https://www.clydeco.com/en/insights/2024/05/singapore-s-model-ai-governance-framework-for-gene",
+   "timestamp": "20261016022038",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.cnn.com/2025/01/16/asia/thailand-prime-minister-scam-call-intl-hnk/index.html": {
+   "snapshot": "https://web.archive.org/web/20261031005402/https://www.cnn.com/2025/01/16/asia/thailand-prime-minister-scam-call-intl-hnk/index.html",
+   "timestamp": "20261031005402",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.csa.gov.sg/alerts-and-advisories/advisories/ad-2024-006/": {
+   "snapshot": "https://web.archive.org/web/20260612135410/https://www.csa.gov.sg/alerts-and-advisories/advisories/ad-2024-006/",
+   "timestamp": "20260612135410",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.cushmanwakefield.com/en/vietnam/news/2026/08/asia-pacific-data-centre-development-pipeline": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.datacenterdynamics.com/en/news/singapore-govt-allocates-200mw-of-power-for-four-data-center-developers-on-jurong-island/": {
+   "snapshot": "https://web.archive.org/web/20261021182250/https://www.datacenterdynamics.com/en/news/singapore-govt-allocates-200mw-of-power-for-four-data-center-developers-on-jurong-island/",
+   "timestamp": "20261021182250",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.datacenterknowledge.com/data-center-construction/apac-data-center-pipeline-surges-as-ai-pre-leasing-tightens-supply": {
+   "snapshot": "https://web.archive.org/web/20261019131443/https://www.datacenterknowledge.com/data-center-construction/apac-data-center-pipeline-surges-as-ai-pre-leasing-tightens-supply",
+   "timestamp": "20261019131443",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.drewnetworkasia.com/media/xpsfsiou/dna-asean-guide-to_how-the-use-of-artificial-intelligence-is-regulated-in-southeast-asia_3rd-edition.pdf": {
+   "snapshot": "https://web.archive.org/web/20260809015037/https://www.drewnetworkasia.com/media/xpsfsiou/dna-asean-guide-to_how-the-use-of-artificial-intelligence-is-regulated-in-southeast-asia_3rd-edition.pdf",
+   "timestamp": "20260809015037",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.eco-business.com/ms/opinion/the-us-china-ai-chip-war-southeast-asias-compliance-dilemma/": {
+   "snapshot": "https://web.archive.org/web/20260716135546/https://www.eco-business.com/ms/opinion/the-us-china-ai-chip-war-southeast-asias-compliance-dilemma/",
+   "timestamp": "20260716135546",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.edb.gov.sg/content/dam/edb-en/about-edb/media-releases/news/four-data-centre-proposals-selected-as-part-of-second-data-centre/Fact%20Sheet%20-Four%20data%20centre%20proposals%20selected%20as%20part%20of%20second%20data%20centre.pdf": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.fyt.ph/stories/deepfake-videos-pang-red-tag-na-rin": {
+   "snapshot": "https://web.archive.org/web/20260615102739/https://www.fyt.ph/stories/deepfake-videos-pang-red-tag-na-rin",
+   "timestamp": "20260615102739",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.hukumonline.com/berita/a/deepfake-menyebar-cepat--hukum-bergerak-lambat-lt68f065103ad53": {
+   "snapshot": "https://web.archive.org/web/20261115152221/https://www.hukumonline.com/berita/a/deepfake-menyebar-cepat--hukum-bergerak-lambat-lt68f065103ad53",
+   "timestamp": "20261115152221",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf": {
+   "snapshot": "https://web.archive.org/web/20261116183820/https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf",
+   "timestamp": "20261116183820",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.imda.gov.sg/ai": {
+   "snapshot": "https://web.archive.org/web/20221007001258/https://www.imda.gov.sg/ai",
+   "timestamp": "20221007001258",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.instagram.com/p/DZwKrAsEvzv/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.instagram.com/p/DZzOFtcoLqQ/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.instagram.com/p/DbaCe4MEoLM/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.instagram.com/p/DeSnWTsStmN/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.khaleejtimes.com/world/asia/malaysian-customs-foil-13-million-ai-chip-smuggling": {
+   "snapshot": "https://web.archive.org/web/20260711053237/https://www.khaleejtimes.com/world/asia/malaysian-customs-foil-13-million-ai-chip-smuggling",
+   "timestamp": "20260711053237",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.khmertimeskh.com/501789131/pm-hun-manet-warns-public-of-ai-generated-fake-video-imitating-his-voice/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.liputan6.com/cek-fakta/read/6178364/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.malaymail.com/amp/news/malaysia/2024/01/18/deputy-minister-mcmc-instructed-to-ask-meta-to-remove-fake-videos-of-national-news-agencys-tv-news/113161": {
+   "snapshot": "https://web.archive.org/web/20240118100236/https://www.malaymail.com/amp/news/malaysia/2024/01/18/deputy-minister-mcmc-instructed-to-ask-meta-to-remove-fake-videos-of-national-news-agencys-tv-news/113161",
+   "timestamp": "20240118100236",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.malaymail.com/amp/news/money/2026/10/09/johor-stays-malaysias-data-centre-powerhouse-as-ai-demand-surges-bmi-says/238358": {
+   "snapshot": "https://web.archive.org/web/20261010212200/https://www.malaymail.com/amp/news/money/2026/10/09/johor-stays-malaysias-data-centre-powerhouse-as-ai-demand-surges-bmi-says/238358",
+   "timestamp": "20261010212200",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.malaymail.com/amp/news/singapore/2023/12/29/singapore-pm-lee-urges-public-not-to-respond-to-deepfake-ai-videos-featuring-him-or-lawrence-wong-promoting-crypto/109709": {
+   "snapshot": "https://web.archive.org/web/20231229105630/https://www.malaymail.com/amp/news/singapore/2023/12/29/singapore-pm-lee-urges-public-not-to-respond-to-deepfake-ai-videos-featuring-him-or-lawrence-wong-promoting-crypto/109709",
+   "timestamp": "20231229105630",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.malaymail.com/news/singapore/2024/10/16/as-clock-ticks-down-to-general-election-singapore-passes-law-banning-deepfakes-of-candidates/153804": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error _ssl.c:994: The handshake operation timed out>"
+  },
+  "https://www.marketing-interactive.com/imda-in-talks-with-x-as-grok-misuse-sparks-safety-concerns": {
+   "snapshot": "https://web.archive.org/web/20260810014433/https://www.marketing-interactive.com/imda-in-talks-with-x-as-grok-misuse-sparks-safety-concerns",
+   "timestamp": "20260810014433",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.marketing-interactive.com/mcmc-presses-anthropic-over-alleged-malaysia-election-manipulation": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.mddi.gov.sg/newsroom/041223/": {
+   "snapshot": "https://web.archive.org/web/20260719064739/https://www.mddi.gov.sg/newsroom/041223/",
+   "timestamp": "20260719064739",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.mddi.gov.sg/newsroom/national-artificial-intelligence-strategy-unveiled/": {
+   "snapshot": "https://web.archive.org/web/20260715160858/https://www.mddi.gov.sg/newsroom/national-artificial-intelligence-strategy-unveiled/",
+   "timestamp": "20260715160858",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.mddi.gov.sg/newsroom/singapore-launches-new-model-ai-governance-framework-for-agentic-ai--": {
+   "snapshot": "https://web.archive.org/web/20261109110934/https://www.mddi.gov.sg/newsroom/singapore-launches-new-model-ai-governance-framework-for-agentic-ai--",
+   "timestamp": "20261109110934",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.medianama.com/2026/02/223-grok-x-account-undressing-women/": {
+   "snapshot": "https://web.archive.org/web/20260318072135/https://www.medianama.com/2026/02/223-grok-x-account-undressing-women/",
+   "timestamp": "20260318072135",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.morganlewis.com/pubs/2024/07/singapore-expands-its-ai-governance-approach-to-include-generative-ai": {
+   "snapshot": "https://web.archive.org/web/20260511090824/https://www.morganlewis.com/pubs/2024/07/singapore-expands-its-ai-governance-approach-to-include-generative-ai",
+   "timestamp": "20260511090824",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.nst.com.my/amp/news/nation/2026/01/1362886/mcmc-lifts-temporary-restriction-grok-app": {
+   "snapshot": "https://web.archive.org/web/20260211232021/https://www.nst.com.my/amp/news/nation/2026/01/1362886/mcmc-lifts-temporary-restriction-grok-app",
+   "timestamp": "20260211232021",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.philstar.com/headlines/2026/02/04/2505550/pnp-warns-public-vs-ai-love-scams": {
+   "snapshot": "https://web.archive.org/web/20260204145249/https://www.philstar.com/headlines/2026/02/04/2505550/pnp-warns-public-vs-ai-love-scams",
+   "timestamp": "20260204145249",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.phnompenhpost.com/national/suspect-who-used-ai-generated-fake-news-to-solicit-funds-arrested": {
+   "snapshot": "https://web.archive.org/web/20260423111602/https://www.phnompenhpost.com/national/suspect-who-used-ai-generated-fake-news-to-solicit-funds-arrested",
+   "timestamp": "20260423111602",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.police.gov.sg/media-hub/news/2025/04/20250407_singapore_and_hong_kong_police_force_recover_over_-670000_in_a_scam": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.polis.gov.bn/ppdb-ingatkan-orang-ramai-berhubung-video-palsu-dihasilkan-menggunakan-ai/": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.polis.gov.bn/video-deepfake-anggota-ppdb/": {
+   "snapshot": "https://web.archive.org/web/20260612232842/https://www.polis.gov.bn/video-deepfake-anggota-ppdb/",
+   "timestamp": "20260612232842",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.reuters.com/investigations/chatgpt-was-used-help-scammers-do-their-thing-asia-fraud-scheme-2025-09-15/": {
+   "snapshot": "https://web.archive.org/web/20250917100631/https://www.reuters.com/investigations/chatgpt-was-used-help-scammers-do-their-thing-asia-fraud-scheme-2025-09-15/",
+   "timestamp": "20250917100631",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.rfi.fr/en/international-news/20250115-thai-pm-says-nearly-fell-for-foreign-leader-phone-scam": {
+   "snapshot": "https://web.archive.org/web/20261031005402/https://www.rfi.fr/en/international-news/20250115-thai-pm-says-nearly-fell-for-foreign-leader-phone-scam",
+   "timestamp": "20261031005402",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.scmp.com/week-asia/people/article/3297396/ai-assisted-scam-costs-thai-beauty-queen-us118000-two-arrested": {
+   "snapshot": "https://web.archive.org/web/20250929132436/https://www.scmp.com/week-asia/people/article/3297396/ai-assisted-scam-costs-thai-beauty-queen-us118000-two-arrested",
+   "timestamp": "20250929132436",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.telecompaper.com/news/deepfake-images-sent-to-multiple-government-agencies-in-singapore--1520694": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.thefreelibrary.com/Beware+of+Fake+News+generated+by+AI.-a0797874835": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.thefreelibrary.com/PM+warns+of+AI-generated+fake-video+imitating+his+voice.-a0863690529": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.thefreelibrary.com/Suspect+who+used+AI-generated+fake+news+to+solicit+funds+arrested.-a0847279432": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "<urlopen error [Errno 111] Connection refused>"
+  },
+  "https://www.thestar.com.my/aseanplus/aseanplus-news/2025/02/04/thai-police-arrest-two-key-suspects-in-call-centre-crackdown": {
+   "snapshot": "https://web.archive.org/web/20260309205252/https://www.thestar.com.my/aseanplus/aseanplus-news/2025/02/04/thai-police-arrest-two-key-suspects-in-call-centre-crackdown",
+   "timestamp": "20260309205252",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/05/14/victim-loses-at-least-s49mil-in-scam-involving-deepfakes-of-singapore-pm-wong-government-officials": {
+   "snapshot": "https://web.archive.org/web/20260615140840/https://www.thestar.com.my/aseanplus/aseanplus-news/2026/05/14/victim-loses-at-least-s49mil-in-scam-involving-deepfakes-of-singapore-pm-wong-government-officials",
+   "timestamp": "20260615140840",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  },
+  "https://www.thestar.com.my/business/business-news/2026/11/16/american-curbs-threaten-south-east-asias-ai-boom": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.threads.com/@tribunbogor/post/DfXR3QaGe1J": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.toswo.com/events/aiid-1127": {
+   "checked": "2026-11-26",
+   "attempts": 1,
+   "error": "Save Page Now did not confirm a copy (HTTP 401)"
+  },
+  "https://www.withersworldwide.com/en-gb/insight/read/deepfakes-in-singapore-legal-recourse-regulatory-powers-and-building-long-term-corporate-resilien": {
+   "snapshot": "https://web.archive.org/web/20260608235203/https://www.withersworldwide.com/en-gb/insight/read/deepfakes-in-singapore-legal-recourse-regulatory-powers-and-building-long-term-corporate-resilien",
+   "timestamp": "20260608235203",
+   "checked": "2026-11-26",
+   "how": "already in the archive"
+  }
+ }
 }
