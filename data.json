@@ -4941,6 +4941,11 @@
  ],
  "changelog": [
   {
+   "date": "2026-11-27",
+   "change": "Sources are now saved to the Internet Archive each week by an automatic workflow, and each source with a saved copy shows an archived copy link, so entries stay checkable if a page moves or disappears. No data changed.",
+   "rows": "all"
+  },
+  {
    "date": "2026-11-26",
    "change": "Renamed from the ASEAN AI Governance Tracker to the ASEAN AI Governance and Safety Tracker, to reflect the new coverage of AI safety and compute. The web address is unchanged, so existing links keep working.",
    "rows": "all"
