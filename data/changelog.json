@@ -68,5 +68,15 @@
   "date": "2026-11-23",
   "change": "Template, 2026-11-23: the ASEAN emblem is no longer used; the non-affiliation statement is kept and the Method section explains this. Added a Back to top button and footer links, and a header link to AI Benar Advisory. The privacy notice link now points to its GitHub copy, so it works however the site is hosted. Map tiles: accessible names now start with their visible text (code, name, number) for voice-control users, hover tooltips are hidden from screen readers (the label carries the same details), and empty-tile names meet 4.5:1 contrast.",
   "rows": ""
+ },
+ {
+  "date": "2026-11-25",
+  "change": "Version 0.5: a new Compute tab, on chips, data centres and verification. It records published data centre capacity by market (with what each figure measures), named projects, and rules, responses and cases about where AI chips go, including the US licence rule for Malaysia, Singapore, Thailand and Indonesia. It compares planned with running capacity using one firm's figures, shows a \"Can it be checked?\" profile of five questions for each member with no total or ranking, lists public signals to check when something is not in the news, and sets out the layers at which compute could be verified, with whose cooperation.",
+  "rows": "compute"
+ },
+ {
+  "date": "2026-11-25",
+  "change": "Method decision: investigations and charges about chips are recorded as reported, and every such row must say that an investigation is not a finding and a charge is an allegation until a court decides. The Compute tab does not name people.",
+  "rows": "method"
  }
 ]

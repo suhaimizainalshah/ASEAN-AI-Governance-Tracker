@@ -21,7 +21,7 @@ ROOT = pathlib.Path(__file__).parent
 DATA = ROOT / "data"
 
 # ---- settings you may edit -------------------------------------------------
-VERSION = "0.4"
+VERSION = "0.5"
 CREDIT = "Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic)."
 CORRECTIONS_URL = "mailto:suhaimizainalshah@gmail.com"     # readers can report errors by email; or use a GitHub issues link
 # Optional visitor counting with GoatCounter (no cookies). Empty means OFF: no tracking code is added.
@@ -189,7 +189,59 @@ for e in events:
 for c in changelog:
     if not valid_date(c["date"], "day"): err("changelog", c.get("date", "?"), "date must be YYYY-MM-DD")
 
-print(f"Checked {len(incidents)} cases, {len(responses)} responses, {len(instruments)} policies.")
+# ---------- Compute: chips, data centres and verification (0.5). Optional files: the tracker builds without them.
+COUNTRIES = {"SG", "ID", "MY", "VN", "PH", "TH", "KH", "LA", "MM", "BN", "TL", "ASEAN"}
+SITE_STATUS = {"operational", "under_construction", "announced", "approved", "paused", "cancelled"}
+MEASURE_KIND = {"foreign_rule", "permit", "export_control", "data_centre_rule", "energy_rule", "government_response", "investigation", "prosecution", "seizure", "guidance"}
+LANGS = {"en", "ms", "id", "th", "vi", "tl", "km", "lo", "my", "zh", "ta"}
+def read_optional(name):
+    return read(name) if (DATA / f"{name}.csv").exists() else []
+compute_capacity, compute_sites, compute_measures = read_optional("compute_capacity"), read_optional("compute_sites"), read_optional("compute_measures")
+compute_profile = read_optional("compute_profile")
+PROFILE_Q = {"public_list", "capacity_official", "chip_permit", "enforcement_public", "technical_unit"}
+PROFILE_S = {"yes", "partly", "checked_not_found"}        # a cell that was not checked has no row: the page shows "not checked yet"
+_seen = set()
+for r in compute_profile:
+    i = r.get("id", "?")
+    if r.get("country") not in COUNTRIES - {"ASEAN"}: err("profile", i, "country must be an ASEAN member code such as MY")
+    if r.get("question") not in PROFILE_Q: err("profile", i, f"question must be one of {sorted(PROFILE_Q)}")
+    if r.get("status") not in PROFILE_S: err("profile", i, f"status must be one of {sorted(PROFILE_S)} (leave a cell out if it was not checked)")
+    if (r.get("country"), r.get("question")) in _seen: err("profile", i, "this country and question already have a row")
+    _seen.add((r.get("country"), r.get("question")))
+    if not r.get("detail"): err("profile", i, "detail is required: say what was found, or where you looked")
+    if not valid_date(r.get("checked_on", ""), "day"): err("profile", i, "checked_on must be YYYY-MM-DD")
+    if r.get("confidence") not in CONF: err("profile", i, f"confidence must be one of {sorted(CONF)}")
+    check_url("profile", i, "source_url", r.get("source_url", ""), r.get("status") != "checked_not_found")
+def num(t, i, field, v):
+    if v and not re.match(r"^\d+(\.\d+)?$", v): err(t, i, f"{field} must be a number of megawatts or empty")
+for r in compute_capacity:
+    i = r.get("id", "?")
+    if r.get("country") not in COUNTRIES: err("capacity", i, "country must be an ASEAN code such as MY")
+    if not valid_date(r.get("as_of", ""), "month") and not valid_date(r.get("as_of", ""), "day"): err("capacity", i, "as_of must be YYYY-MM or YYYY-MM-DD")
+    for f in ("operational_mw", "under_construction_mw", "planned_mw", "facilities"): num("capacity", i, f, r.get(f, ""))
+    if not r.get("measure"): err("capacity", i, "say what the figures measure (measure); firms define capacity differently")
+    if not r.get("firm"): err("capacity", i, "say which firm the figures come from (firm): ratios only compare one firm's figures")
+    check_url("capacity", i, "source_url", r.get("source_url", ""), True)
+for r in compute_sites:
+    i = r.get("id", "?")
+    if r.get("country") not in COUNTRIES: err("site", i, "country must be an ASEAN code such as MY")
+    if r.get("status") not in SITE_STATUS: err("site", i, f"status must be one of {sorted(SITE_STATUS)}")
+    num("site", i, "capacity_mw", r.get("capacity_mw", ""))
+    if r.get("confidence") not in CONF: err("site", i, f"confidence must be one of {sorted(CONF)}")
+    if r.get("source_language", "en") not in LANGS: err("site", i, f"source_language must be one of {sorted(LANGS)}")
+    check_url("site", i, "source_url", r.get("source_url", ""), True)
+for r in compute_measures:
+    i = r.get("id", "?")
+    if r.get("jurisdiction") not in COUNTRIES | {"US", "CN", "EU", "INTL"}: err("measure", i, "jurisdiction must be an ASEAN code, or US, CN, EU or INTL")
+    if r.get("date_precision") not in PREC or not valid_date(r.get("date", ""), r.get("date_precision", "")): err("measure", i, "date must match its date_precision")
+    if r.get("kind") not in MEASURE_KIND: err("measure", i, f"kind must be one of {sorted(MEASURE_KIND)}")
+    if r.get("binding") not in {"yes", "no"}: err("measure", i, "binding must be yes or no")
+    if r.get("confidence") not in CONF: err("measure", i, f"confidence must be one of {sorted(CONF)}")
+    if r.get("kind") in {"investigation", "prosecution"} and not re.search(r"not a finding|until a court|allegation", r.get("summary", ""), re.I):
+        err("measure", i, "say in the summary that an investigation or charge is not a finding of wrongdoing")
+    if not r.get("title") or not r.get("summary"): err("measure", i, "title and summary are required")
+    check_url("measure", i, "source_url", r.get("source_url", ""), True)
+print(f"Checked {len(incidents)} cases, {len(responses)} responses, {len(instruments)} policies; compute: {len(compute_capacity)} markets, {len(compute_sites)} sites, {len(compute_measures)} measures, {len(compute_profile)} profile answers.")
 for w in warnings: print("  note:", w)
 if errors:
     print("\nBUILD STOPPED. Fix these rows in data/*.csv:")
@@ -202,7 +254,8 @@ payload = dict(
     meta=dict(version=VERSION, verified=verified, built=datetime.date.today().isoformat(), credit=CREDIT, corrections_url=CORRECTIONS_URL,
               analytics=dict(goatcounter=GOATCOUNTER_CODE, stats_url=STATS_URL, min_visits=STATS_MIN_VISITS, sample=bool(stats and stats.get("sample")))),
     incidents=incidents, responses=responses, instruments=instruments, events=events,
-    changelog=sorted(changelog, key=lambda c: c["date"], reverse=True), backlog=backlog, visitors=stats)
+    changelog=sorted(changelog, key=lambda c: c["date"], reverse=True), backlog=backlog, visitors=stats,
+    compute=dict(capacity=compute_capacity, sites=compute_sites, measures=sorted(compute_measures, key=lambda m: m["date"], reverse=True), profile=compute_profile))
 
 public = json.loads(json.dumps(payload)); public.pop("visitors", None); public["meta"].pop("analytics", None)   # the reusable dataset carries no visitor data
 (ROOT / "tracker-data.json").write_text(json.dumps(public, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -302,11 +355,7 @@ tpl = (ROOT / "template.html").read_text(encoding="utf-8")
 if "<!--__STATIC_ROWS__-->" not in tpl:
     sys.exit("template.html is missing the <!--__STATIC_ROWS__--> placeholder")
 tpl = tpl.replace("<!--__STATIC_ROWS__-->", static_rows())
-PREVIEW = "--preview" in sys.argv or os.environ.get("PREVIEW") == "1"     # pull-request preview: shows the Review tab and a banner
-page = {**payload, "meta": {**payload["meta"], "preview": True}} if PREVIEW else payload
-blob = json.dumps(page, ensure_ascii=False).replace("</", "<\\/")      # keep </script> out of the data
-if PREVIEW:
-    print("PREVIEW build: the Review tab and a preview banner are shown. Do not commit this index.html.")
+blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")      # keep </script> out of the data
 (ROOT / "index.html").write_text(tpl.replace("/*__DATA__*/null", blob), encoding="utf-8")
 print(f"Built index.html and tracker-data.json (version {VERSION}, verified {verified}).")
 print(f"Also wrote data.json, data/*.json (one per row type), feed.xml and feed.json ({len(changelog)} changelog entries).")
