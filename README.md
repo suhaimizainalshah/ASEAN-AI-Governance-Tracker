@@ -1,6 +1,6 @@
 # ASEAN AI Governance Tracker
 
-A living record of **what went wrong, who officially responded and when, and which policies were already in place**, for all eleven ASEAN member states — Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — plus ASEAN regional action.
+A living record of **AI governance and AI safety** in Southeast Asia: **what went wrong, who officially responded and when, and which policies were already in place**, for all eleven ASEAN member states — Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — plus ASEAN regional action.
 
 **Status: proof of concept.** Version 0.4 · 55 cases · 79 official responses · 97 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
