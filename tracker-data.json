@@ -1,6 +1,6 @@
 {
  "meta": {
-  "version": "0.5",
+  "version": "0.6",
   "verified": "2026-11-26",
   "built": "2026-11-26",
   "credit": "Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic).",
@@ -4959,6 +4959,11 @@
    "date": "2026-11-26",
    "change": "Restored two automatic checks that were missing from the repository: the review checklist on each pull request (see REVIEWING.md), and the check that the page matches its template.",
    "rows": "method"
+  },
+  {
+   "date": "2026-11-26",
+   "change": "Version 0.6: renamed the ASEAN AI Governance and Safety Tracker; 206 short forms and organisations explained; cities shown with their country on the Compute tab; the tracker's name and logo return to its starting view, and the AI Benar home link leads to the AI Benar home page. No data changed.",
+   "rows": "all"
   },
   {
    "date": "2026-11-25",

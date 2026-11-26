@@ -21,7 +21,7 @@ ROOT = pathlib.Path(__file__).parent
 DATA = ROOT / "data"
 
 # ---- settings you may edit -------------------------------------------------
-VERSION = "0.5"
+VERSION = "0.6"
 CREDIT = "Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic)."
 CORRECTIONS_URL = "mailto:suhaimizainalshah@gmail.com"     # readers can report errors by email; or use a GitHub issues link
 # Optional visitor counting with GoatCounter (no cookies). Empty means OFF: no tracking code is added.

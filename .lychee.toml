@@ -4,10 +4,20 @@
 # lychee's default), so the default is kept and each bot-blocking host is
 # listed below instead.
 
+# Slow government sites (kpl.gov.la, Laos's state news agency, timed out twice on 26 Nov 2026):
+# allow more time and a few retries before calling a link broken.
+timeout = 30
+max_retries = 4
+retry_wait_time = 5
+
 # Excluded, with reasons. Everything here was checked by hand on 23 Nov 2026
 # (curl with a browser user-agent); a 403 from these hosts is bot protection,
 # not a dead link — the rows were verified against these sources when added.
 exclude = [
+  # Our own address. aibenar.dev is the tracker's canonical address and link-preview image. Until the
+  # custom domain is connected it cannot answer (seen 26 Nov 2026 as "UnrecognisedName"), and once it
+  # is, the tracker's own links are checked locally instead (see the root folder in links.yml).
+  "^https://aibenar\\.dev/",
   # Bot protection: 403 to automated requests (checked 22 Nov 2026 audit).
   "ohchr\\.org",
   "economie\\.gouv\\.fr",
