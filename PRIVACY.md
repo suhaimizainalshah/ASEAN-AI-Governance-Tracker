@@ -1,6 +1,6 @@
 # Privacy
 
-This page explains what the ASEAN AI Governance Tracker records about its
+This page explains what the ASEAN AI Governance and Safety Tracker records about its
 readers. Short version: as little as possible, and nothing about any
 individual.
 

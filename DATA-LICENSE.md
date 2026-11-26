@@ -13,7 +13,7 @@ changes were made.
 
 Suggested attribution:
 
-> ASEAN AI Governance Tracker, by Suhaimi Zainal Shah, licensed under
+> ASEAN AI Governance and Safety Tracker, by Suhaimi Zainal Shah, licensed under
 > CC BY 4.0. Source: https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker
 
 Individual source material linked from the data (government pages, news
@@ -23,3 +23,5 @@ project, with a source link on every row.
 
 The code in this repository is licensed separately under the MIT Licence —
 see LICENSE.
+
+Until version 0.5 (November 2026) the tracker was called the ASEAN AI Governance Tracker. Citations of earlier versions under that name remain correct.

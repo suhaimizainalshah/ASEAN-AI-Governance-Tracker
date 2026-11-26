@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build the ASEAN AI Governance Tracker.
+Build the ASEAN AI Governance and Safety Tracker.
 
     python3 build.py
 
@@ -56,7 +56,7 @@ RT_LABEL = {"statement": "Statement or warning", "advisory": "Formal advisory or
             "legislation": "New law, regulation or declaration"}
 # Public address of the live tracker; used for the feeds and for feed item links.
 SITE_URL = "https://suhaimizainalshah.github.io/ASEAN-AI-Governance-Tracker/"
-FEED_TITLE = "ASEAN AI Governance Tracker — Updates"
+FEED_TITLE = "ASEAN AI Governance and Safety Tracker — Updates"
 STATUS = {"in_force", "adopted", "draft", "proposed", "superseded"}
 LEGAL = {"existing_law", "new_law", "none_stated", "not_applicable"}
 PREC = {"day", "month", "year"}
@@ -285,7 +285,7 @@ def write_feeds():
            '<rss version="2.0"><channel>',
            f"<title>{xml_escape(FEED_TITLE)}</title>",
            f"<link>{xml_escape(SITE_URL)}</link>",
-           f"<description>{xml_escape('What changed in the ASEAN AI Governance Tracker: new cases, official responses and policies, and what is still queued for verification.')}</description>",
+           f"<description>{xml_escape('What changed in the ASEAN AI Governance and Safety Tracker: new cases, official responses and policies, and what is still queued for verification.')}</description>",
            "<language>en</language>",
            f"<lastBuildDate>{_rfc2822(last)}</lastBuildDate>"]
     for n, c in enumerate(items):

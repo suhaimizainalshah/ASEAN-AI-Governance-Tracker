@@ -1,10 +1,25 @@
-# ASEAN AI Governance Tracker
+# ASEAN AI Governance and Safety Tracker
 
 A living record of **AI governance and AI safety** in Southeast Asia: **what went wrong, who officially responded and when, and which policies were already in place**, for all eleven ASEAN member states — Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Timor-Leste and Vietnam — plus ASEAN regional action.
 
 **Status: proof of concept.** Version 0.4 · 55 cases · 79 official responses · 97 policies · every row has a source link. It is a curated sample built to test the method, not a census. It does not claim to hold every incident in the OECD AI Incidents and Hazards Monitor (AIM) for these countries.
 
 This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem. Timor-Leste became ASEAN’s eleventh member on 26 October 2025, and all eleven member states are in scope.
+
+## Why AI safety, and why compute
+This tracker began by recording how Southeast Asian governments respond to AI incidents, such as deepfake scams and sexual deepfakes, and
+which laws and policies they use. From version 0.5 it also covers **AI safety**, and the **compute** that powerful AI depends on: chips, data
+centres, and how anyone could check what runs on them. It was renamed from the ASEAN AI Governance Tracker to reflect that.
+
+The motivation came from time spent with the AI safety community in London, including a mixer at **LISA, the London Initiative for Safe AI**,
+and from exploring AI verification and hardware governance since. One gap kept coming up: most work on verifying compute is framed around the
+United States and China, and done from London and California. The **host countries**, where data centres are actually being built, rarely
+feature, though any inspection or audit would happen on their soil, under their laws, and often in their languages.
+
+Southeast Asia is now one of the world's fastest-growing places for data centres, and the region's rules on where chips go are changing quickly.
+The tracker aims to help researchers and policymakers by recording **what is published** about compute in the region, saying plainly **what is
+not**, and drawing on sources in the region's own languages. Mentioning LISA describes where the interest came from; it does not imply that LISA
+or anyone there has reviewed or endorsed this tracker.
 
 ## What is in this folder
 

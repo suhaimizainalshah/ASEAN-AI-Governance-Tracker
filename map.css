@@ -147,3 +147,24 @@ html[data-theme="dark"] .tile:hover, html[data-theme="dark"] .tile:focus-visible
 .pf-dash{color:var(--muted);opacity:.7;font-size:1rem}
 .pf-legend .pf-chip.pf-none{border:0;padding-left:.2rem}
 .pf-swipe{display:none;margin:.2rem 0 .3rem}@media (max-width:700px){.pf-swipe{display:block}}
+
+/* ---------- abbreviations and country codes, explained (0.5) ---------- */
+abbr[title]{text-decoration:underline dotted;text-underline-offset:3px;text-decoration-thickness:1px;cursor:help;position:relative}
+abbr.open::after{content:attr(title);position:absolute;left:0;top:calc(100% + 6px);z-index:30;width:max-content;max-width:min(280px,80vw);
+  padding:.45rem .6rem;border-radius:8px;background:var(--ink);color:var(--surface);font-size:.82rem;font-weight:400;line-height:1.4;white-space:normal;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+@media (hover:hover){abbr.open::after{display:none}}
+.gloss{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;margin:.5rem 0 1rem}.gloss dt{font-weight:700}.gloss dd{margin:0}
+@media (max-width:560px){.gloss{grid-template-columns:1fr}.gloss dd{margin:0 0 .5rem}}
+/* bars made of page elements: readable at any width */
+.cp-legend{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;font-size:.85rem;margin:.2rem 0 .7rem}.cp-legend span{display:inline-flex;align-items:center;gap:.4rem}
+.cp-legend i{display:inline-block;width:14px;height:14px;border-radius:3px}
+.cp-op{background:#0d5e57}.cp-uc{background:#4f9a8f}.cp-pl{background:#b9d6d0}
+[data-theme=dark] .cp-op{background:#9ff0e4}[data-theme=dark] .cp-uc{background:#45c9b9}[data-theme=dark] .cp-pl{background:#5c8e87}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .cp-op{background:#9ff0e4}:root:not([data-theme=light]) .cp-uc{background:#45c9b9}:root:not([data-theme=light]) .cp-pl{background:#5c8e87}}
+.cp-bars{max-width:820px}.cp-row{margin:0 0 .75rem}.cp-rl{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;flex-wrap:wrap;font-size:.92rem;margin-bottom:.25rem}
+.cp-name{font-weight:600}.cp-num{font-variant-numeric:tabular-nums;color:var(--ink)}.cp-num small{color:var(--muted);font-size:.82rem}.cp-num.cp-big{font-weight:700;font-size:1rem}
+.cp-bar{display:flex;height:16px;border-radius:4px;overflow:hidden;background:var(--soft)}.cp-bar span{display:block;height:100%}
+.cp-bar span+span{box-shadow:inset 1px 0 0 var(--surface)}
+.gl-role{display:block;color:var(--muted);font-size:.9rem;line-height:1.45;margin-top:.1rem}
+.abbr-tip{margin:.45rem 0 0;font-size:.85rem;color:var(--muted)}
+.abbr-demo{text-decoration:underline dotted;text-underline-offset:3px}

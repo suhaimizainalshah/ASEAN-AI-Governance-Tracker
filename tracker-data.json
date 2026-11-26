@@ -4941,6 +4941,26 @@
  ],
  "changelog": [
   {
+   "date": "2026-11-26",
+   "change": "Renamed from the ASEAN AI Governance Tracker to the ASEAN AI Governance and Safety Tracker, to reflect the new coverage of AI safety and compute. The web address is unchanged, so existing links keep working.",
+   "rows": "all"
+  },
+  {
+   "date": "2026-11-26",
+   "change": "Easier to read: cities on the Compute tab now show their country (Johor, Malaysia), abbreviations and country codes are explained the first time they appear on each tab (hover, or tap on a phone), the Method tab lists them all, the Compute charts stay readable on phones, and links shared on social media show the tracker's name, description and an image.",
+   "rows": "all"
+  },
+  {
+   "date": "2026-11-26",
+   "change": "Explanations for every short form and organisation that can be explained with confidence: 206 in all, including Malay, Indonesian, Vietnamese and Portuguese names. A line under the tabs says how to see them (hover, or tap on a phone), and the Method tab lists them all. Where a short form has two meanings in the tracker, both are given. A few are left unexplained until they can be confirmed.",
+   "rows": "all"
+  },
+  {
+   "date": "2026-11-26",
+   "change": "Restored two automatic checks that were missing from the repository: the review checklist on each pull request (see REVIEWING.md), and the check that the page matches its template.",
+   "rows": "method"
+  },
+  {
    "date": "2026-11-25",
    "change": "Version 0.5: a new Compute tab, on chips, data centres and verification. It records published data centre capacity by market (with what each figure measures), named projects, and rules, responses and cases about where AI chips go, including the US licence rule for Malaysia, Singapore, Thailand and Indonesia. It compares planned with running capacity using one firm's figures, shows a \"Can it be checked?\" profile of five questions for each member with no total or ranking, lists public signals to check when something is not in the news, and sets out the layers at which compute could be verified, with whose cooperation.",
    "rows": "compute"

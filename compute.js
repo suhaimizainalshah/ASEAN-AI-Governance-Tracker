@@ -1,4 +1,4 @@
-/* ASEAN AI Governance Tracker: the Compute tab. Chips, data centres and verification in Southeast Asia.
+/* ASEAN AI Governance and Safety Tracker: the Compute tab. Chips, data centres and verification in Southeast Asia.
    Draws from DATA.compute (data/compute_capacity.csv, compute_sites.csv and compute_measures.csv, checked by build.py).
    Everything shown is published and sourced. Signals are questions to check, never accusations. */
 (() => {
@@ -10,6 +10,9 @@
   const KIND = { foreign_rule: "Rule from outside ASEAN", permit: "Permit or licence", export_control: "Export control", data_centre_rule: "Data centre rule", energy_rule: "Energy rule",
                  government_response: "Government response", investigation: "Investigation", prosecution: "Charge or prosecution", seizure: "Seizure", guidance: "Guidance" };
   const fmt = n => n === "" || n == null ? "" : Number(n).toLocaleString("en-GB");
+  const isNation = r => /whole country/i.test(r.market) || r.market === CT[r.country];      // "Singapore" is a city and a country
+  const short = r => isNation(r) ? r.market : `${r.market} (${r.country})`;             // charts: "Johor (MY)"
+  const full = r => isNation(r) ? r.market : `${r.market}, ${CT[r.country] || r.country}`; // text: "Johor, Malaysia"
   const when = (d, p) => { if (!d) return ""; const [y, m, dd] = d.split("-"); const M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return p === "year" ? y : p === "month" ? `${M[+m - 1]} ${y}` : `${+dd} ${M[+m - 1]} ${y}`; };
   const src = r => `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_title)}</a>`;
@@ -19,29 +22,23 @@
     const a = document.createElement("a"), u = URL.createObjectURL(blob); a.href = u; a.download = name; a.hidden = true; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); };
 
   /* ---------- 1. capacity: one bar per market ---------- */
-  function capacityChart(rows) {     // R (right margin) leaves room for the longest bar's label
+  function capacityChart(rows) {     // bars made of page elements, so they reflow and stay readable on any screen
     const markets = rows.filter(r => !/whole country/i.test(r.market));
-    const max = Math.max(1, ...markets.map(r => (+r.operational_mw || 0) + (+r.under_construction_mw || 0) + (+r.planned_mw || 0)));
-    const W = 760, L = 150, R = 240, rowH = 46, H = 40 + markets.length * rowH + 6, x = v => L + v / max * (W - L - R);
-    const parts = [["operational_mw", "Operational", "var(--cp-op, #0d5e57)"], ["under_construction_mw", "Under construction", "var(--cp-uc, #4f9a8f)"], ["planned_mw", "Planned", "var(--cp-pl, #b9d6d0)"]];
-    let g = "";
-    markets.forEach((r, i) => {
-      const y = 34 + i * rowH; let at = 0;
-      g += `<text x="${L - 10}" y="${y + 17}" text-anchor="end" class="cp-lab">${esc(r.market)}</text>`;
-      parts.forEach(([k, n, c]) => { const v = +r[k] || 0; if (!v) return; g += `<rect x="${x(at)}" y="${y + 4}" width="${Math.max(1, x(at + v) - x(at))}" height="20" fill="${c}"><title>${esc(r.market)}: ${n} ${fmt(v)} MW</title></rect>`; at += v; });
-      const missing = parts.filter(([k]) => r[k] === "").map(([, n]) => n.toLowerCase());
-      g += `<text x="${x(at) + 8}" y="${y + 18}" class="cp-val">${fmt(at)} MW${missing.length ? ` · ${missing.join(", ")} not published` : ""}</text>`;
-    });
-    const legend = parts.map(([, n, c], i) => `<rect x="${L + i * 180}" y="8" width="14" height="14" fill="${c}"/><text x="${L + i * 180 + 20}" y="20" class="cp-lab">${n}</text>`).join("");
-    const desc = markets.map(r => `${r.market}: ${parts.map(([k, n]) => r[k] ? `${n.toLowerCase()} ${fmt(r[k])} MW` : "").filter(Boolean).join(", ")}`).join("; ");
-    return `<figure class="cp-fig"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Data centre capacity by market, in megawatts. ${esc(desc)}">${legend}${g}</svg>
+    const tot = r => (+r.operational_mw || 0) + (+r.under_construction_mw || 0) + (+r.planned_mw || 0), max = Math.max(1, ...markets.map(tot));
+    const parts = [["operational_mw", "Operational", "cp-op"], ["under_construction_mw", "Under construction", "cp-uc"], ["planned_mw", "Planned", "cp-pl"]];
+    const desc = markets.map(r => `${full(r)}: ${parts.map(([k, n]) => r[k] ? `${n.toLowerCase()} ${fmt(r[k])} MW` : "").filter(Boolean).join(", ")}`).join("; ");
+    const rowsHtml = markets.map(r => { const missing = parts.filter(([k]) => r[k] === "").map(([, n]) => n.toLowerCase());
+      return `<div class="cp-row"><div class="cp-rl"><span class="cp-name" title="${esc(full(r))}">${esc(short(r))}</span><span class="cp-num">${fmt(tot(r))} MW${missing.length ? `<small> · ${esc(missing.join(", "))} not published</small>` : ""}</span></div>
+        <div class="cp-bar">${parts.map(([k, n, c]) => +r[k] ? `<span class="${c}" style="width:${(+r[k] / max * 100).toFixed(2)}%" title="${esc(full(r))}: ${n} ${fmt(r[k])} MW"></span>` : "").join("")}</div></div>`; }).join("");
+    return `<figure class="cp-fig"><div class="cp-legend" aria-hidden="true">${parts.map(([, n, c]) => `<span><i class="${c}"></i>${n}</span>`).join("")}</div>
+      <div class="cp-bars" role="img" aria-label="Data centre capacity by market, in megawatts. ${esc(desc)}">${rowsHtml}</div>
       <figcaption>Megawatts (MW) of data centre IT capacity by market, mid-2026. Each bar comes from one published report: see the table for its source and what it measures.
       <strong>Do not add figures from different firms together:</strong> they count capacity differently.</figcaption></figure>`;
   }
   function capacityTable(rows) {
     return `<div class="tablewrap"><table class="cp-t"><caption class="sr">Capacity figures, with what each measures and its source</caption>
       <thead><tr><th scope="col">Market</th><th scope="col">Operational</th><th scope="col">Under construction</th><th scope="col">Planned</th><th scope="col">What it measures</th><th scope="col">Source</th></tr></thead><tbody>
-      ${rows.map(r => `<tr><th scope="row">${esc(r.market)}<br><small class="muted">${esc(when(r.as_of, r.as_of.length > 7 ? "day" : "month"))}</small></th>
+      ${rows.map(r => `<tr><th scope="row">${esc(r.market)}${isNation(r) ? "" : `<br><small>${esc(CT[r.country] || r.country)}</small>`}<br><small class="muted">${esc(when(r.as_of, r.as_of.length > 7 ? "day" : "month"))}</small></th>
         ${["operational_mw", "under_construction_mw", "planned_mw"].map(k => `<td>${r[k] ? fmt(r[k]) + " MW" : '<span class="muted">not published</span>'}</td>`).join("")}
         <td>${esc(r.measure)}${r.notes ? `<details><summary>Note</summary><p>${esc(r.notes)}</p></details>` : ""}</td><td>${src(r)}</td></tr>`).join("")}</tbody></table></div>`;
   }
@@ -98,20 +95,19 @@
   /* ---------- planned versus running: one firm's figures only ---------- */
   function ratioRows(rows) {
     return rows.filter(r => r.firm === "Cushman & Wakefield" && +r.operational_mw > 0 && !/whole country/i.test(r.market))
-      .map(r => ({ market: r.market, op: +r.operational_mw, ahead: (+r.under_construction_mw || 0) + (+r.planned_mw || 0), as_of: r.as_of, r }))
+      .map(r => ({ market: r.market, label: short(r), name: full(r), op: +r.operational_mw, ahead: (+r.under_construction_mw || 0) + (+r.planned_mw || 0), as_of: r.as_of, r }))
       .map(x => ({ ...x, ratio: x.ahead / x.op })).sort((a, b) => b.ratio - a.ratio);
   }
   function ratioChart(rows) {
     const R = ratioRows(rows); if (!R.length) return '<p class="muted">Not enough figures from one firm yet.</p>';
-    const W = 480, L = 128, Rm = 64, rowH = 44, H = 20 + R.length * rowH, max = Math.max(...R.map(x => x.ratio)), x = v => L + v / max * (W - L - Rm);
-    const bars = R.map((d, i) => { const y = 10 + i * rowH;
-      return `<text x="${L - 10}" y="${y + 19}" text-anchor="end" class="cp-lab">${esc(d.market)}</text><rect x="${L}" y="${y + 6}" width="${Math.max(2, x(d.ratio) - L)}" height="20" rx="3" fill="var(--cp-uc, #4f9a8f)"><title>${esc(d.market)}: ${d.ratio.toFixed(1)} times</title></rect>
-        <text x="${x(d.ratio) + 8}" y="${y + 20}" class="cp-big">${d.ratio.toFixed(1)} ×</text>`; }).join("");
-    const desc = R.map(d => `${d.market} ${d.ratio.toFixed(1)} times`).join(", ");
-    const excluded = rows.filter(r => !R.some(d => d.r === r)).map(r => `${r.market} (${r.firm !== "Cushman & Wakefield" ? "figures from " + r.firm : "no operational figure published"})`);
-    return `<div class="cp-two"><figure class="cp-fig"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Capacity being built or planned, as a multiple of capacity running now: ${esc(desc)}">${bars}</svg>
+    const max = Math.max(...R.map(x => x.ratio));
+    const bars = R.map(d => `<div class="cp-row"><div class="cp-rl"><span class="cp-name" title="${esc(d.name)}">${esc(d.label)}</span><span class="cp-num cp-big">${d.ratio.toFixed(1)} ×</span></div>
+      <div class="cp-bar"><span class="cp-uc" style="width:${(d.ratio / max * 100).toFixed(2)}%" title="${esc(d.name)}: ${d.ratio.toFixed(1)} times"></span></div></div>`).join("");
+    const desc = R.map(d => `${d.name} ${d.ratio.toFixed(1)} times`).join(", ");
+    const excluded = rows.filter(r => !R.some(d => d.r === r)).map(r => `${full(r)} (${r.firm !== "Cushman & Wakefield" ? "figures from " + r.firm : "no operational figure published"})`);
+    return `<div class="cp-two"><figure class="cp-fig"><div class="cp-bars" role="img" aria-label="Capacity being built or planned, as a multiple of capacity running now: ${esc(desc)}">${bars}</div>
         <figcaption>Capacity under construction or planned, divided by capacity running now. All from one firm, Cushman &amp; Wakefield (mid-2026), so the markets compare like with like.</figcaption></figure>
-      <ul class="cp-story">${R.map(d => `<li><strong>${esc(d.market)}:</strong> ${fmt(d.ahead)} MW being built or planned, <strong>${d.ratio.toFixed(1)} times</strong> the ${fmt(d.op)} MW running. ${d.ratio >= 5 ? "Most of it is still a plan, and depends on power, permits and financing arriving." : d.op >= 500 ? "A large pipeline on an already large base." : "An early market: still small in megawatts."}</li>`).join("")}</ul></div>
+      <ul class="cp-story">${R.map(d => `<li><strong>${esc(d.name)}:</strong> ${fmt(d.ahead)} MW being built or planned, <strong>${d.ratio.toFixed(1)} times</strong> the ${fmt(d.op)} MW running. ${d.ratio >= 5 ? "Most of it is still a plan, and depends on power, permits and financing arriving." : d.op >= 500 ? "A large pipeline on an already large base." : "An early market: still small in megawatts."}</li>`).join("")}</ul></div>
       ${excluded.length ? `<p class="small muted">Left out of this comparison: ${esc(excluded.join("; "))}.</p>` : ""}`;
   }
   /* ---------- can it be checked? A profile, with no total ---------- */
@@ -146,8 +142,8 @@
     const tot = r => (+r.operational_mw || 0) + (+r.under_construction_mw || 0) + (+r.planned_mw || 0);
     const card = (n, l, href) => `<a class="cp-card" href="${href}"><span class="cp-n">${n}</span><span class="cp-l">${l}</span></a>`;
     return `<div class="cp-glance" aria-label="At a glance">
-      ${big ? card(fmt(tot(big)) + " MW", `${esc(big.market)}: running, being built and planned`, "#cp-capacity") : ""}
-      ${top ? card(top.ratio.toFixed(1) + " ×", `${esc(top.market)}: planned capacity compared with what runs now`, "#cp-ratio") : ""}
+      ${big ? card(fmt(tot(big)) + " MW", `${esc(full(big))}: running, being built and planned`, "#cp-capacity") : ""}
+      ${top ? card(top.ratio.toFixed(1) + " ×", `${esc(top.name)}: planned capacity compared with what runs now`, "#cp-ratio") : ""}
       ${card(String(C.measures.length), "Rules, responses and cases about chips", "#cp-chips")}
       ${card(`${(C.profile || []).length} of ${MEMBERS.length * PQ.length}`, "Questions checked in the profile", "#cp-profile")}</div>`;
   }
