@@ -55,7 +55,10 @@ RT_LABEL = {"statement": "Statement or warning", "advisory": "Formal advisory or
             "engagement": "Engagement with a platform", "restriction_lifted": "Restriction lifted",
             "legislation": "New law, regulation or declaration"}
 # Public address of the live tracker; used for the feeds and for feed item links.
-SITE_URL = "https://suhaimizainalshah.github.io/ASEAN-AI-Governance-Tracker/"
+SITE_URL = "https://aibenar.dev/ASEAN-AI-Governance-Tracker/"
+# Each feed update's ID keeps the tracker's first address. An ID is a fixed label, not a link: changing it would make feed readers show
+# every past update again as new. Links use SITE_URL.
+FEED_ID_BASE = "https://suhaimizainalshah.github.io/ASEAN-AI-Governance-Tracker/"
 FEED_TITLE = "ASEAN AI Governance and Safety Tracker — Updates"
 STATUS = {"in_force", "adopted", "draft", "proposed", "superseded"}
 LEGAL = {"existing_law", "new_law", "none_stated", "not_applicable"}
@@ -292,7 +295,7 @@ def write_feeds():
         rss.append("<item>"
                    f"<title>{xml_escape('Tracker update — ' + c['date'])}</title>"
                    f"<link>{xml_escape(SITE_URL + '#updates')}</link>"
-                   f"<guid isPermaLink=\"false\">{xml_escape(SITE_URL + '#updates-' + c['date'] + '-' + str(n))}</guid>"
+                   f"<guid isPermaLink=\"false\">{xml_escape(FEED_ID_BASE + '#updates-' + c['date'] + '-' + str(n))}</guid>"
                    f"<pubDate>{_rfc2822(c['date'])}</pubDate>"
                    f"<description>{xml_escape(c['change'])}</description>"
                    "</item>")
@@ -300,7 +303,7 @@ def write_feeds():
     (ROOT / "feed.xml").write_text("\n".join(rss) + "\n", encoding="utf-8")
     feed = {"version": "https://jsonfeed.org/version/1.1",
             "title": FEED_TITLE, "home_page_url": SITE_URL, "feed_url": SITE_URL + "feed.json",
-            "items": [{"id": SITE_URL + "#updates-" + c["date"] + "-" + str(n),
+            "items": [{"id": FEED_ID_BASE + "#updates-" + c["date"] + "-" + str(n),
                        "url": SITE_URL + "#updates",
                        "title": "Tracker update — " + c["date"],
                        "content_text": c["change"],

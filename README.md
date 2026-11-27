@@ -233,7 +233,26 @@ fetch will be blocked.
 - Themes and the "pre-emptive" label are researcher judgements and can be challenged.
 
 *Prepared by Suhaimi Zainal Shah with assistance from Muse and Claude AI (Anthropic). Version 0.4, data verified 23 November 2026.*
-*Built and maintained by Suhaimi Zainal Shah · [AI Benar Advisory](https://suhaimizainalshah.github.io/AI-Benar-Advisory/) — independent AI compliance and governance.*
+## The ASEAN AI Governance Atlas (archived)
+The [ASEAN AI Governance Atlas](https://aibenar.dev/ASEAN-AI-Governance-Atlas/) ([repository](https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Atlas))
+is an earlier, separate map of AI readiness, milestones, incidents and hazards across ASEAN, for 2021 to 2025. It began during a research sprint on
+AI governance in Southeast Asia at LSE IDEAS, and was developed with contributions from the research sprint team. It is linked from the Method tab
+and the footer.
+
+**Where its data comes from:** its own snapshot, inside the atlas's `index.html`: readiness scores from the Oxford Insights Government AI Readiness
+Index 2025 (January 2026 edition), and short summaries of milestones, incidents and hazards gathered by the sprint team, mainly from the OECD AI
+Incidents Monitor and the ASEAN Secretariat. **It does not read this tracker's data**, so its counts can differ from the tracker's.
+
+**Keeping them in step:** the atlas is archived, so it is **not** updated when this tracker is. When the tracker's records change, nothing in the
+atlas changes. If the atlas is ever corrected, change its archive date and say what changed (see its README). A possible future version would read
+this tracker's `tracker-data.json` directly; only then would it make sense as a tab inside this tracker, since the tracker already has its own map.
+
+## Addresses
+The tracker lives at **https://aibenar.dev/ASEAN-AI-Governance-Tracker/**. Old `suhaimizainalshah.github.io` links redirect there automatically.
+The feeds' update IDs keep the old address on purpose (`FEED_ID_BASE` in `build.py`): an ID is a label, not a link, and changing it would make feed
+readers show every past update again.
+
+*Built and maintained by Suhaimi Zainal Shah · [AI Benar Advisory](https://aibenar.dev/AI-Benar-Advisory/) — independent AI compliance and governance.*
 
 ## Sources saved to the Internet Archive
 Every week (and whenever `data/*.csv` changes on main), `.github/workflows/archive-sources.yml` runs `scripts/archive_sources.py`.

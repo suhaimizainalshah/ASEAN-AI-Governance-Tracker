@@ -345,6 +345,8 @@ html:not([data-theme=dark]) #search{--pagefind-ui-text:var(--ink);--pagefind-ui-
 html:not([data-theme=dark]) #search .pagefind-ui__result-link{color:var(--link)}
 html:not([data-theme=dark]) #search .pagefind-ui__result-excerpt{color:var(--muted)}
 .home-link{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.atlas-note{border:1px solid currentColor;border-radius:10px;padding:.2rem 1rem .4rem;margin:0 0 1.5rem}
+.site-links a{display:inline-block;min-height:32px;line-height:32px}
 .foot-nav a{margin-right:1rem}
 /* Compare tab: fold-out sections */
 details.fold>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:.15rem .6rem;color:var(--ink);border-radius:6px}
@@ -377,7 +379,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
       </div>
     </div>
     <div class="mast-tools">
-      <p><a class="home-link" href="/">AI Benar home</a> · <a class="home-link" href="/EU-AI-Governance-Tracker/">EU tracker</a></p>
+      <p><a class="home-link" href="/">AI Benar home</a> · <a class="home-link" href="/EU-AI-Governance-Tracker/">EU tracker</a> · <a class="home-link" href="/blog/">Blog</a> · <a class="home-link" href="/sitemap/">Site map</a></p>
       <p>Version <span id="ver"></span>, last verified <time id="verified"></time></p>
       <div id="search" role="search" aria-label="Search the tracker"></div>
       <button class="ghost" id="theme" type="button" aria-pressed="false">Dark mode</button>
@@ -430,7 +432,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
   </div>
 <!--__STATIC_ROWS__-->
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Sources are also saved to the Internet Archive each week: where a copy exists, an <em>archived copy</em> link appears beside the source. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Sources are also saved to the Internet Archive each week: where a copy exists, an <em>archived copy</em> link appears beside the source. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p class="site-links"><a href="/">AI Benar home</a> · <a href="/sitemap/">Site map</a> · <a href="/blog/">Blog</a> · <a href="/ASEAN-AI-Governance-Atlas/">ASEAN AI Governance Atlas (archived)</a></p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
 <a href="#top" class="to-top" id="toTop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
 <script>
 /* Back to top: shown after about one screen of scrolling; returns keyboard focus to the page title */
@@ -1140,6 +1142,10 @@ function coverageHTML() {
 function renderMethod() {
   const defs = Object.entries(RT).map(([k, v]) => `<dt><span class="t-${k}" style="display:inline-flex;gap:.4rem;align-items:center">${ICON(k)}</span> ${esc(v.l)}</dt><dd>${esc(v.d)}</dd>`).join('');
   $('#panel-method').innerHTML = `<h2 class="sr" style="position:absolute;left:-9999px">Method</h2><div class="prose">
+    <div class="atlas-note" role="note"><h2>Related: the ASEAN AI Governance Atlas (archived)</h2>
+    <p>The <a href="/ASEAN-AI-Governance-Atlas/">ASEAN AI Governance Atlas</a> is an earlier, separate map of AI readiness, milestones, incidents and hazards across ASEAN, for 2021 to 2025.
+    It began during a research sprint on AI governance in Southeast Asia at LSE IDEAS, and was developed with contributions from the research sprint team.
+    <b>It is an archived snapshot with its own data, and is not updated with this tracker</b>, so its counts can differ from the records here. For current, source-linked records, use this tracker.</p></div>
     <h2>Why AI safety and compute</h2>
     <p>The tracker began with how governments respond to AI incidents, and which laws they use. It now also covers <b>AI safety</b>, and the <b>compute</b> that powerful AI depends on.
     Most work on verifying compute is framed around the United States and China, and done from London and California. The countries where data centres are being built rarely feature,
