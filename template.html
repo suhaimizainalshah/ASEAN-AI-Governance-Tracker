@@ -364,6 +364,9 @@ details.fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset
 .previewbar{background:#7a3e00;color:#fff;padding:.55rem 1rem;text-align:center;font-weight:600}
 .vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 table.live tr.lead th,table.live tr.lead td{font-weight:700}
+.overdue{border:2px solid #b07a00;background:#fff6df;color:#3d2a00;border-radius:12px;padding:.7rem 1rem;margin:1rem 0}
+.overdue b{color:#7a4f00}
+@media (prefers-color-scheme:dark){.overdue{background:#2c2412;color:#f3e6c8;border-color:#e9bb5c}.overdue b{color:#e9bb5c}}
 </style>
 <link rel="stylesheet" href="map.css">
 </head>
@@ -379,7 +382,8 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
       </div>
     </div>
     <div class="mast-tools">
-      <p><a class="home-link" href="/">AI Benar home</a> · <a class="home-link" href="/EU-AI-Governance-Tracker/">EU tracker</a> · <a class="home-link" href="/blog/">Blog</a> · <a class="home-link" href="/sitemap/">Site map</a></p>
+      <p><a class="home-link" href="/">AI Benar home</a> · <a class="home-link" href="/EU-AI-Governance-Tracker/">EU tracker</a> · <a class="home-link" href="/Middle-East-AI-Governance-Tracker/">Middle East tracker</a> · <a class="home-link" href="/blog/">Blog</a> · <a class="home-link" href="/sitemap/">Site map</a></p>
+      <p id="cadence"></p>
       <p>Version <span id="ver"></span>, last verified <time id="verified"></time></p>
       <div id="search" role="search" aria-label="Search the tracker"></div>
       <button class="ghost" id="theme" type="button" aria-pressed="false">Dark mode</button>
@@ -392,6 +396,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
 </header>
 
 <main id="main" class="wrap" tabindex="-1">
+<div class="overdue" id="overdue" role="status" hidden></div>
   <div class="notice" id="notice"></div>
   <div class="layout" id="layout">
     <aside id="rail" aria-label="Filters">
@@ -432,7 +437,7 @@ table.live tr.lead th,table.live tr.lead td{font-weight:700}
   </div>
 <!--__STATIC_ROWS__-->
 </main>
-<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Sources are also saved to the Internet Archive each week: where a copy exists, an <em>archived copy</em> link appears beside the source. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p class="site-links"><a href="/">AI Benar home</a> · <a href="/sitemap/">Site map</a> · <a href="/blog/">Blog</a> · <a href="/ASEAN-AI-Governance-Atlas/">ASEAN AI Governance Atlas (archived)</a></p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
+<footer><div class="wrap"><p id="credit"></p><p>Data are drawn from public sources and checked row by row; see Method. Sources are also saved to the Internet Archive each week: where a copy exists, an <em>archived copy</em> link appears beside the source. Please report errors with the row ID.<span id="corr"></span></p><p><a href="https://github.com/suhaimizainalshah/ASEAN-AI-Governance-Tracker/blob/main/PRIVACY.md">Privacy notice</a> — what this page collects (no cookies), who hosts it, and which third parties are involved.</p><p>Built and maintained by Suhaimi Zainal Shah · <a href="/AI-Benar-Advisory/">AI Benar Advisory</a> — independent AI compliance and governance</p><p class="site-links"><a href="/">AI Benar home</a> · <a href="/EU-AI-Governance-Tracker/">EU tracker</a> · <a href="/Middle-East-AI-Governance-Tracker/">Middle East tracker</a> · <a href="/sitemap/">Site map</a> · <a href="/blog/">Blog</a> · <a href="/ASEAN-AI-Governance-Atlas/">ASEAN AI Governance Atlas (archived)</a></p><p>This tracker is an independent project by Suhaimi Zainal Shah (AI Benar Advisory). It is not affiliated with, endorsed by, or acting on behalf of ASEAN or the ASEAN Secretariat, and it does not use the ASEAN emblem.</p></div><div class="wrap"><p class="foot-nav"><a href="#top">Back to top</a><a href="/">AI Benar home</a></p></div></footer>
 <a href="#top" class="to-top" id="toTop" aria-label="Back to top" title="Back to top" hidden><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
 <script>
 /* Back to top: shown after about one screen of scrolling; returns keyboard focus to the page title */
@@ -448,6 +453,26 @@ document.addEventListener("click",function(e){var a=e.target.closest&&e.target.c
 <script src="compute.js"></script>
 <script src="pagefind/pagefind-ui.js" defer></script>
 <script>
+/* Honest timing (December 2026): how often this tracker is checked, when it last was, and, worked out on the reader's own device,
+   whether a check is late. The notice appears by itself, and disappears once the last-checked date is updated and the page rebuilt. */
+function cadenceInfo(meta) {
+  var every = meta.update_every_days || 7, checked = meta.checked || meta.verified;
+  var words = { 7: 'weekly', 14: 'every two weeks', 30: 'monthly', 31: 'monthly', 91: 'quarterly', 92: 'quarterly' }[every] || ('every ' + every + ' days');
+  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var long = function (iso) { var p = iso.split('-'); return (+p[2]) + ' ' + months[+p[1] - 1] + ' ' + p[0]; };
+  var at = function (iso) { return new Date(iso + 'T12:00:00Z').getTime(); };
+  var due = new Date(at(checked) + every * 86400000).toISOString().slice(0, 10);
+  var age = Math.floor((Date.now() - at(checked)) / 86400000), late = age > every + Math.max(3, Math.round(every / 2));
+  return { words: words, late: late, age: age, checkedText: long(checked),
+           label: 'Updated ' + words + '. Last checked ' + long(checked) + (late ? '.' : '; next check due by ' + long(due) + '.'),
+           notice: 'This tracker is overdue for its ' + words + ' check. It was last checked on ' + long(checked) + ' (' + age + ' days ago), so some recent developments may be missing. Check the sources for anything newer.' };
+}
+function showCadence(meta, labelEl, noticeEl) {
+  var c = cadenceInfo(meta);
+  if (labelEl) labelEl.textContent = c.label;
+  if (noticeEl && c.late) { noticeEl.hidden = false; noticeEl.innerHTML = '<b>' + c.notice.split('. ')[0] + '.</b> ' + c.notice.split('. ').slice(1).join('. '); }
+}
+
 const DATA = /*__DATA__*/null;
 if (DATA && DATA.meta && DATA.meta.preview) {            // a pull-request preview, never the public site
   var addPreviewBar = function () { document.body.insertAdjacentHTML('afterbegin', '<div class="previewbar" role="note">Preview of a pull request. Nothing here is on the public site until the pull request is merged.</div>'); };
@@ -1437,6 +1462,7 @@ function initSearch() {
 (function init() {
   const th = store.get('aat_theme_v1', matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   document.documentElement.dataset.theme = th; $('#theme').textContent = th === 'dark' ? 'Light mode' : 'Dark mode'; $('#theme').setAttribute('aria-pressed', th === 'dark');
+  showCadence(DATA.meta, $('#cadence'), $('#overdue'));
   $('#ver').textContent = DATA.meta.version; $('#verified').textContent = fmt(DATA.meta.verified, 'day'); $('#verified').setAttribute('datetime', DATA.meta.verified);
   $('#notice').innerHTML = `<b>Proof of concept, version ${esc(DATA.meta.version)}.</b> A curated sample, not a full census: only items with a checked source are included, and every entry links to its source. "No response recorded" means none was found. The Method tab shows coverage, and the Updates tab lists what is still queued.`;
   $('#credit').textContent = DATA.meta.credit;

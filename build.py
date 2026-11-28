@@ -252,9 +252,14 @@ if errors:
     sys.exit(1)
 
 verified = max(r["verified_on"] for r in incidents + responses + instruments)
+# How often the tracker is checked, and when it last was. After EVERY check, set LAST_CHECKED to that day, even if nothing new was found:
+# the page says "Updated weekly. Last checked …" and shows an overdue notice by itself if a check is late. (verified is the newest record.)
+UPDATE_EVERY_DAYS = 7
+LAST_CHECKED = "2026-11-27"
+LAST_CHECKED = max(LAST_CHECKED, verified)
 stats = load_stats()
 payload = dict(
-    meta=dict(version=VERSION, verified=verified, built=datetime.date.today().isoformat(), credit=CREDIT, corrections_url=CORRECTIONS_URL,
+    meta=dict(version=VERSION, verified=verified, checked=LAST_CHECKED, update_every_days=UPDATE_EVERY_DAYS, built=datetime.date.today().isoformat(), credit=CREDIT, corrections_url=CORRECTIONS_URL,
               analytics=dict(goatcounter=GOATCOUNTER_CODE, stats_url=STATS_URL, min_visits=STATS_MIN_VISITS, sample=bool(stats and stats.get("sample")))),
     incidents=incidents, responses=responses, instruments=instruments, events=events,
     changelog=sorted(changelog, key=lambda c: c["date"], reverse=True), backlog=backlog, visitors=stats,
